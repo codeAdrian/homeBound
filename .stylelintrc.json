@@ -1,0 +1,43 @@
+{
+  "extends": "stylelint-config-recommended",
+  "rules": {
+    "max-nesting-depth": 3,
+    "property-no-vendor-prefix": true,
+    "max-empty-lines": 1,
+    "indentation": 4,
+    "block-no-empty": null,
+    "function-calc-no-unspaced-operator": true,
+    "string-quotes": "single",
+    "no-duplicate-selectors": true,
+    "no-missing-end-of-source-newline": true,
+    "color-hex-case": "upper",
+    "selector-max-id": 0,
+    "selector-combinator-space-after": "always",
+    "declaration-block-trailing-semicolon": "always",
+    "declaration-colon-space-before": "never",
+    "declaration-colon-space-after": "always",
+    "rule-empty-line-before": [
+      "always-multi-line",
+      {
+        "except": ["after-single-line-comment", "first-nested"]
+      }
+    ],
+    "media-feature-range-operator-space-before": "always",
+    "media-feature-range-operator-space-after": "always",
+    "media-feature-parentheses-space-inside": "never",
+    "media-feature-colon-space-before": "never",
+    "media-feature-colon-space-after": "always",
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["function", "if", "each", "include", "mixin", "lost"]
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["/^lost-/"]
+      }
+    ]
+  }
+}
