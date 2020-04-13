@@ -1,2 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ApplicationState {}
+import { AllUsersState } from 'modules/user';
+
+export interface ApplicationState {
+  user: AllUsersState;
+}
