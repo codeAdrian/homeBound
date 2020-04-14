@@ -3,9 +3,22 @@ import isEmpty from 'lodash/isEmpty';
 import { FirestoreService, Collections } from 'modules/firebase';
 import { User } from 'modules/user';
 
-const getUserDocument = async (uid: string) => {
-  if (!uid) return null;
+const formatUserDocumentData = (user: User) => {
+  const { displayName, email, photoURL, uid } = user;
+  const createdAt = new Date();
 
+  return {
+    id: uid,
+    uid: uid,
+    displayName,
+    email,
+    photoURL,
+    createdAt,
+  };
+};
+
+const getUserDocument = async (uid: User['uid']) => {
+  if (!uid) return null;
   const firestore = new FirestoreService(Collections.Users);
 
   return firestore.getByIdAsync(uid);
@@ -15,31 +28,22 @@ const createUserDocument = async (
   user: User,
   additionalData?: Partial<User>,
 ) => {
-  if (!user) return;
-  const firestore = new FirestoreService('users');
+  if (isEmpty(user)) return;
+  const firestore = new FirestoreService(Collections.Users);
+  const userRef = await getUserDocument(user.uid);
 
-  const userRef = await firestore.getByIdAsync(user.uid);
+  if (userRef.uid) return userRef;
 
-  if (!isEmpty(userRef)) {
-    const { displayName, email, photoURL, uid } = user;
-    const createdAt = new Date();
+  const userData = formatUserDocumentData(user);
 
-    const userData = {
-      id: uid,
-      uid: uid,
-      displayName,
-      email,
-      photoURL,
-      createdAt,
-    };
+  firestore.addAsync({
+    ...userData,
+    ...additionalData,
+  });
 
-    firestore.addAsync({
-      ...userData,
-      ...additionalData,
-    });
-  }
+  const updatedDocument = await getUserDocument(user.uid);
 
-  return getUserDocument(user.uid);
+  return updatedDocument;
 };
 
 export { createUserDocument, getUserDocument };
