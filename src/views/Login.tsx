@@ -1,11 +1,12 @@
 import * as React from 'react';
 
-import { LoginWithGoogle } from 'modules/user';
+import { LoginWithGoogle, LoginWithEmail } from 'modules/user';
 
 const Login = () => (
-  <div>
+  <>
+    <LoginWithEmail />
     <LoginWithGoogle />
-  </div>
+  </>
 );
 
 export { Login };

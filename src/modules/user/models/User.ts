@@ -1,7 +1,4 @@
-export interface User {
-  uid: string;
-  createdAt: Date;
-  displayName: string;
+export interface UserAuthData {
   email: string;
-  photoURL: string;
+  password: string;
 }

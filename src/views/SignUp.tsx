@@ -1,5 +1,7 @@
 import * as React from 'react';
 
-const SignUp = () => <div>SignUp</div>;
+import { SignUpEmail } from 'modules/user';
+
+const SignUp = () => <SignUpEmail />;
 
 export { SignUp };

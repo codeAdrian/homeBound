@@ -1,17 +1,13 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {
-  createUserDocument,
-  UserActionTypes,
-  User as UserType,
-} from 'modules/user';
+import { createUserDocument, UserActionTypes } from 'modules/user';
 
 export const useAuthStateChange = () => {
   const dispatch = useDispatch();
 
   const handleAuthData = useCallback(
-    (payload: UserType | {}) => ({
+    (payload: firebase.User | {}) => ({
       type: UserActionTypes.Success,
       payload,
     }),

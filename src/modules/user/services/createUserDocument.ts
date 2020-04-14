@@ -1,9 +1,8 @@
 import isEmpty from 'lodash/isEmpty';
 
 import { FirestoreService, Collections } from 'modules/firebase';
-import { User } from 'modules/user';
 
-const formatUserDocumentData = (user: User) => {
+const formatUserDocumentData = (user: firebase.User) => {
   const { displayName, email, photoURL, uid } = user;
   const createdAt = new Date();
 
@@ -17,7 +16,7 @@ const formatUserDocumentData = (user: User) => {
   };
 };
 
-const getUserDocument = async (uid: User['uid']) => {
+const getUserDocument = async (uid: firebase.User['uid']) => {
   if (!uid) return null;
   const firestore = new FirestoreService(Collections.Users);
 
@@ -25,8 +24,8 @@ const getUserDocument = async (uid: User['uid']) => {
 };
 
 const createUserDocument = async (
-  user: User,
-  additionalData?: Partial<User>,
+  user: firebase.User,
+  additionalData?: Partial<firebase.User>,
 ) => {
   if (isEmpty(user)) return;
   const firestore = new FirestoreService(Collections.Users);

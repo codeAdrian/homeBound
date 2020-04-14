@@ -1,21 +1,21 @@
-import { User, UserActions, UserActionTypes } from 'modules/user';
+import { UserActions, UserActionTypes } from 'modules/user';
 
-export interface AllUsersState {
-  userData: User | {};
+export interface UserState {
+  userData: firebase.User | {};
   isLoading: boolean;
   error?: string;
 }
 
-const INITIAL_STATE: AllUsersState = {
+const INITIAL_STATE: UserState = {
   userData: {},
   isLoading: false,
   error: undefined,
 };
 
 export const userReducer = (
-  state: AllUsersState = INITIAL_STATE,
+  state: UserState = INITIAL_STATE,
   action: UserActions,
-): AllUsersState => {
+): UserState => {
   switch (action.type) {
     case UserActionTypes.Request:
       return {
