@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute, PublicRoute } from 'modules/routing';
 import { Dashboard, Login, SignUp } from 'views';
-import { useAuthData } from 'hooks';
+import { useAuthData } from 'modules/user';
 
 const Placeholder = () => <div>Placeholder</div>;
 

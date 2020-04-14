@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { FirebaseService } from 'modules/firebase';
-import { useAuthStateChange } from 'hooks';
+import { useAuthStateChange } from 'modules/user';
 
 const useAuthData = () => {
   const dispatch = useDispatch();
