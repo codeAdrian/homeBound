@@ -12,8 +12,8 @@ export const Routing = () => {
 
   return (
     <Switch>
-      <PrivateRoute exact path={'/'} component={Dashboard} />
-      <PublicRoute exact path={'/login'} component={Login} />
+      <PrivateRoute exact path="/" component={Dashboard} />
+      <PublicRoute exact path="/login" component={Login} />
       <PublicRoute exact path="/signup" component={SignUp} />
       <Route component={Placeholder} />
     </Switch>
