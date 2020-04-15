@@ -1,14 +1,14 @@
 import 'firebase/firestore';
 import { FirebaseService } from './firebaseService';
 
-import { ListenerProps, QueryFilter, Ordering } from '../models';
+import { ListenerProps, QueryFilter, Ordering, Collections } from '../models';
 
 export class FirestoreService<T extends any> {
   private firebase = FirebaseService.Instance;
   private firestore = this.firebase.firestore();
   private collection: firebase.firestore.CollectionReference;
 
-  constructor(collection: string) {
+  constructor(collection: Collections) {
     this.collection = this.firestore.collection(collection);
   }
 

@@ -6,8 +6,8 @@ const LogOut = () => {
   const firebase = FirebaseService.Instance;
   const auth = firebase.auth();
 
-  const handleLogout = React.useCallback(async () => {
-    await auth.signOut();
+  const handleLogout = React.useCallback(() => {
+    auth.signOut();
   }, [auth]);
 
   return <button onClick={handleLogout}>Logout</button>;

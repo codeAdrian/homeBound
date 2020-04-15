@@ -1,7 +1,4 @@
-export enum Order {
-  asc = 'asc',
-  desc = 'desc',
-}
+export type Order = 'asc' | 'desc';
 
 export interface Ordering {
   orderBy: string;

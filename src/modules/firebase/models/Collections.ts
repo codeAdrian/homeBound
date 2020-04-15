@@ -1,3 +1,1 @@
-export enum Collections {
-  Users = 'users',
-}
+export type Collections = 'users';
