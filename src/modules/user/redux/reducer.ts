@@ -1,14 +1,8 @@
 import { UserActions, UserActionTypes } from 'modules/user';
 
-export interface UserData extends firebase.UserInfo {
-  settings?: {
-    [key: string]: boolean;
-  };
-}
-
 export interface UserState {
   isLoading: boolean;
-  userData?: UserData;
+  userData?: firebase.UserInfo;
   error?: string;
 }
 

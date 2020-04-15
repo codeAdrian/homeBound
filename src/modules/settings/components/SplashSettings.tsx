@@ -1,8 +1,13 @@
 import * as React from 'react';
-import { isEmpty } from 'lodash';
+import { useDispatch } from 'react-redux';
+import has from 'lodash/has';
 
-import { updateUserSettings } from 'modules/settings';
-import { UserAuthData, UserState } from 'modules/user';
+import {
+  updateUserSettings,
+  SettingsActionTypes,
+  SettingsState,
+} from 'modules/settings';
+import { UserState } from 'modules/user';
 
 const QUESTIONS = [
   {
@@ -19,25 +24,40 @@ const QUESTIONS = [
   },
 ];
 
-const SplashSettings = ({ user: { userData } }: { user: UserState }) => {
+interface Props {
+  userData: UserState['userData'];
+  userSettings: SettingsState['userSettings'];
+}
+
+const SplashSettings = ({ userSettings, userData }: Props) => {
+  const dispatch = useDispatch();
   const [questionNum, setQuestionNum] = React.useState(0);
 
-  if (questionNum >= QUESTIONS.length || !userData) return null;
+  if (has(userSettings, 'test1') && has(userSettings, 'test2')) return null;
 
-  if (userData.settings) return null;
+  if (questionNum >= QUESTIONS.length) return null;
 
   const { question, answerPositive, answerNegative, label } = QUESTIONS[
     questionNum
   ];
 
-  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
     const newValue = value === 'true';
     const newIndex = questionNum + 1;
-    if (!isEmpty(userData))
-      updateUserSettings(userData as firebase.UserInfo, {
+
+    const updatedSettings = await updateUserSettings(
+      userData as firebase.UserInfo,
+      {
         [label]: newValue,
-      });
+      },
+    );
+
+    dispatch({
+      type: SettingsActionTypes.Success,
+      payload: updatedSettings,
+    });
+
     setQuestionNum(newIndex);
   };
 

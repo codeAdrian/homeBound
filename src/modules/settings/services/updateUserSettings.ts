@@ -1,50 +1,28 @@
-import isEmpty from 'lodash/isEmpty';
-
 import { FirestoreService, Collections } from 'modules/firebase';
-import { getUserDocument } from 'modules/user';
 
-/*
-const updateUserSettings = async (user: firebase.UserInfo) => {
-  const firestore = new FirestoreService(Collections.Users);
-  const userRef = await getUserDocument(user.uid);
+export const getUserDocumentSettings = async (uid: firebase.User['uid']) => {
+  if (!uid) return null;
+  const firestore = new FirestoreService(Collections.Settings);
 
-  const { newValue } = userRef;
-
-  firestore.updateByIdAsync(
-    {
-      newValue: true,
-    },
-    user.uid,
-  );
-
-  const updatedDocument = await getUserDocument(user.uid);
-
-  return updatedDocument;
+  return firestore.getByIdAsync(uid);
 };
-*/
 
 const updateUserSettings = async (
   user: firebase.UserInfo,
   value: { [key: string]: boolean },
 ) => {
-  const firestore = new FirestoreService(Collections.Users);
-  const userRef = await getUserDocument(user.uid);
+  const firestore = new FirestoreService(Collections.Settings);
+  const settings = await getUserDocumentSettings(user.uid);
 
-  const { settings } = userRef;
+  firestore.addAsync({
+    id: user.uid,
+    ...settings,
+    ...value,
+  });
 
-  firestore.updateByIdAsync(
-    {
-      settings: {
-        ...settings,
-        ...value,
-      },
-    },
-    user.uid,
-  );
+  const updatedSettings = await getUserDocumentSettings(user.uid);
 
-  const updatedDocument = await getUserDocument(user.uid);
-
-  return updatedDocument;
+  return updatedSettings;
 };
 
 export { updateUserSettings };
