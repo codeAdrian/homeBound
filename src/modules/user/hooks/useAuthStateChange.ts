@@ -32,8 +32,6 @@ export const useAuthStateChange = () => {
       dispatch({ type: UserActionTypes.Request });
       dispatch({ type: SettingsActionTypes.Request });
 
-      console.log(userAuth);
-
       if (userAuth) {
         const userRef = await createUserDocument(userAuth);
         const settingsRef = await getUserDocumentSettings(userAuth.uid);
