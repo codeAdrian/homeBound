@@ -1,3 +1,5 @@
+import isEmpty from 'lodash/isEmpty';
+
 import { FirestoreService } from 'modules/firebase';
 
 export const getUserDocumentSettings = async (uid: firebase.User['uid']) => {
@@ -14,11 +16,15 @@ const updateUserSettings = async (
   const firestore = new FirestoreService('settings');
   const settings = await getUserDocumentSettings(user.uid);
 
-  firestore.addAsync({
-    id: user.uid,
-    ...settings,
-    ...value,
-  });
+  console.log(settings);
+
+  const { id, ...data } = settings;
+
+  if (isEmpty(data)) {
+    await firestore.addAsync({ id: user.uid, ...value });
+  } else {
+    await firestore.updateByIdAsync(value, user.uid);
+  }
 
   const updatedSettings = await getUserDocumentSettings(user.uid);
 
