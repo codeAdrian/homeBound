@@ -16,6 +16,7 @@ export const userReducer = (
   state: UserState = INITIAL_STATE,
   action: UserActions,
 ): UserState => {
+  console.log({ action, state });
   switch (action.type) {
     case UserActionTypes.Request:
       return {

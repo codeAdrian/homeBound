@@ -9,9 +9,9 @@ const LoginWithEmail = () => {
   const firebase = FirebaseService.Instance;
   const authProvider = firebase.auth();
 
-  const onSubmit = async (values: FieldValues) => {
+  const onSubmit = (values: FieldValues) => {
     const { email, password } = values;
-    await authProvider.signInWithEmailAndPassword(email, password);
+    authProvider.signInWithEmailAndPassword(email, password);
   };
 
   return (

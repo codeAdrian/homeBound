@@ -1,8 +1,8 @@
-import { FirestoreService, Collections } from 'modules/firebase';
+import { FirestoreService } from 'modules/firebase';
 
 export const getUserDocumentSettings = async (uid: firebase.User['uid']) => {
   if (!uid) return null;
-  const firestore = new FirestoreService(Collections.Settings);
+  const firestore = new FirestoreService('settings');
 
   return firestore.getByIdAsync(uid);
 };
@@ -11,7 +11,7 @@ const updateUserSettings = async (
   user: firebase.UserInfo,
   value: { [key: string]: boolean },
 ) => {
-  const firestore = new FirestoreService(Collections.Settings);
+  const firestore = new FirestoreService('settings');
   const settings = await getUserDocumentSettings(user.uid);
 
   firestore.addAsync({
