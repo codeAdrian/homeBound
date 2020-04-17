@@ -5,7 +5,7 @@ export const UserActions = {
   Request: () => createAction(UserActionTypes.Request),
 
   Success: (userData: firebase.User) =>
-    createAction(UserActionTypes.Success, { userData }),
+    createAction(UserActionTypes.Success, userData),
 
   Error: (error?: string) => createAction(UserActionTypes.Error, { error }),
 };

@@ -1,13 +1,13 @@
 import { UserActions, UserActionTypes } from 'modules/user';
 
 export interface UserState {
-  userData: firebase.User | {};
   isLoading: boolean;
+  userData?: firebase.UserInfo;
   error?: string;
 }
 
 const INITIAL_STATE: UserState = {
-  userData: {},
+  userData: undefined,
   isLoading: false,
   error: undefined,
 };
