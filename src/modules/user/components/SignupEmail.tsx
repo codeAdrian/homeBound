@@ -5,7 +5,7 @@ import { emailRegex } from 'util/validation';
 import { FirebaseService } from 'modules/firebase';
 import { createUserDocument } from 'modules/user';
 
-const SignUpEmail = () => {
+const SignUpEmail: React.FC = () => {
   const { handleSubmit, register, errors, watch } = useForm();
   const password = React.useRef({});
 

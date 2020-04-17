@@ -2,6 +2,6 @@ import * as React from 'react';
 
 import { SignUpEmail } from 'modules/user';
 
-const SignUp = () => <SignUpEmail />;
+const SignUp: React.FC = () => <SignUpEmail />;
 
 export { SignUp };

@@ -5,7 +5,7 @@ import { Route, Redirect, RouteProps } from 'react-router-dom';
 
 import { getUserData } from 'modules/user';
 
-const PrivateRoute = (props: RouteProps) => {
+const PrivateRoute: React.FC<RouteProps> = (props) => {
   const { userData } = useSelector(getUserData());
 
   return isEmpty(userData) ? <Redirect to="/login" /> : <Route {...props} />;

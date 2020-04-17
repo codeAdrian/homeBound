@@ -7,12 +7,12 @@ interface Props {
   answerPositive: string;
 }
 
-const SplashQuestion = ({
+const SplashQuestion: React.FC<Props> = ({
   question,
   handleOnClick,
   answerNegative,
   answerPositive,
-}: Props) => {
+}) => {
   return (
     <div>
       {question}

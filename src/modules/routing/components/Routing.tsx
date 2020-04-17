@@ -5,9 +5,9 @@ import { PrivateRoute, PublicRoute } from 'modules/routing';
 import { Dashboard, Login, SignUp } from 'views';
 import { useAuthData } from 'modules/user';
 
-const Placeholder = () => <div>Placeholder</div>;
+const Placeholder: React.FC = () => <div>Placeholder</div>;
 
-export const Routing = () => {
+export const Routing: React.FC = () => {
   useAuthData();
 
   return (
