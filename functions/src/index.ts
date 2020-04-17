@@ -5,7 +5,7 @@ admin.initializeApp();
 
 const firestore = admin.firestore();
 
-exports.incrementCommentCount = functions.firestore
+exports.incrementUserScore = functions.firestore
   .document('score/{userId}/history/{scoreId}')
   .onCreate(async (snapshot, context) => {
     const { userId, scoreId } = context.params;
