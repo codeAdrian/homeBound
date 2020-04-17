@@ -28,16 +28,28 @@ const createUserDocument = async (
   additionalData?: Partial<firebase.User>,
 ) => {
   if (isEmpty(user)) return;
-  const firestore = new FirestoreService('users');
+  const userStore = new FirestoreService('users');
+  const settingsStore = new FirestoreService('settings');
+  const scoreStore = new FirestoreService('score');
   const userRef = await getUserDocument(user.uid);
 
   if (userRef.uid) return userRef;
 
   const userData = formatUserDocumentData(user);
 
-  firestore.addAsync({
+  userStore.addAsync({
     ...userData,
     ...additionalData,
+  });
+
+  settingsStore.addAsync({
+    id: user.uid,
+    surveyCompleted: false,
+  });
+
+  scoreStore.addAsync({
+    id: user.uid,
+    score: 0,
   });
 
   const updatedDocument = await getUserDocument(user.uid);

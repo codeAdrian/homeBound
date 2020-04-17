@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { LogOut, getUserData } from 'modules/user';
 import { SplashSettings, getUserSettings } from 'modules/settings';
 import { ApplicationState } from 'modules/redux-store';
+import { IncrementScore } from 'modules/score';
 
 const Dashboard = () => {
   const { userData } = useSelector((state: ApplicationState) =>
@@ -13,8 +14,11 @@ const Dashboard = () => {
     getUserSettings()(state),
   );
 
+  if (!userData) return null;
+
   return (
     <>
+      <IncrementScore user={userData} />
       <SplashSettings userSettings={userSettings} userData={userData} />
       <LogOut />
     </>
