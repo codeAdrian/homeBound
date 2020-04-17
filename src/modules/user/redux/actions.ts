@@ -8,6 +8,7 @@ export const UserActions = {
     createAction(UserActionTypes.Success, userData),
 
   Error: (error?: string) => createAction(UserActionTypes.Error, { error }),
+  Reset: () => createAction(UserActionTypes.Reset),
 };
 
 export type UserActions = ActionUnion<typeof UserActions>;

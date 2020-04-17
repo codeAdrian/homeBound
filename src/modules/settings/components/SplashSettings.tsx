@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 
 import {
   SplashQuestion,
-  updateUserSettings,
-  SettingsActionTypes,
   SettingsState,
   QUESTIONS,
+  useSettingsServices,
 } from 'modules/settings';
-import { UserState } from 'modules/user';
+import { UserState, useUserServices } from 'modules/user';
 
 interface Props {
   userData: UserState['userData'];
@@ -16,14 +14,17 @@ interface Props {
 }
 
 const SplashSettings: React.FC<Props> = ({ userSettings, userData }) => {
-  const dispatch = useDispatch();
+  const [, { updateSettings }] = useSettingsServices();
+  const [user] = useUserServices();
   const [questionNum, setQuestionNum] = React.useState(0);
 
   if ((userSettings && userSettings.surveyCompleted) || !userData) return null;
+  if (questionNum >= QUESTIONS.length) return null;
 
   const { label } = QUESTIONS[questionNum];
 
   const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!user.userData) return;
     const { value } = e.currentTarget;
     const newIndex = questionNum + 1;
     const isLastQuestion = newIndex >= QUESTIONS.length;
@@ -33,12 +34,7 @@ const SplashSettings: React.FC<Props> = ({ userSettings, userData }) => {
       surveyCompleted: isLastQuestion,
     };
 
-    const updatedSettings = await updateUserSettings(userData, updatedValue);
-
-    dispatch({
-      type: SettingsActionTypes.Success,
-      payload: updatedSettings,
-    });
+    updateSettings(user.userData, updatedValue);
 
     setQuestionNum(newIndex);
   };

@@ -37,6 +37,8 @@ export const settingsReducer = (
         error: action.payload.error,
         isLoading: false,
       };
+    case SettingsActionTypes.Reset:
+      return INITIAL_STATE;
     default:
       return state || INITIAL_STATE;
   }

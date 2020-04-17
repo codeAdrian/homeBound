@@ -35,6 +35,8 @@ export const userReducer = (
         error: action.payload.error,
         isLoading: false,
       };
+    case UserActionTypes.Reset:
+      return INITIAL_STATE;
     default:
       return state || INITIAL_STATE;
   }

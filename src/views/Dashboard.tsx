@@ -1,25 +1,38 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import { LogOut, getUserData } from 'modules/user';
-import { SplashSettings, getUserSettings } from 'modules/settings';
-import { ApplicationState } from 'modules/redux-store';
-import { IncrementScore } from 'modules/score';
+import { SplashSettings, useSettingsServices } from 'modules/settings';
+import { LogOut, useUserServices } from 'modules/user';
+import {
+  IncrementScore,
+  useScoreListener,
+  useScoreServices,
+} from 'modules/score';
 
 const Dashboard: React.FC = () => {
-  const { userData } = useSelector((state: ApplicationState) =>
-    getUserData()(state),
-  );
-  const { userSettings } = useSelector((state: ApplicationState) =>
-    getUserSettings()(state),
-  );
+  const [{ userData }] = useUserServices();
+  const [{ userSettings }] = useSettingsServices();
+  const [{ userScore }, { getScoreHistory }] = useScoreServices();
 
-  if (!userData) return null;
+  useScoreListener(userData);
+
+  if (!userData) return <Redirect to="/login" />;
 
   return (
     <>
+      <strong>Update score realtime: </strong>
+      {userScore && userScore.score}
       <IncrementScore user={userData} />
       <SplashSettings userSettings={userSettings} userData={userData} />
+      <strong>Update user history on demand:</strong>
+      <button onClick={getScoreHistory}>Update</button>
+      {userScore?.history &&
+        userScore?.history.length > 0 &&
+        userScore?.history.map(({ score, title }) => (
+          <div>
+            {title}: {score} points
+          </div>
+        ))}
       <LogOut />
     </>
   );

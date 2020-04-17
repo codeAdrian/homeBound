@@ -17,7 +17,7 @@ export const IncrementScore: React.FC<Props> = ({ user }: Props) => {
   };
   return (
     <div>
-      <button onClick={onClick}>Increment Score +10</button>
+      <button onClick={onClick}>Increment Score randomly</button>
     </div>
   );
 };

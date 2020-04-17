@@ -10,4 +10,22 @@ const updateScoreHistory = async (
   firestore.addAsync(value);
 };
 
-export { updateScoreHistory };
+const getUserScoreHistoryData = async (user: firebase.UserInfo) => {
+  const firestore = new FirestoreService(`score`);
+  return firestore.getSubcollection(user.uid, 'history');
+};
+
+const getUserScoreData = async (
+  user: firebase.UserInfo,
+  successFunction: (data: unknown) => void,
+  errorFunction: (error: string) => void,
+) => {
+  const firestore = new FirestoreService(`score`);
+
+  await firestore.getByIdAsync(user.uid, {
+    successFunction,
+    errorFunction,
+  });
+};
+
+export { getUserScoreData, updateScoreHistory, getUserScoreHistoryData };

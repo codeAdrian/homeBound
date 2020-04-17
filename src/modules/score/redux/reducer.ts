@@ -37,7 +37,7 @@ export const scoreReducer = (
     case ScoreActionTypes.Success:
       return {
         ...state,
-        userScore: action.payload,
+        userScore: { ...state.userScore, ...action.payload },
         isLoading: false,
       };
     case ScoreActionTypes.Error:
