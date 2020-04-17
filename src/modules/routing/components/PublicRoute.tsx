@@ -5,7 +5,7 @@ import { Route, Redirect, RouteProps } from 'react-router-dom';
 
 import { getUserData } from 'modules/user';
 
-const PublicRoute = (props: RouteProps) => {
+const PublicRoute: React.FC<RouteProps> = (props) => {
   const { userData } = useSelector(getUserData());
 
   return isEmpty(userData) ? <Route {...props} /> : <Redirect to="/" />;

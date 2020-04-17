@@ -15,7 +15,7 @@ interface Props {
   userSettings: SettingsState['userSettings'];
 }
 
-const SplashSettings = ({ userSettings, userData }: Props) => {
+const SplashSettings: React.FC<Props> = ({ userSettings, userData }) => {
   const dispatch = useDispatch();
   const [questionNum, setQuestionNum] = React.useState(0);
 

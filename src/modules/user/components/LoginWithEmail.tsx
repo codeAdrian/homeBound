@@ -4,7 +4,7 @@ import { useForm, FieldValues } from 'react-hook-form';
 import { emailRegex } from 'util/validation';
 import { FirebaseService } from 'modules/firebase';
 
-const LoginWithEmail = () => {
+const LoginWithEmail: React.FC = () => {
   const { handleSubmit, register, errors } = useForm();
   const firebase = FirebaseService.Instance;
   const authProvider = firebase.auth();

@@ -6,7 +6,7 @@ import { SplashSettings, getUserSettings } from 'modules/settings';
 import { ApplicationState } from 'modules/redux-store';
 import { IncrementScore } from 'modules/score';
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const { userData } = useSelector((state: ApplicationState) =>
     getUserData()(state),
   );

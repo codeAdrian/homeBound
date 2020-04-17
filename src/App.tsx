@@ -7,7 +7,7 @@ import { Routing } from 'modules/routing';
 import 'normalize.css';
 import 'css/app.css';
 
-const App = () => {
+const App: React.FC = () => {
   const store = configureStore();
 
   return (

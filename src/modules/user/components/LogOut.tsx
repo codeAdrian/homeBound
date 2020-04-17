@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { FirebaseService } from 'modules/firebase';
 
-const LogOut = () => {
+const LogOut: React.FC = () => {
   const firebase = FirebaseService.Instance;
   const auth = firebase.auth();
 
