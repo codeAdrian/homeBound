@@ -25,6 +25,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0"
   },
+  "proxy": "http://localhost:3001",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

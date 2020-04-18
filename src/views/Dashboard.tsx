@@ -3,11 +3,13 @@ import { Redirect } from 'react-router-dom';
 
 import { SplashSettings, useSettingsServices } from 'modules/settings';
 import { LogOut, useUserServices } from 'modules/user';
+import { AddActivity } from 'modules/activities';
 import {
   IncrementScore,
   useScoreListener,
   useScoreServices,
 } from 'modules/score';
+import { MessageForm } from 'modules/contacts';
 
 const Dashboard: React.FC = () => {
   const [{ userData }] = useUserServices();
@@ -20,6 +22,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
+      <MessageForm />
+      <AddActivity />
       <strong>Update score realtime: </strong>
       {userScore && userScore.score}
       <IncrementScore user={userData} />

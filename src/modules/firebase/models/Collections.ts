@@ -1,1 +1,6 @@
-export type Collections = 'users' | 'settings' | 'score' | string;
+export type Collections =
+  | 'users'
+  | 'settings'
+  | 'score'
+  | `activities`
+  | string;

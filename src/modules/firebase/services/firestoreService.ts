@@ -171,6 +171,7 @@ export class FirestoreService<T extends any> {
       .get()
       .then((snapshot) =>
         snapshot.docs.map((document) => ({
+          id: document.id,
           ...document.data(),
         })),
       );
