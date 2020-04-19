@@ -22,8 +22,6 @@ const completeUserActivity = async (user: firebase.UserInfo, id: string) => {
 
   const completedTask = await firestore.getByIdAsync(id);
 
-  console.log(completedTask);
-
   delete completedTask.id;
 
   await updateScoreHistory(user, completedTask);

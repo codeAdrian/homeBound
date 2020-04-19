@@ -1,0 +1,12 @@
+.icon--small {
+    width: var(--spacing--12px);
+    height: var(--spacing--12px);
+}
+
+.icon--lightest {
+    fill: var(--color__white);
+}
+
+.icon--darker {
+    fill: var(--color__text);
+}

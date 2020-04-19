@@ -1,0 +1,41 @@
+@keyframes autofill {
+    0%,
+    100% {
+        color: #666;
+        background: transparent;
+    }
+}
+
+input:-webkit-autofill {
+    animation-delay: 0.1s;
+    animation-name: autofill;
+    animation-fill-mode: both;
+}
+
+.input {
+    position: relative;
+}
+
+.input__control {
+    display: block;
+    width: 100%;
+    background: transparent;
+    outline: 0;
+    border-width: 0;
+    box-shadow: none;
+}
+
+.input__control--text {
+    padding: var(--spacing--8px) 0;
+}
+
+.input__deco--text {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color__text);
+    bottom: 0;
+    opacity: 0.3;
+}

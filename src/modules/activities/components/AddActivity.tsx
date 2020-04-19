@@ -8,8 +8,6 @@ const AddActivity = () => {
     { addActivity, removeActivity, completeActivity },
   ] = useActivitiesServices();
 
-  console.log({ userActivities });
-
   const handleClick = () => {
     const randomNum = Math.floor(Math.random() * 10 + 1);
     addActivity({
@@ -18,8 +16,6 @@ const AddActivity = () => {
       score: randomNum,
     });
   };
-
-  console.log('userActivities', userActivities);
 
   return (
     <div>

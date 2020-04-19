@@ -1,0 +1,75 @@
+.button {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    background-color: transparent;
+    outline: 0;
+    border-width: 0;
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+
+    & > * + * {
+        padding-left: var(--spacing--4px);
+    }
+}
+
+.button--block {
+    width: 100%;
+    display: flex;
+}
+
+.button--size-xxsmall {
+    padding: var(--spacing--6px);
+}
+
+.button--size-small {
+    padding: var(--spacing--12px);
+}
+
+.button--size-base {
+    padding: var(--spacing--14px);
+}
+
+.button--size-large {
+    padding: var(--spacing--16px);
+}
+
+.button--ghost {
+    opacity: 0.3;
+    background-color: transparent;
+}
+
+.button--size-mixed {
+    padding: var(--spacing--10px) var(--spacing--16px);
+}
+
+.button--primary {
+    background-color: var(--color__white);
+    color: var(--color__black);
+}
+
+.button--cta {
+    background-color: var(--color__cta);
+    color: var(--color__white);
+}
+
+.button--pill {
+    border-radius: var(--border__radius--24px);
+}
+
+.button--square {
+    border-radius: var(--border__radius--10px);
+}
+
+.button--rounded {
+    border-radius: 100%;
+}
+
+.button--glow-cta {
+    box-shadow: 0px var(--spacing--8px) var(--spacing--16px)
+        var(--color__glow--cta);
+}

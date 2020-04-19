@@ -3,6 +3,7 @@ import { useForm, FieldValues } from 'react-hook-form';
 
 import { emailRegex } from 'util/validation';
 import { FirebaseService } from 'modules/firebase';
+import { TextInput } from 'components';
 
 const LoginWithEmail: React.FC = () => {
   const { handleSubmit, register, errors } = useForm();
@@ -17,7 +18,8 @@ const LoginWithEmail: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Login</h1>
-      <input
+      <TextInput
+        label="Email"
         name="email"
         ref={register({
           required: 'Required',
@@ -29,7 +31,8 @@ const LoginWithEmail: React.FC = () => {
       />
       {errors.email && errors.email.message}
 
-      <input
+      <TextInput
+        label="Password"
         name="password"
         type="password"
         ref={register({ required: 'Required' })}

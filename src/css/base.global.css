@@ -4,6 +4,14 @@ body {
     margin: 0;
 }
 
+body {
+    scroll-behavior: smooth;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #e5e5e5;
+}
+
 html {
     box-sizing: border-box;
 }
@@ -17,4 +25,10 @@ html {
 img {
     display: block;
     max-width: 100%;
+}
+
+.root {
+    position: relative;
+    height: 568px;
+    width: 320px;
 }

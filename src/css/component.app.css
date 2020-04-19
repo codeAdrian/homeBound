@@ -1,0 +1,35 @@
+.app__background {
+    height: 100%;
+    transition: background-color 0.8s ease;
+    padding: var(--spacing--28px) var(--spacing--40px) 0;
+    border-radius: var(--border__radius--20px);
+    overflow: auto;
+}
+
+.app__background--primary {
+    background-color: var(--color__background--primary);
+}
+
+.app__background--secondary {
+    background-color: var(--color__background--secondary);
+}
+
+.app__background--tertiary {
+    background-color: var(--color__background--tertiary);
+}
+
+.app__background--quaternary {
+    background-color: var(--color__background--quaternary);
+}
+
+.app__deco {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.app__content {
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}

@@ -1,20 +1,21 @@
-import * as React from 'react';
+import React from 'react';
 
-import { SignUpEmail } from 'modules/user';
+import { ReactComponent as Logo } from 'assets/icons/logo.svg';
 import { useAppState } from 'modules/app';
 
-const SignUp: React.FC = () => {
+export const SplashScreen = () => {
   const [, { setAppThemeColor }] = useAppState();
 
   React.useEffect(() => {
-    setAppThemeColor('#6A62FF');
+    setAppThemeColor('#FAC936');
   }, [setAppThemeColor]);
+
+  console.log('RENDER');
 
   return (
     <section className="app__content">
-      <SignUpEmail />
+      <Logo />
+      HomeBound
     </section>
   );
 };
-
-export { SignUp };

@@ -10,6 +10,11 @@ import {
   useScoreServices,
 } from 'modules/score';
 import { MessageForm, AddContact } from 'modules/contacts';
+import { Button, BUTTON } from 'components';
+import { ReactComponent as GoogleIcon } from 'assets/icons/google.svg';
+import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
+import { ReactComponent as PersonIcon } from 'assets/icons/person.svg';
+import { useAppState } from 'modules/app';
 
 const Dashboard: React.FC = () => {
   const [{ userData }] = useUserServices();
@@ -18,10 +23,51 @@ const Dashboard: React.FC = () => {
 
   useScoreListener(userData);
 
+  const [, { setAppThemeColor }] = useAppState();
+
+  React.useEffect(() => {
+    if (userData) {
+      setAppThemeColor('#6A62FF');
+    }
+  }, [setAppThemeColor, userData]);
+
   if (!userData) return <Redirect to="/login" />;
 
   return (
-    <>
+    <section className="app__content">
+      <Button
+        icon={<GoogleIcon />}
+        className={BUTTON.PILL.PRIMARY.BASE}
+        onClick={() => {}}
+      >
+        Sign up
+      </Button>
+      <br />
+      <Button className={BUTTON.PILL.CTA.BASE.GLOW} onClick={() => {}}>
+        Change password
+      </Button>
+      <br />
+      <Button
+        icon={<PlusIcon />}
+        className={BUTTON.ROUNDED.CTA.LARGE.GLOW}
+        onClick={() => {}}
+      />
+
+      <Button
+        icon={<PlusIcon className="icon--small" />}
+        className={BUTTON.ROUNDED.CTA.SMALL}
+        onClick={() => {}}
+      />
+      <Button
+        icon={<PersonIcon className="icon--lightest" />}
+        className={BUTTON.SQUARE.CTA.MIXED.GLOW}
+        onClick={() => {}}
+      />
+      <Button
+        icon={<PersonIcon className="icon--darker" />}
+        className={BUTTON.SQUARE.GHOST.MIXED}
+        onClick={() => {}}
+      />
       <MessageForm />
       <AddActivity />
       <strong>Update score realtime: </strong>
@@ -39,7 +85,7 @@ const Dashboard: React.FC = () => {
         ))}
       <AddContact />
       <LogOut />
-    </>
+    </section>
   );
 };
 
