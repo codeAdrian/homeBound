@@ -18,10 +18,13 @@ app.get('/api/greeting', (req, res) => {
 });
 
 app.post('/api/messages', (req, res) => {
+    const { APP_MODE, TWILIO_PHONE_NUMBER } = process.env;
+    const from =
+        APP_MODE === 'production' ? req.body.from : TWILIO_PHONE_NUMBER;
     res.header('Content-Type', 'application/json');
     client.messages
         .create({
-            from: process.env.TWILIO_PHONE_NUMBER,
+            from,
             to: req.body.to,
             body: req.body.body,
         })

@@ -8,8 +8,14 @@ interface State {
   submitSuccess: boolean;
 }
 
+export interface Message {
+  from: string;
+  to: string;
+  body: string;
+}
+
 interface Api {
-  sendMessage: (message: any) => void;
+  sendMessage: (message: Message) => void;
 }
 
 type FormatState = (error: boolean, submit: boolean, success: boolean) => State;
@@ -36,7 +42,7 @@ export const useMessageService = () => {
   }, [formatState]);
 
   const sendMessage = React.useCallback(
-    (message: any) => {
+    (message: Message) => {
       setHookState(formatState(false, true, false));
       messageContact(message, handleSuccess, handleError);
     },

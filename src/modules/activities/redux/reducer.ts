@@ -1,6 +1,7 @@
 import { ActivitiesActionTypes, ActivitiesActions } from 'modules/activities';
 
 export type UserActivity = {
+  date: Date;
   title: string;
   id: string;
   score: number;

@@ -13,9 +13,15 @@ import {
 
 type State = ContactsState;
 
+export interface ContactInput {
+  date: Date;
+  name: string;
+  phoneNumber: string;
+}
+
 interface Api {
   getContacts: VoidFunction;
-  addContact: (contact: any) => void;
+  addContact: (contact: ContactInput) => void;
   removeContact: (id: string) => void;
 }
 
@@ -39,7 +45,7 @@ export const useContactsServices = () => {
   }, [dispatch, userData]);
 
   const addContact = React.useCallback(
-    async (contact: any) => {
+    async (contact: ContactInput) => {
       if (userData) {
         await addUserContact(userData, contact);
         await getContacts();

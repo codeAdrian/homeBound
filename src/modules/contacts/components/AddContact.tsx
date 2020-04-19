@@ -17,8 +17,6 @@ const AddContact = () => {
     });
   };
 
-  console.log('userContacts', userContacts);
-
   return (
     <div>
       <button onClick={handleClick}>Add contact</button>

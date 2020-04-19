@@ -1,6 +1,7 @@
 import { ContactsActionTypes, ContactsActions } from 'modules/contacts';
 
 export type UserContact = {
+  date: Date;
   name: string;
   id: string;
   phoneNumber: string;

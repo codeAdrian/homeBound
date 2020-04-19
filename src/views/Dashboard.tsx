@@ -9,7 +9,7 @@ import {
   useScoreListener,
   useScoreServices,
 } from 'modules/score';
-import { MessageForm, AddContact, useContactsServices } from 'modules/contacts';
+import { MessageForm, AddContact } from 'modules/contacts';
 
 const Dashboard: React.FC = () => {
   const [{ userData }] = useUserServices();

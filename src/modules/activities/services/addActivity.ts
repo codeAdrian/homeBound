@@ -1,7 +1,11 @@
 import { FirestoreService } from 'modules/firebase';
 import { updateScoreHistory } from 'modules/score';
+import { ActivityInput } from 'modules/activities';
 
-const addUserActivity = async (user: firebase.UserInfo, value: any) => {
+const addUserActivity = async (
+  user: firebase.UserInfo,
+  value: ActivityInput,
+) => {
   const firestore = new FirestoreService(`activities/${user.uid}/userActivity`);
 
   await firestore.addAsync(value);

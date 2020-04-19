@@ -14,9 +14,15 @@ import {
 
 type State = ActivitiesState;
 
+export interface ActivityInput {
+  date: Date;
+  title: string;
+  score: number;
+}
+
 interface Api {
   getActivities: VoidFunction;
-  addActivity: (activity: any) => void;
+  addActivity: (activity: ActivityInput) => void;
   removeActivity: (id: string) => void;
   completeActivity: (id: string) => void;
 }
@@ -41,7 +47,7 @@ export const useActivitiesServices = () => {
   }, [dispatch, userData]);
 
   const addActivity = React.useCallback(
-    async (activity: any) => {
+    async (activity: ActivityInput) => {
       if (userData) {
         await addUserActivity(userData, activity);
         await getActivities();

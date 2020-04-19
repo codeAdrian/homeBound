@@ -1,6 +1,7 @@
 import { FirestoreService } from 'modules/firebase';
+import { ContactInput } from 'modules/contacts';
 
-const addUserContact = async (user: firebase.UserInfo, value: any) => {
+const addUserContact = async (user: firebase.UserInfo, value: ContactInput) => {
   const firestore = new FirestoreService(`contacts/${user.uid}/userContacts`);
 
   await firestore.addAsync(value);

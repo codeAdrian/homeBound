@@ -1,5 +1,7 @@
+import { Message } from 'modules/contacts';
+
 type MessagingFuncion = (
-  message: any,
+  message: Message,
   handleSuccess: VoidFunction,
   handleError: VoidFunction,
 ) => void;

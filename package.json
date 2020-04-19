@@ -30,7 +30,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint --fix src --ext .ts,.tsx"
+    "lint:fix": "eslint --fix src --ext .ts,.tsx",
+    "server:start": "node-env-run server --exec nodemon"
   },
   "license": "MIT",
   "eslintConfig": {
@@ -70,6 +71,12 @@
     "react-scripts": "3.4.1",
     "stylelint": "^13.3.1",
     "stylelint-config-recommended": "^3.0.0",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-pino-logger": "^4.0.0",
+    "node-env-run": "^3.0.2",
+    "nodemon": "^2.0.3",
+    "twilio": "^3.42.2"
   }
 }

@@ -3,10 +3,11 @@ import React from 'react';
 import { useMessageService } from 'modules/contacts';
 
 const MessageForm = () => {
-  const [state, { sendMessage }] = useMessageService();
+  const [, { sendMessage }] = useMessageService();
 
   const onClick = () => {
     sendMessage({
+      from: '+385911272581',
       to: '+385911272581',
       body: 'Test message from twilio',
     });
