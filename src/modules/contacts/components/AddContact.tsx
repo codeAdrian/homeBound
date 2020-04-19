@@ -9,20 +9,23 @@ const AddContact = () => {
   ] = useContactsServices();
 
   const handleClick = () => {
-    const randomNum = Math.floor(Math.random() * 10 + 1);
+    const randomNum = Math.floor(Math.random() * 999999 + 10000);
     addContact({
       date: new Date(),
-      title: `Contact - ${randomNum}`,
-      score: randomNum,
+      name: `Contact - ${randomNum}`,
+      phoneNumber: `+385${randomNum}`,
     });
   };
+
+  console.log('userContacts', userContacts);
 
   return (
     <div>
       <button onClick={handleClick}>Add contact</button>
-      {userContacts?.map(({ title, id }) => (
+      {userContacts?.map(({ name, phoneNumber, id }) => (
         <div>
-          {title} <button onClick={() => removeContact(id)}>Remove</button> |
+          {name} - {phoneNumber} |
+          <button onClick={() => removeContact(id)}>Remove</button> |
         </div>
       ))}
     </div>

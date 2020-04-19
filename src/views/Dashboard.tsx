@@ -9,7 +9,7 @@ import {
   useScoreListener,
   useScoreServices,
 } from 'modules/score';
-import { MessageForm } from 'modules/contacts';
+import { MessageForm, AddContact, useContactsServices } from 'modules/contacts';
 
 const Dashboard: React.FC = () => {
   const [{ userData }] = useUserServices();
@@ -37,6 +37,7 @@ const Dashboard: React.FC = () => {
             {title}: {score} points
           </div>
         ))}
+      <AddContact />
       <LogOut />
     </>
   );

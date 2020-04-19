@@ -19,6 +19,8 @@ const AddActivity = () => {
     });
   };
 
+  console.log('userActivities', userActivities);
+
   return (
     <div>
       <button onClick={handleClick}>Add activity</button>

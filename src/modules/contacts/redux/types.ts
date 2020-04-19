@@ -1,8 +1,8 @@
 enum GetContactsActionTypes {
-  Request = 'ACTIVITIES_DATA_REQUEST',
-  Success = 'ACTIVITIES_DATA_SUCCESS',
-  Error = 'ACTIVITIES_DATA_ERROR',
-  Reset = 'ACTIVITIES_DATA_RESET',
+  Request = 'CONTACTS_DATA_REQUEST',
+  Success = 'CONTACTS_DATA_SUCCESS',
+  Error = 'CONTACTS_DATA_ERROR',
+  Reset = 'CONTACTS_DATA_RESET',
 }
 
 export const ContactsActionTypes = {

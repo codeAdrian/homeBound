@@ -1,9 +1,9 @@
 import { ContactsActionTypes, ContactsActions } from 'modules/contacts';
 
 export type UserContact = {
-  title: string;
+  name: string;
   id: string;
-  score: number;
+  phoneNumber: string;
 };
 
 export interface ContactsState {

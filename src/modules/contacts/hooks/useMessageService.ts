@@ -12,40 +12,35 @@ interface Api {
   sendMessage: (message: any) => void;
 }
 
+type FormatState = (error: boolean, submit: boolean, success: boolean) => State;
+
 export const useMessageService = () => {
-  const [hookState, setHookState] = React.useState<State>({
-    hasError: false,
-    isSubmitting: false,
-    submitSuccess: false,
-  });
+  const formatState = React.useCallback<FormatState>(
+    (hasError, isSubmitting, submitSuccess) => ({
+      hasError,
+      isSubmitting,
+      submitSuccess,
+    }),
+    [],
+  );
+  const [hookState, setHookState] = React.useState<State>(
+    formatState(false, false, false),
+  );
 
   const handleSuccess = React.useCallback(() => {
-    setHookState({
-      hasError: false,
-      isSubmitting: false,
-      submitSuccess: true,
-    });
-  }, []);
+    setHookState(formatState(false, false, true));
+  }, [formatState]);
 
   const handleError = React.useCallback(() => {
-    setHookState({
-      hasError: true,
-      isSubmitting: false,
-      submitSuccess: false,
-    });
-  }, []);
+    setHookState(formatState(true, false, false));
+  }, [formatState]);
 
   const sendMessage = React.useCallback(
     (message: any) => {
-      setHookState({
-        hasError: false,
-        isSubmitting: true,
-        submitSuccess: false,
-      });
-
+      setHookState(formatState(false, true, false));
       messageContact(message, handleSuccess, handleError);
     },
-    [handleError, handleSuccess],
+    [formatState, handleError, handleSuccess],
   );
 
   const api = React.useMemo(
