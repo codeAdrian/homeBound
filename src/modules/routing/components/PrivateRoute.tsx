@@ -7,13 +7,14 @@ import { SplashScreen } from 'components';
 
 const PrivateRoute: React.FC<RouteProps> = (props) => {
   const [{ userData, isLoading }] = useUserServices();
-  const [ready, setIsReady] = React.useState(false);
+  const shouldDisplaySplashScreen = React.useMemo(
+    () => !!userData?.uid && isLoading,
+    [isLoading, userData],
+  );
 
-  React.useEffect(() => {
-    setTimeout(() => setIsReady(true), 2000);
-  }, []);
+  console.log('private', shouldDisplaySplashScreen);
 
-  if ((!userData && isLoading) || !ready) return <SplashScreen />;
+  if (shouldDisplaySplashScreen) return <SplashScreen />;
 
   return isEmpty(userData) ? <Redirect to="/login" /> : <Route {...props} />;
 };

@@ -18,15 +18,19 @@ const Dashboard: React.FC = () => {
   const [{ userScore }, { getScoreHistory }] = useScoreServices();
   const [, { setAppTheme }] = useAppState();
 
-  console.log('userSettings', userSettings);
-
   useScoreListener(userData);
 
   React.useEffect(() => {
     if (userData) {
-      setAppTheme({ color: '#F7CE53', shapeClass: 'app__deco--default' });
+      setAppTheme({
+        color: '#F7CE53',
+        shapeClass: 'app__deco--default',
+        showNav: true,
+      });
     }
   }, [setAppTheme, userData]);
+
+  console.log('Dash', userData);
 
   if (!userData) return <Redirect to="/login" />;
 

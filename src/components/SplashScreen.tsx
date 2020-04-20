@@ -7,7 +7,11 @@ export const SplashScreen = () => {
   const [, { setAppTheme }] = useAppState();
 
   React.useEffect(() => {
-    setAppTheme({ color: '#FAC936', shapeClass: 'app__deco--default' });
+    setAppTheme({
+      color: '#FAC936',
+      shapeClass: 'app__deco--default',
+      showNav: false,
+    });
   }, [setAppTheme]);
 
   return (

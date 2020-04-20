@@ -9,7 +9,11 @@ const SignUp: React.FC = () => {
   const [, { setAppTheme }] = useAppState();
 
   React.useEffect(() => {
-    setAppTheme({ color: '#6A62FF', shapeClass: 'app__deco--default' });
+    setAppTheme({
+      color: '#6A62FF',
+      shapeClass: 'app__deco--default',
+      showNav: false,
+    });
   }, [setAppTheme]);
 
   return (

@@ -2,15 +2,21 @@ import React from 'react';
 
 import { Routing } from 'modules/routing';
 import { useAppState } from 'modules/app';
+import { Navigation } from 'components/Navigation';
 
 export const AppLayout: React.FC = () => {
   const [{ theme }] = useAppState();
+
+  const appClassName = theme.showNav
+    ? 'app__background app__background--primary app__background--withNav'
+    : 'app__background app__background--primary';
   return (
     <>
       <section
-        className="app__background app__background--primary"
+        className={appClassName}
         style={{ backgroundColor: theme.color }}
       >
+        <Navigation />
         <Routing />
       </section>
       <svg

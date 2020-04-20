@@ -4,6 +4,7 @@ export type App = any;
 
 export interface Theme {
   color: string;
+  showNav: boolean;
   shapeClass: string;
 }
 
@@ -20,6 +21,7 @@ export type AppState = AppVariables & {
 const INITIAL_STATE: AppState = {
   app: undefined,
   theme: {
+    showNav: false,
     color: '#FAC936',
     shapeClass: '',
   },
@@ -31,7 +33,6 @@ export const appReducer = (
   state: AppState = INITIAL_STATE,
   action: AppActions,
 ): AppState => {
-  console.log({ ...state, action });
   switch (action.type) {
     case AppActionTypes.Request:
       return {

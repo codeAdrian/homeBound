@@ -45,8 +45,9 @@ export const useSettingsServices = () => {
     ) => {
       if (!userData) return;
       await updateUserSettings(userData, updatedValue);
+      getSettings(userData);
     },
-    [],
+    [getSettings],
   );
 
   const api = React.useMemo(
