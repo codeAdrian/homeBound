@@ -38,6 +38,10 @@
     padding: var(--spacing--16px);
 }
 
+.button--size-xlarge {
+    padding: var(--spacing--20px);
+}
+
 .button--ghost {
     opacity: 0.3;
     background-color: transparent;
@@ -72,4 +76,15 @@
 .button--glow-cta {
     box-shadow: 0px var(--spacing--8px) var(--spacing--16px)
         var(--color__glow--cta);
+}
+
+.button--combined {
+    width: 320px;
+    margin-left: var(--spacing--n40px);
+    margin-right: var(--spacing--n40px);
+}
+
+.button--top {
+    border-radius: var(--border__radius--20px) var(--border__radius--20px) 0 0;
+    box-shadow: inset 0 -1px 0 1px rgba(0, 0, 0, 0.1);
 }

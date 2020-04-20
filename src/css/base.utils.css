@@ -1,0 +1,36 @@
+.u-t-center {
+    text-align: center;
+}
+
+.u-o-8 {
+    opacity: 0.8;
+}
+
+.u-o-4 {
+    opacity: 0.4;
+}
+
+.u-c-dark {
+    color: var(--color__text);
+}
+
+.u-c-light {
+    color: var(--color__white);
+}
+
+.u-sb-40 {
+    margin-bottom: var(--spacing--40px);
+}
+
+.u-sb-12 {
+    margin-bottom: var(--spacing--12px);
+}
+
+.u-ab-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.u-d-block {
+    display: block;
+}

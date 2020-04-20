@@ -1,4 +1,5 @@
 :root {
+    --spacing--n40px: -40px;
     --spacing--2px: 2px;
     --spacing--4px: 4px;
     --spacing--6px: 6px;
@@ -7,6 +8,7 @@
     --spacing--12px: 12px;
     --spacing--14px: 14px;
     --spacing--16px: 16px;
+    --spacing--20px: 20px;
     --spacing--28px: 28px;
     --spacing--40px: 40px;
 }

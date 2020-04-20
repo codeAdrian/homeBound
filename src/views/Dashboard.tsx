@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { SplashSettings, useSettingsServices } from 'modules/settings';
+import { useSettingsServices } from 'modules/settings';
 import { LogOut, useUserServices } from 'modules/user';
 import { AddActivity } from 'modules/activities';
 import {
@@ -10,70 +10,36 @@ import {
   useScoreServices,
 } from 'modules/score';
 import { MessageForm, AddContact } from 'modules/contacts';
-import { Button, BUTTON } from 'components';
-import { ReactComponent as GoogleIcon } from 'assets/icons/google.svg';
-import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
-import { ReactComponent as PersonIcon } from 'assets/icons/person.svg';
 import { useAppState } from 'modules/app';
 
 const Dashboard: React.FC = () => {
   const [{ userData }] = useUserServices();
   const [{ userSettings }] = useSettingsServices();
   const [{ userScore }, { getScoreHistory }] = useScoreServices();
+  const [, { setAppTheme }] = useAppState();
+
+  console.log('userSettings', userSettings);
 
   useScoreListener(userData);
 
-  const [, { setAppThemeColor }] = useAppState();
-
   React.useEffect(() => {
     if (userData) {
-      setAppThemeColor('#6A62FF');
+      setAppTheme({ color: '#F7CE53', shapeClass: 'app__deco--default' });
     }
-  }, [setAppThemeColor, userData]);
+  }, [setAppTheme, userData]);
 
   if (!userData) return <Redirect to="/login" />;
 
+  if (userSettings && !userSettings.surveyCompleted)
+    return <Redirect to="/welcome" />;
+
   return (
     <section className="app__content">
-      <Button
-        icon={<GoogleIcon />}
-        className={BUTTON.PILL.PRIMARY.BASE}
-        onClick={() => {}}
-      >
-        Sign up
-      </Button>
-      <br />
-      <Button className={BUTTON.PILL.CTA.BASE.GLOW} onClick={() => {}}>
-        Change password
-      </Button>
-      <br />
-      <Button
-        icon={<PlusIcon />}
-        className={BUTTON.ROUNDED.CTA.LARGE.GLOW}
-        onClick={() => {}}
-      />
-
-      <Button
-        icon={<PlusIcon className="icon--small" />}
-        className={BUTTON.ROUNDED.CTA.SMALL}
-        onClick={() => {}}
-      />
-      <Button
-        icon={<PersonIcon className="icon--lightest" />}
-        className={BUTTON.SQUARE.CTA.MIXED.GLOW}
-        onClick={() => {}}
-      />
-      <Button
-        icon={<PersonIcon className="icon--darker" />}
-        className={BUTTON.SQUARE.GHOST.MIXED}
-        onClick={() => {}}
-      />
       <MessageForm />
       <AddActivity />
       <strong>Update score realtime: </strong>
       {userScore && userScore.score}
       <IncrementScore user={userData} />
-      <SplashSettings userSettings={userSettings} userData={userData} />
       <strong>Update user history on demand:</strong>
       <button onClick={getScoreHistory}>Update</button>
       {userScore?.history &&

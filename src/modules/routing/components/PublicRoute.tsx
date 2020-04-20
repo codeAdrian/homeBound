@@ -13,6 +13,8 @@ const PublicRoute: React.FC<RouteProps> = (props) => {
     setTimeout(() => setIsReady(true), 2000);
   }, []);
 
+  if ((!userData && isLoading) || !ready) return <SplashScreen />;
+
   return isEmpty(userData) ? <Route {...props} /> : <Redirect to="/" />;
 };
 

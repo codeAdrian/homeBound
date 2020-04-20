@@ -1,10 +1,12 @@
 import React from 'react';
 
-interface Props {
+interface OwnProps {
   className?: string;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
+  value?: any;
 }
+
+type Props = OwnProps & React.HTMLAttributes<HTMLButtonElement>;
 
 export const BUTTON = {
   SQUARE: {
@@ -31,7 +33,16 @@ export const BUTTON = {
       },
     },
   },
-
+  COMBINED: {
+    PRIMARY: {
+      BASE: {
+        TOP:
+          'button button--primary button--combined button--block button--combined button--top button--size-xlarge u-t__fontSize--small',
+        BOTTOM:
+          'button button--primary button--combined button--block button--combined button--bottom button--size-xlarge u-t__fontSize--small',
+      },
+    },
+  },
   ROUNDED: {
     CTA: {
       SMALL:

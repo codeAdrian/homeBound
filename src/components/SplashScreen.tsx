@@ -4,18 +4,20 @@ import { ReactComponent as Logo } from 'assets/icons/logo.svg';
 import { useAppState } from 'modules/app';
 
 export const SplashScreen = () => {
-  const [, { setAppThemeColor }] = useAppState();
+  const [, { setAppTheme }] = useAppState();
 
   React.useEffect(() => {
-    setAppThemeColor('#FAC936');
-  }, [setAppThemeColor]);
-
-  console.log('RENDER');
+    setAppTheme({ color: '#FAC936', shapeClass: 'app__deco--default' });
+  }, [setAppTheme]);
 
   return (
-    <section className="app__content">
-      <Logo />
-      HomeBound
+    <section className="splashScreen app__content">
+      <Logo className="splashScreen__logo" />
+      <div className="splashScreen__title">
+        <strong className="u-t__fontFamily--secondary u-t__fontSize--xxlarge">
+          HomeBound
+        </strong>
+      </div>
     </section>
   );
 };

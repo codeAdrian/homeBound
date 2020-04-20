@@ -1,0 +1,69 @@
+.app {
+    color: var(--color__text);
+}
+
+.app--light {
+    color: var(--color__white);
+}
+
+.app__background {
+    height: 100%;
+    transition: background-color 0.8s ease;
+    padding: var(--spacing--28px) var(--spacing--40px) 0;
+    border-radius: var(--border__radius--20px);
+    overflow: auto;
+}
+
+.app__background--primary {
+    background-color: var(--color__background--primary);
+}
+
+.app__background--secondary {
+    background-color: var(--color__background--secondary);
+}
+
+.app__background--tertiary {
+    background-color: var(--color__background--tertiary);
+}
+
+.app__background--quaternary {
+    background-color: var(--color__background--quaternary);
+}
+
+.app__deco {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    & path {
+        opacity: 0.3;
+        transition: all 2s ease;
+        fill: #ffffff;
+    }
+}
+
+.app__content {
+    min-height: 100%;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 0.8s 0.1s ease forwards;
+}
+
+.app__deco--default {
+    & path {
+        d: path(
+            'M294.922 111.746C330.57 175.894 310.047 248.019 247.289 282.894C184.532 317.77 103.141 301.894 67.6569 238.042C39.2199 186.871 54.2894 86.126 109.289 55.5614C164.289 24.9968 266.485 60.5749 294.922 111.746Z'
+        );
+    }
+}
+
+.app__deco--variant1 {
+    & path {
+        d: path(
+            'M367.393537,0.000001l66.180683,391.154837l-367.393537,62.160436l-66.180683,-391.154837l367.393537,-62.160436Z'
+        );
+    }
+}

@@ -1,6 +1,6 @@
 @keyframes fadeIn {
     from {
-        transform: translate3d(0, var(--spacing--8px), 0);
+        transform: translate3d(0, var(--spacing--6px), 0);
         opacity: 0;
     }
 

@@ -1,12 +1,21 @@
 import React from 'react';
 
 interface OwnProps {
+  name: string;
   label: string;
+  hasValue?: boolean;
+  componentRef: any;
 }
 
 type Props = OwnProps & React.HTMLProps<any>;
 
-export const TextInput: React.FC<Props> = ({ label, ...props }) => {
+export const TextInput: React.FC<Props> = ({
+  label,
+  componentRef,
+  name,
+  hasValue,
+  ...props
+}) => {
   const [isFocused, setIsFocused] = React.useState(false);
 
   const handleFocus = () => {
@@ -16,11 +25,22 @@ export const TextInput: React.FC<Props> = ({ label, ...props }) => {
     setIsFocused(false);
   };
 
+  const shouldTransformLabel = isFocused || hasValue;
+
+  const labelClassName = shouldTransformLabel
+    ? 'input__label u-t__fontSize--base input__label--focused'
+    : 'input__label u-t__fontSize--base';
+
   return (
     <div className="input">
-      <label className="input__label">{label}</label>
+      <label htmlFor={name} className={labelClassName}>
+        {label}
+      </label>
       <input
-        className="input__control input__control--text"
+        id={name}
+        name={name}
+        ref={componentRef}
+        className="input__control input__control--text u-t__fontSize--base"
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}

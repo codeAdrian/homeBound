@@ -2,9 +2,14 @@ import { AppActionTypes, AppActions } from 'modules/app';
 
 export type App = any;
 
+export interface Theme {
+  color: string;
+  shapeClass: string;
+}
+
 export interface AppVariables {
   app: App;
-  themeColor: string;
+  theme: Theme;
 }
 
 export type AppState = AppVariables & {
@@ -14,7 +19,10 @@ export type AppState = AppVariables & {
 
 const INITIAL_STATE: AppState = {
   app: undefined,
-  themeColor: '#FAC936',
+  theme: {
+    color: '#FAC936',
+    shapeClass: '',
+  },
   isLoading: false,
   error: undefined,
 };
@@ -34,7 +42,7 @@ export const appReducer = (
     case AppActionTypes.Success:
       return {
         ...state,
-        themeColor: action.payload.themeColor,
+        ...action.payload,
         isLoading: false,
       };
     case AppActionTypes.Error:

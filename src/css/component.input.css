@@ -1,19 +1,45 @@
 @keyframes autofill {
     0%,
     100% {
-        color: #666;
+        color: currentColor;
         background: transparent;
     }
 }
 
 input:-webkit-autofill {
+    color: currentColor !important;
     animation-delay: 0.1s;
     animation-name: autofill;
     animation-fill-mode: both;
 }
 
 .input {
+    color: currentColor;
     position: relative;
+    margin-bottom: 20px;
+
+    &:placeholder {
+        color: currentColor;
+    }
+
+    &:-webkit-autofill {
+        color: currentColor;
+    }
+}
+
+.input__label {
+    position: absolute;
+    top: 0;
+    display: inline-block;
+    transform-origin: 0% 0% 0;
+    transform: translate3d(0, 22px, 0) scale3d(1, 1, 1);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    color: currentColor;
+}
+
+.input__label--focused {
+    transform: scale3d(0.85, 0.85, 1);
+    opacity: 0.6;
 }
 
 .input__control {
@@ -23,10 +49,11 @@ input:-webkit-autofill {
     outline: 0;
     border-width: 0;
     box-shadow: none;
+    color: currentColor;
 }
 
 .input__control--text {
-    padding: var(--spacing--8px) 0;
+    padding: var(--spacing--20px) 0 var(--spacing--8px);
 }
 
 .input__deco--text {
@@ -35,7 +62,7 @@ input:-webkit-autofill {
     width: 100%;
     left: 0;
     right: 0;
-    background-color: var(--color__text);
+    background-color: currentColor;
     bottom: 0;
     opacity: 0.3;
 }
