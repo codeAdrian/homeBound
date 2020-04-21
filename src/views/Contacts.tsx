@@ -6,26 +6,22 @@ import { toDate } from 'util/time';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 import { ReactComponent as TextBubble } from 'assets/icons/text_bubble.svg';
 import { Button, BUTTON } from 'components';
+import { Modal } from 'modules/modal';
 
 export const Contacts = () => {
-  const [recentContacts, setRecentContacts] = React.useState<UserContact[]>([]);
-  const [, { getLastUserContacts }] = useContactsServices();
+  const [{ userContacts }, { getLastUserContacts }] = useContactsServices();
   const groupedContacts: {
     [k: string]: { date: Date; contacts: UserContact[] };
   } = {};
 
-  const handleRecentContacts = (data: UserContact[]) => {
-    setRecentContacts(data);
-  };
-
   React.useEffect(() => {
-    getLastUserContacts(100, handleRecentContacts);
+    getLastUserContacts();
   }, [getLastUserContacts]);
 
   const groupContacts = () => {
-    console.log('recentContacts', recentContacts);
-    if (!recentContacts) return null;
-    recentContacts.map((contact) => {
+    console.log('recentContacts', userContacts);
+    if (!userContacts) return null;
+    userContacts.map((contact) => {
       const newDate = format(toDate(contact.date), 'dMY');
 
       if (!groupedContacts[newDate]) {
@@ -66,13 +62,14 @@ export const Contacts = () => {
   });
 
   return (
-    <div>
+    <section className="app__content">
+      <Modal>Test</Modal>
       <Button
         icon={<PlusIcon />}
         className={BUTTON.ROUNDED.CTA.LARGE.GLOW}
         onClick={() => {}}
       ></Button>
       {test}
-    </div>
+    </section>
   );
 };

@@ -5,24 +5,21 @@ import { useContactsServices } from 'modules/contacts';
 import { toDate } from 'util/time';
 
 export const ContactSummary = () => {
-  const [recentContacts, setRecentContacts] = React.useState([]);
-  const [, { getLastUserContacts }] = useContactsServices();
-
-  const handleRecentContacts = (data: any) => {
-    setRecentContacts(data);
-  };
+  const [{ userContacts }, { getLastUserContacts }] = useContactsServices();
 
   React.useEffect(() => {
-    getLastUserContacts(2, handleRecentContacts);
+    getLastUserContacts();
   }, [getLastUserContacts]);
 
-  console.log(recentContacts);
+  console.log(userContacts);
 
-  if (!recentContacts || recentContacts.length === 0) return null;
+  if (!userContacts || userContacts.length === 0) return null;
+
+  if (userContacts.length > 2) userContacts.length = 2;
 
   return (
     <>
-      {recentContacts.map(({ name, date, id }) => {
+      {userContacts.map(({ name, date, id }) => {
         const distance = differenceInCalendarDays(new Date(), toDate(date));
 
         const distanceValue = (

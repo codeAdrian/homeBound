@@ -1,0 +1,10 @@
+.modal {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    top: 0;
+    padding: 0 var(--spacing--40px);
+    left: 0;
+    right: 0;
+    z-index: 10;
+}

@@ -16,6 +16,7 @@
 @import 'component.splashScreen.css';
 @import 'component.icons.css';
 @import 'component.navigation.css';
+@import 'component.modal.css';
 
 @import 'module.app.css';
 @import 'module.score.css';

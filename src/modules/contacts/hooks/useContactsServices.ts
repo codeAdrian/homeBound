@@ -4,13 +4,11 @@ import * as React from 'react';
 import { getUserData } from 'modules/user';
 import {
   ContactsState,
-  getUserContacts,
   getContactsState,
   addUserContact,
   ContactsActionTypes,
   removeUserContact,
   getLastContacts,
-  UserContact,
 } from 'modules/contacts';
 
 type State = ContactsState;
@@ -22,8 +20,7 @@ export interface ContactInput {
 }
 
 interface Api {
-  getLastUserContacts: (n: number, data: any) => void;
-  getContacts: VoidFunction;
+  getLastUserContacts: (n?: number) => void;
   addContact: (contact: ContactInput) => void;
   removeContact: (id: string) => void;
 }
@@ -33,64 +30,69 @@ export const useContactsServices = () => {
   const { userData } = useSelector(getUserData());
   const contacts = useSelector(getContactsState());
 
-  const getLastUserContacts = React.useCallback(
-    async (n: number, successFunction: (data: any) => void) => {
-      if (!userData) return;
-      await getLastContacts(userData, n, {
-        successFunction,
-        errorFunction: () => false,
+  const successFunction = React.useCallback(
+    (payload: any) => {
+      dispatch({
+        type: ContactsActionTypes.Success,
+        payload,
       });
     },
-    [userData],
+    [dispatch],
   );
 
-  const getContacts = React.useCallback(async () => {
-    if (!userData) return;
-    dispatch({
-      type: ContactsActionTypes.Request,
-    });
+  const errorFunction = React.useCallback(
+    (payload: any) => {
+      dispatch({
+        type: ContactsActionTypes.Error,
+        payload,
+      });
+    },
+    [dispatch],
+  );
 
-    const payload = await getUserContacts(userData);
-
-    dispatch({
-      type: ContactsActionTypes.Success,
-      payload: payload,
-    });
-  }, [dispatch, userData]);
+  const getLastUserContacts = React.useCallback(
+    async (n?: number) => {
+      if (!userData) return;
+      dispatch({
+        type: ContactsActionTypes.Request,
+      });
+      const amount = n || 60;
+      await getLastContacts(userData, amount, {
+        successFunction,
+        errorFunction,
+      });
+    },
+    [dispatch, errorFunction, successFunction, userData],
+  );
 
   const addContact = React.useCallback(
     async (contact: ContactInput) => {
       if (userData) {
         await addUserContact(userData, contact);
-        await getContacts();
+        await getLastUserContacts();
       }
     },
-    [userData, getContacts],
+    [userData, getLastUserContacts],
   );
 
   const removeContact = React.useCallback(
     async (id: string) => {
       if (userData) {
         await removeUserContact(userData, id);
-        await getContacts();
+        await getLastUserContacts();
       }
     },
-    [getContacts, userData],
+    [getLastUserContacts, userData],
   );
 
   const api = React.useMemo(
     () => ({
       getLastUserContacts,
-      getContacts,
       addContact,
       removeContact,
     }),
-    [addContact, getContacts, removeContact, getLastUserContacts],
+    [addContact, removeContact, getLastUserContacts],
   );
-
-  React.useEffect(() => {
-    getContacts();
-  }, [getContacts]);
 
   return [contacts, api] as [State, Api];
 };

@@ -13,6 +13,7 @@ export const AppLayout: React.FC = () => {
   return (
     <>
       <section
+        id="app-root"
         className={appClassName}
         style={{ backgroundColor: theme.color }}
       >

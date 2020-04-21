@@ -1,11 +1,5 @@
 import { FirestoreService, ListenerProps } from 'modules/firebase';
 
-const getUserContacts = async (user: firebase.UserInfo) => {
-  const firestore = new FirestoreService('contacts');
-
-  return firestore.getSubcollection(user.uid, 'userContacts');
-};
-
 const getLastContacts = (
   user: firebase.UserInfo,
   n: number,
@@ -16,4 +10,4 @@ const getLastContacts = (
   return firestore.filterByDate(listenerProps, n);
 };
 
-export { getUserContacts, getLastContacts };
+export { getLastContacts };
