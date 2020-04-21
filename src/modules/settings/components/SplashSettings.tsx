@@ -25,8 +25,6 @@ const SplashSettings: React.FC = () => {
     });
   }, [COLORS, questionNum, setAppTheme]);
 
-  console.log({ userSettings, userData });
-
   if (userSettings && userSettings.surveyCompleted) return <Redirect to="/" />;
 
   if (questionNum >= QUESTIONS.length) return <SplashScreen />;

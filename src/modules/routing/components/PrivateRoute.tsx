@@ -12,8 +12,6 @@ const PrivateRoute: React.FC<RouteProps> = (props) => {
     [isLoading, userData],
   );
 
-  console.log('private', shouldDisplaySplashScreen);
-
   if (shouldDisplaySplashScreen) return <SplashScreen />;
 
   return isEmpty(userData) ? <Redirect to="/login" /> : <Route {...props} />;

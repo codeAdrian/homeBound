@@ -9,8 +9,6 @@ export const Navigation = () => {
 
   const navClassName = theme.showNav ? 'nav' : 'nav nav--hidden';
 
-  console.log(navClassName);
-
   return (
     <nav className={navClassName}>
       <NavLink to="/1" className="nav__link" activeClassName="">

@@ -30,8 +30,6 @@ const Dashboard: React.FC = () => {
     }
   }, [setAppTheme, userData]);
 
-  console.log('Dash', userData);
-
   if (!userData) return <Redirect to="/login" />;
 
   if (userSettings && !userSettings.surveyCompleted)
