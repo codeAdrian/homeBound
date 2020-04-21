@@ -1,4 +1,4 @@
-import { FirestoreService } from 'modules/firebase';
+import { FirestoreService, ListenerProps } from 'modules/firebase';
 
 const getUserContacts = async (user: firebase.UserInfo) => {
   const firestore = new FirestoreService('contacts');
@@ -6,4 +6,14 @@ const getUserContacts = async (user: firebase.UserInfo) => {
   return firestore.getSubcollection(user.uid, 'userContacts');
 };
 
-export { getUserContacts };
+const getLastContacts = (
+  user: firebase.UserInfo,
+  n: number,
+  listenerProps: ListenerProps,
+) => {
+  const firestore = new FirestoreService(`contacts/${user.uid}/userContacts`);
+
+  return firestore.filterByDate(listenerProps, n);
+};
+
+export { getUserContacts, getLastContacts };

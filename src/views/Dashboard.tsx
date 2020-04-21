@@ -8,8 +8,9 @@ import {
   IncrementScore,
   useScoreListener,
   useScoreServices,
+  ScoreTracker,
 } from 'modules/score';
-import { MessageForm, AddContact } from 'modules/contacts';
+import { MessageForm, AddContact, ContactSummary } from 'modules/contacts';
 import { useAppState } from 'modules/app';
 
 const Dashboard: React.FC = () => {
@@ -37,6 +38,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <section className="app__content">
+      <ScoreTracker mode="small" />
+      <ContactSummary />
       <MessageForm />
       <AddActivity />
       <strong>Update score realtime: </strong>

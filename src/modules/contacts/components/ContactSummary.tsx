@@ -1,0 +1,49 @@
+import React from 'react';
+import { differenceInCalendarDays } from 'date-fns';
+
+import { useContactsServices } from 'modules/contacts';
+import { toDate } from 'util/time';
+
+export const ContactSummary = () => {
+  const [recentContacts, setRecentContacts] = React.useState([]);
+  const [, { getLastUserContacts }] = useContactsServices();
+
+  const handleRecentContacts = (data: any) => {
+    setRecentContacts(data);
+  };
+
+  React.useEffect(() => {
+    getLastUserContacts(2, handleRecentContacts);
+  }, [getLastUserContacts]);
+
+  console.log(recentContacts);
+
+  if (!recentContacts || recentContacts.length === 0) return null;
+
+  return (
+    <>
+      {recentContacts.map(({ name, date, id }) => {
+        const distance = differenceInCalendarDays(new Date(), toDate(date));
+
+        const distanceValue = (
+          <div className="contactCard__distance">
+            <span className="contactCard__value u-t__fontFamily--secondary">
+              {distance}
+            </span>
+
+            <span className="contactCard__text u-t__fontFamily--primary u-t__fontSize--xxsmall u-o-5">
+              {distance === 1 ? 'day ago' : 'days ago'}
+            </span>
+          </div>
+        );
+
+        return (
+          <article className="contactCard" key={id}>
+            <div className="contactCard__name">{name}</div>
+            {distanceValue}
+          </article>
+        );
+      })}
+    </>
+  );
+};

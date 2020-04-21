@@ -1,0 +1,29 @@
+.contactCard {
+    border-radius: var(--border__radius--8px);
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: var(--spacing--16px) var(--spacing--20px);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing--8px);
+    align-items: center;
+}
+
+.contactCard__distance {
+    display: inline-flex;
+    align-items: center;
+    flex: 0;
+}
+
+.contactCard__name {
+    flex-grow: 1;
+}
+
+.contactCard__value {
+    padding-right: var(--spacing--4px);
+    font-size: 24px;
+}
+
+.contactCard__text {
+    text-transform: uppercase;
+    flex: 0;
+}

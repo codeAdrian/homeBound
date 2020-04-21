@@ -9,6 +9,8 @@ import {
   addUserContact,
   ContactsActionTypes,
   removeUserContact,
+  getLastContacts,
+  UserContact,
 } from 'modules/contacts';
 
 type State = ContactsState;
@@ -20,6 +22,7 @@ export interface ContactInput {
 }
 
 interface Api {
+  getLastUserContacts: (n: number, data: any) => void;
   getContacts: VoidFunction;
   addContact: (contact: ContactInput) => void;
   removeContact: (id: string) => void;
@@ -29,6 +32,17 @@ export const useContactsServices = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector(getUserData());
   const contacts = useSelector(getContactsState());
+
+  const getLastUserContacts = React.useCallback(
+    async (n: number, successFunction: (data: any) => void) => {
+      if (!userData) return;
+      await getLastContacts(userData, n, {
+        successFunction,
+        errorFunction: () => false,
+      });
+    },
+    [userData],
+  );
 
   const getContacts = React.useCallback(async () => {
     if (!userData) return;
@@ -66,11 +80,12 @@ export const useContactsServices = () => {
 
   const api = React.useMemo(
     () => ({
+      getLastUserContacts,
       getContacts,
       addContact,
       removeContact,
     }),
-    [addContact, getContacts, removeContact],
+    [addContact, getContacts, removeContact, getLastUserContacts],
   );
 
   React.useEffect(() => {

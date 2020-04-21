@@ -1,7 +1,8 @@
+import { Timestamp } from 'util/time';
 import { ContactsActionTypes, ContactsActions } from 'modules/contacts';
 
 export type UserContact = {
-  date: Date;
+  date: Timestamp;
   name: string;
   id: string;
   phoneNumber: string;
