@@ -1,7 +1,4 @@
 import { AppActionTypes, AppActions } from 'modules/app';
-
-export type App = any;
-
 export interface Theme {
   color: string;
   showNav: boolean;
@@ -9,7 +6,6 @@ export interface Theme {
 }
 
 export interface AppVariables {
-  app: App;
   theme: Theme;
 }
 
@@ -19,7 +15,6 @@ export type AppState = AppVariables & {
 };
 
 const INITIAL_STATE: AppState = {
-  app: undefined,
   theme: {
     showNav: false,
     color: '#FAC936',

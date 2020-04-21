@@ -3,7 +3,7 @@ import React from 'react';
 interface OwnProps {
   className?: string;
   icon?: React.ReactNode;
-  value?: any;
+  value?: string;
 }
 
 type Props = OwnProps & React.HTMLAttributes<HTMLButtonElement>;

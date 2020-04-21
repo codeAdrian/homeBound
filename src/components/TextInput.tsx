@@ -4,10 +4,12 @@ interface OwnProps {
   name: string;
   label: string;
   hasValue?: boolean;
-  componentRef: any;
+  componentRef: (
+    ref: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null,
+  ) => void;
 }
 
-type Props = OwnProps & React.HTMLProps<any>;
+type Props = OwnProps & React.HTMLProps<HTMLInputElement>;
 
 export const TextInput: React.FC<Props> = ({
   label,

@@ -44,7 +44,7 @@
     pointer-events: none;
 
     & path {
-        opacity: 0.3;
+        opacity: 0.08;
         transition: all 2s ease;
         fill: #ffffff;
     }
