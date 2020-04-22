@@ -15,8 +15,8 @@
 
 .contactGroup__deco {
     position: absolute;
-    left: -19.5px;
-    top: var(--spacing--8px);
+    left: -19px;
+    top: var(--spacing--7px);
     transform: translate3d(-50%, 0, 0);
 }
 
@@ -50,6 +50,7 @@
 
 .contactCard__name {
     flex-grow: 1;
+    padding-right: var(--spacing--12px);
 }
 
 .contactCard__value {

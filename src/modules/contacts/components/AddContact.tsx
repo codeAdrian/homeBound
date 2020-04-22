@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { format } from 'date-fns';
+import { format, add, isToday } from 'date-fns';
 import { useForm, FieldValues } from 'react-hook-form';
 
 import { useContactsServices } from 'modules/contacts';
@@ -10,17 +10,27 @@ interface Props {
 }
 
 const AddContact: React.FC<Props> = ({ callback }) => {
-  const { handleSubmit, register, watch } = useForm();
+  const { handleSubmit, register, watch, reset } = useForm();
   const [, { addContact }] = useContactsServices();
 
   const onSubmit = (values: FieldValues) => {
     const { date, name, phoneNumber } = values;
+
+    const dateValue = new Date();
+
+    const newDate = isToday(new Date(date))
+      ? add(new Date(date).setHours(0, 0, 0, 0), {
+          hours: dateValue.getHours(),
+          minutes: dateValue.getMinutes(),
+          seconds: dateValue.getSeconds(),
+        })
+      : new Date(date);
     addContact({
-      date: new Date(date),
+      date: newDate,
       name,
       phoneNumber,
     });
-
+    reset();
     callback();
   };
 

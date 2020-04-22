@@ -3,7 +3,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
 import { ReactComponent as ScoreTrackerDeco } from 'assets/icons/circle_star.svg';
 import { useScoreServices } from 'modules/score';
-import { Heading, HEADING } from 'components';
+import { Heading } from 'components';
 
 const SVG_STYLES = {
   rotation: 0.6,

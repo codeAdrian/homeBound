@@ -10,6 +10,10 @@ type Props = OwnProps & React.HTMLAttributes<HTMLButtonElement>;
 
 export const BUTTON = {
   SQUARE: {
+    LARGE: {
+      CTA:
+        'button button--square-large button--size-xxlarge button--block u-t__fontSize--large u-t__fontWeight--light button--square-cta',
+    },
     GHOST: {
       MIXED: 'button button--ghost button--size-mixed button--square',
     },

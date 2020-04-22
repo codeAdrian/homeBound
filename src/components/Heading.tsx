@@ -15,6 +15,11 @@ export const HEADING = {
       BOLD:
         'heading u-t__fontFamily--primary u-t__fontSize--xlarge u-t__fontWeight--bold',
     },
+
+    XXLARGE: {
+      LIGHT:
+        'heading u-t__fontFamily--primary u-t__fontSize--xxlarge u-t__fontWeight--light',
+    },
   },
   SECONDARY: {
     SMALL: {

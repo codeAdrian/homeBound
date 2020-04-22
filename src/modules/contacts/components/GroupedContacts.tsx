@@ -27,7 +27,7 @@ export const GroupedContacts = () => {
 
         return (
           <article className="contactCard" key={id}>
-            <div className="contactCard__name">{name}</div>
+            <div className="contactCard__name u-t-truncate">{name}</div>
             {distanceValue}
           </article>
         );

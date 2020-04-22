@@ -34,8 +34,20 @@
     margin-bottom: var(--spacing--40px);
 }
 
+.u-sb-28 {
+    margin-bottom: var(--spacing--28px);
+}
+
 .u-sb-12 {
     margin-bottom: var(--spacing--12px);
+}
+
+.u-sb-16 {
+    margin-bottom: var(--spacing--16px);
+}
+
+.u-sr-32 {
+    padding-right: var(--spacing--32px);
 }
 
 .u-ab-center {
@@ -54,4 +66,16 @@
 .u-l-6 {
     position: relative;
     z-index: var(--level-6);
+}
+
+.u-t-truncate {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.u-f--spaceBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: ceneter;
 }

@@ -1,12 +1,12 @@
 .scoretracker {
-    max-width: 55px;
+    width: 55px;
     position: relative;
-    margin: 0 auto;
-    margin-bottom: var(--spacing--28px);
+    margin-bottom: var(--spacing--8px);
 }
 
 .scoretracker--large {
-    max-width: 100px;
+    width: 100px;
+    margin-bottom: var(--spacing--28px);
 }
 
 .scoretracker__deco {
