@@ -3,7 +3,7 @@
     height: 100%;
     min-width: 100%;
     top: 0;
-    padding: 0 var(--spacing--40px);
+    padding: var(--spacing--32px) var(--spacing--40px) var(--spacing--28px);
     left: 0;
     right: 0;
     z-index: var(--level-5);

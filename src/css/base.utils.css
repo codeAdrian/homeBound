@@ -77,5 +77,9 @@
 .u-f--spaceBetween {
     display: flex;
     justify-content: space-between;
-    align-items: ceneter;
+    align-items: center;
+}
+
+.u-f--grow1 {
+    flex-grow: 1;
 }

@@ -62,9 +62,3 @@
     text-transform: uppercase;
     flex: 0;
 }
-
-.contactModal {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
