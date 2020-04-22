@@ -14,7 +14,6 @@ export class FirestoreService<T extends any> {
 
   async filterByDate(
     listenerProps: ListenerProps,
-    n: number,
   ): Promise<string | T[] | any> {
     let queryRef: firebase.firestore.Query | undefined;
 
@@ -25,7 +24,6 @@ export class FirestoreService<T extends any> {
     return data
       .where('date', '<', new Date())
       .orderBy('date', 'desc')
-      .limit(n)
       .onSnapshot(
         (snapshot) => {
           const items = snapshot.docs.map((document) => {

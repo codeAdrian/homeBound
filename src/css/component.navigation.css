@@ -3,7 +3,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 4;
+    z-index: var(--level-3);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
     border-radius: 20px;
     padding: 20px;
@@ -21,7 +21,7 @@
 
 .nav__background {
     content: '';
-    z-index: 3;
+    z-index: var(--level-2);
     position: absolute;
     left: 0;
     right: 0;
@@ -35,7 +35,7 @@
 
 .nav__link {
     position: relative;
-    z-index: 5;
+    z-index: var(--level-4);
     fill: var(--color__white);
     outline: 0;
     border-width: 0;

@@ -1,14 +1,16 @@
 import React from 'react';
 import { format } from 'date-fns';
 
-import { useContactsServices, UserContact } from 'modules/contacts';
+import { useContactsServices, UserContact, AddContact } from 'modules/contacts';
 import { toDate } from 'util/time';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 import { ReactComponent as TextBubble } from 'assets/icons/text_bubble.svg';
+import { ReactComponent as CircleIcon } from 'assets/icons/circle_ring.svg';
 import { Button, BUTTON } from 'components';
-import { Modal } from 'modules/modal';
+import { Modal, useModalControls } from 'modules/modal';
 
 export const Contacts = () => {
+  const [isModalOpen, { toggleModalState }] = useModalControls();
   const [{ userContacts }, { getLastUserContacts }] = useContactsServices();
   const groupedContacts: {
     [k: string]: { date: Date; contacts: UserContact[] };
@@ -18,11 +20,9 @@ export const Contacts = () => {
     getLastUserContacts();
   }, [getLastUserContacts]);
 
-  const groupContacts = () => {
-    console.log('recentContacts', userContacts);
-    if (!userContacts) return null;
+  userContacts &&
     userContacts.map((contact) => {
-      const newDate = format(toDate(contact.date), 'dMY');
+      const newDate = format(toDate(contact.date), '-YMMdd');
 
       if (!groupedContacts[newDate]) {
         groupedContacts[newDate] = {
@@ -31,45 +31,65 @@ export const Contacts = () => {
         };
       } else {
         groupedContacts[newDate].contacts = [
-          ...groupedContacts[newDate].contacts,
           contact,
+          ...groupedContacts[newDate].contacts,
         ];
       }
-
-      console.log(groupedContacts);
     });
-  };
 
-  groupContacts();
-
-  const test = Object.keys(groupedContacts).map(function (key) {
-    const { date, contacts } = groupedContacts[key];
-    return (
-      <div key={key}>
-        {format(date, 'd MMM')}
-        {contacts.map(({ name, id }) => (
-          <div className="contactCard" key={id}>
-            {name}
-            <Button
-              className={BUTTON.ROUNDED.CTA.SMALL}
-              icon={<TextBubble />}
-              onClick={() => {}}
-            ></Button>
+  const sortedContactCards = React.useMemo(
+    () =>
+      Object.keys(groupedContacts).map(function (key) {
+        const { date, contacts } = groupedContacts[key];
+        return (
+          <div key={key} className="contactGroup">
+            <CircleIcon className="contactGroup__deco" />
+            <span className="u-t__fontFamily--secondary u-t__fontSize--large u-t__fontWeihgt--bold">
+              {format(date, 'dd')}
+            </span>{' '}
+            <span className="u-t__fontSize--xsmall u-o-6">
+              {format(date, 'MMM')}
+            </span>
+            <ul className="contactGroup__list">
+              {contacts.map(({ name, id }) => (
+                <li className="contactCard" key={id}>
+                  {name}
+                  <Button
+                    className={BUTTON.ROUNDED.CTA.SMALL}
+                    icon={<TextBubble />}
+                    onClick={() => {}}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
-        ))}
-      </div>
-    );
-  });
+        );
+      }),
+    [groupedContacts],
+  );
+
+  console.log({ groupedContacts, userContacts });
+
+  if (!userContacts) return null;
 
   return (
     <section className="app__content">
-      <Modal>Test</Modal>
+      <Modal isModalOpen={isModalOpen}>
+        <div className="contactModal">
+          <Button
+            icon={<PlusIcon />}
+            className={BUTTON.ROUNDED.CTA.LARGE.GLOW}
+            onClick={toggleModalState}
+          />
+          <AddContact callback={toggleModalState} />
+        </div>
+      </Modal>
       <Button
         icon={<PlusIcon />}
         className={BUTTON.ROUNDED.CTA.LARGE.GLOW}
-        onClick={() => {}}
-      ></Button>
-      {test}
+        onClick={toggleModalState}
+      />
+      {sortedContactCards}
     </section>
   );
 };

@@ -50,20 +50,16 @@ export const useContactsServices = () => {
     [dispatch],
   );
 
-  const getLastUserContacts = React.useCallback(
-    async (n?: number) => {
-      if (!userData) return;
-      dispatch({
-        type: ContactsActionTypes.Request,
-      });
-      const amount = n || 60;
-      await getLastContacts(userData, amount, {
-        successFunction,
-        errorFunction,
-      });
-    },
-    [dispatch, errorFunction, successFunction, userData],
-  );
+  const getLastUserContacts = React.useCallback(async () => {
+    if (!userData) return;
+    dispatch({
+      type: ContactsActionTypes.Request,
+    });
+    await getLastContacts(userData, {
+      successFunction,
+      errorFunction,
+    });
+  }, [dispatch, errorFunction, successFunction, userData]);
 
   const addContact = React.useCallback(
     async (contact: ContactInput) => {

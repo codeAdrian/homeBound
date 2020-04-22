@@ -11,7 +11,7 @@ export const ContactSummary = () => {
     getLastUserContacts();
   }, [getLastUserContacts]);
 
-  console.log(userContacts);
+  console.log({ userContacts });
 
   if (!userContacts || userContacts.length === 0) return null;
 

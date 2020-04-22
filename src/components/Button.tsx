@@ -29,7 +29,7 @@ export const BUTTON = {
     CTA: {
       BASE: {
         GLOW:
-          'button button--primary button--block button--pill button--size-base u-t__fontSize--small',
+          'button button--cta button--glow-cta button--block button--pill button--size-base u-t__fontSize--small',
       },
     },
   },

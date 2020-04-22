@@ -54,7 +54,6 @@ const Dashboard: React.FC = () => {
             {title}: {score} points
           </div>
         ))}
-      <AddContact />
       <LogOut />
     </section>
   );

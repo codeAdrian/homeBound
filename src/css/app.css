@@ -4,6 +4,7 @@
 @import 'variables.spacing.css';
 @import 'variables.typography.css';
 @import 'variables.borders.css';
+@import 'variables.levels.css';
 
 @import 'base.animations.css';
 @import 'base.typography.css';

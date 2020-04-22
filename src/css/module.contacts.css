@@ -1,3 +1,33 @@
+.contactGroup {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: var(--spacing--n20px);
+        top: 10px;
+        width: 1px;
+        height: 100%;
+        background-color: var(--color__black);
+        opacity: 0.1;
+    }
+}
+
+.contactGroup__deco {
+    position: absolute;
+    left: -19.5px;
+    top: var(--spacing--8px);
+    transform: translate3d(-50%, 0, 0);
+}
+
+.contactGroup__list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    padding-top: var(--spacing--12px);
+    padding-bottom: var(--spacing--16px);
+}
+
 .contactCard {
     border-radius: var(--border__radius--8px);
     background-color: rgba(255, 255, 255, 0.3);
@@ -6,6 +36,10 @@
     justify-content: space-between;
     margin-bottom: var(--spacing--8px);
     align-items: center;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .contactCard__distance {
@@ -26,4 +60,10 @@
 .contactCard__text {
     text-transform: uppercase;
     flex: 0;
+}
+
+.contactModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

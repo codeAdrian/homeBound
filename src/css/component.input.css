@@ -66,3 +66,41 @@ input:-webkit-autofill {
     bottom: 0;
     opacity: 0.3;
 }
+
+.input__control--date {
+    &::-webkit-datetime-edit-text {
+        transition: 0.2s ease;
+    }
+
+    &::-webkit-datetime-edit-month-field {
+        transition: 0.2s ease;
+    }
+
+    &::-webkit-datetime-edit-day-field {
+        transition: 0.2s ease;
+    }
+
+    &::-webkit-datetime-edit-year-field {
+        transition: 0.2s ease;
+    }
+}
+
+.input:not(.input--focused) {
+    & .input__control--date {
+        &::-webkit-datetime-edit-text {
+            opacity: 0;
+        }
+
+        &::-webkit-datetime-edit-month-field {
+            opacity: 0;
+        }
+
+        &::-webkit-datetime-edit-day-field {
+            opacity: 0;
+        }
+
+        &::-webkit-datetime-edit-year-field {
+            opacity: 0;
+        }
+    }
+}

@@ -4,11 +4,19 @@ import { useAppState } from 'modules/app';
 
 import Portal from './Portal';
 
-export const Modal: React.FC = ({ children }) => {
+interface Props {
+  isModalOpen: boolean;
+}
+
+export const Modal: React.FC<Props> = ({ children, isModalOpen }) => {
   const [{ theme }] = useAppState();
+  const modalClassName = isModalOpen ? 'modal modal--open' : 'modal';
   return (
     <Portal id="app-root">
-      <aside className="modal" style={{ backgroundColor: theme.color }}>
+      <aside
+        className={modalClassName}
+        style={{ backgroundColor: theme.color }}
+      >
         {children}
       </aside>
     </Portal>

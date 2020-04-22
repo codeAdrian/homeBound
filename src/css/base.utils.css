@@ -6,6 +6,10 @@
     opacity: 0.8;
 }
 
+.u-o-6 {
+    opacity: 0.6;
+}
+
 .u-o-5 {
     opacity: 0.5;
 }
@@ -45,4 +49,9 @@
 
 .u-c-cta {
     color: var(--color__cta);
+}
+
+.u-l-6 {
+    position: relative;
+    z-index: var(--level-6);
 }
