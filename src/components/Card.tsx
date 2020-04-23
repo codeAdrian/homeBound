@@ -53,7 +53,7 @@ export const Card: React.FC<Props> = ({
 
   return (
     <article className={`card ${cardClassName}`}>
-      {handleComplete && (
+      {onComplete && (
         <CheckIcon onClick={handleComplete} className="card__complete" />
       )}
       <div className={`card__deco ${cardDecoClassName} ${CARD_STYLE[style]}`}>

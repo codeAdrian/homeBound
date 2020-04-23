@@ -17,7 +17,7 @@ export const ContactSummary = () => {
 
   if (!userContacts || userContacts.length === 0)
     return (
-      <>
+      <article className="u-sb-28">
         <label className="u-d-block u-sb-12 u-t__fontSize--small u-t__fontWeight--medium">
           Your close contacts
         </label>
@@ -32,13 +32,13 @@ export const ContactSummary = () => {
           isModalOpen={isModalOpen}
           toggleModalState={toggleModalState}
         />
-      </>
+      </article>
     );
 
   if (userContacts.length > 2) userContacts.length = 2;
 
   return (
-    <>
+    <article className="u-sb-36">
       <label className="u-d-block u-sb-12 u-t__fontSize--small u-t__fontWeight--medium">
         Your recent close contacts
       </label>
@@ -64,6 +64,6 @@ export const ContactSummary = () => {
           </article>
         );
       })}
-    </>
+    </article>
   );
 };

@@ -8,15 +8,17 @@ import { AddActivity } from 'modules/activities';
 interface Props {
   isModalOpen: boolean;
   toggleModalState: VoidFunction;
+  isLight?: boolean;
 }
 
 export const ActivityModal: React.FC<Props> = ({
   isModalOpen,
   toggleModalState,
+  isLight,
 }) => {
   return (
     <Modal isModalOpen={isModalOpen}>
-      <div className="contactModal app--light">
+      <div className={`contactModal ${isLight ? 'app--light' : ''}`}>
         <section className="contactModal l-page">
           <aside className="u-f--spaceBetween u-sb-12">
             <Heading tag="h1" className={HEADING.PRIMARY.XXLARGE.LIGHT}>

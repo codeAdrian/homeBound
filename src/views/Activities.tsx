@@ -28,7 +28,7 @@ export const Activities = () => {
   }, [setAppTheme]);
 
   return (
-    <section className="app__content app--light">
+    <article className="app__content app--light">
       <aside className="u-f--spaceBetween u-sb-40">
         <Heading tag="h1" className={HEADING.PRIMARY.XXLARGE.LIGHT}>
           Activities
@@ -63,6 +63,7 @@ export const Activities = () => {
               <ActivityModal
                 isModalOpen={isModalOpen}
                 toggleModalState={toggleModalState}
+                isLight
               />
             </>
           }
@@ -71,6 +72,6 @@ export const Activities = () => {
           titleSecondary="Completed activities"
         />
       </main>
-    </section>
+    </article>
   );
 };

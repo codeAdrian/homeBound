@@ -3,9 +3,11 @@ import isEmpty from 'lodash/isEmpty';
 
 import { ReactComponent as PlusIcon } from 'assets/icons/plus_large.svg';
 import { Button, BUTTON, Card, CardSlider, CardSpace } from 'components';
-import { useActivitiesServices } from 'modules/activities';
+import { useActivitiesServices, ActivityModal } from 'modules/activities';
+import { useModalControls } from 'modules/modal';
 
 export const ActivitySummary = () => {
+  const [isModalOpen, { toggleModalState }] = useModalControls();
   const [
     { userActivities },
     { removeActivity, completeActivity },
@@ -13,18 +15,26 @@ export const ActivitySummary = () => {
 
   if (!userActivities || isEmpty(userActivities))
     return (
-      <section>
+      <section className="u-sb-28">
+        <ActivityModal
+          isModalOpen={isModalOpen}
+          toggleModalState={toggleModalState}
+        />
         <label className="u-d-block u-sb-12 u-t__fontSize--small u-t__fontWeight--medium">
           Your todo list
         </label>
-        <Button icon={<PlusIcon />} className={BUTTON.SQUARE.LARGE.CTA}>
+        <Button
+          onClick={toggleModalState}
+          icon={<PlusIcon />}
+          className={BUTTON.SQUARE.LARGE.CTA}
+        >
           Add tasks
         </Button>
       </section>
     );
 
   return (
-    <section>
+    <section className="u-sb-36">
       <label className="u-d-block u-sb-12 u-t__fontSize--small u-t__fontWeight--medium">
         Your todo list
       </label>

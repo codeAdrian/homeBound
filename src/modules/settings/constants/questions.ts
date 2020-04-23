@@ -7,7 +7,7 @@ export const QUESTIONS = [
   },
   {
     question:
-      'Do you live by yourself or are theme more people in your household?',
+      'Do you live by yourself or are there more people in your household?',
     answerPositive: "Livin' alone",
     answerNegative: 'Oh no, there are more of us',
     label: 'isLivingAlone',
