@@ -5,11 +5,11 @@ import { CustomHook } from 'models';
 import { getUserData } from 'modules/user';
 import {
   ContactsState,
-  getUserContacts,
   getContactsState,
   addUserContact,
   ContactsActionTypes,
   removeUserContact,
+  getLastContacts,
 } from 'modules/contacts';
 
 export interface ContactInput {
@@ -19,7 +19,7 @@ export interface ContactInput {
 }
 
 interface Api {
-  getContacts: VoidFunction;
+  getLastUserContacts: (n?: number) => void;
   addContact: (contact: ContactInput) => void;
   removeContact: (id: string) => void;
 }
@@ -29,52 +29,65 @@ export const useContactsServices: CustomHook<ContactsState, Api> = () => {
   const { userData } = useSelector(getUserData);
   const contacts = useSelector(getContactsState);
 
-  const getContacts = React.useCallback(async () => {
+  const successFunction = React.useCallback(
+    (payload: any) => {
+      dispatch({
+        type: ContactsActionTypes.Success,
+        payload,
+      });
+    },
+    [dispatch],
+  );
+
+  const errorFunction = React.useCallback(
+    (payload: any) => {
+      dispatch({
+        type: ContactsActionTypes.Error,
+        payload,
+      });
+    },
+    [dispatch],
+  );
+
+  const getLastUserContacts = React.useCallback(async () => {
     if (!userData) return;
     dispatch({
       type: ContactsActionTypes.Request,
     });
-
-    const payload = await getUserContacts(userData);
-
-    dispatch({
-      type: ContactsActionTypes.Success,
-      payload: payload,
+    await getLastContacts(userData, {
+      successFunction,
+      errorFunction,
     });
-  }, [dispatch, userData]);
+  }, [dispatch, errorFunction, successFunction, userData]);
 
   const addContact = React.useCallback(
     async (contact: ContactInput) => {
       if (userData) {
-        addUserContact(userData, contact);
-        await getContacts();
+        await addUserContact(userData, contact);
+        getLastUserContacts();
       }
     },
-    [userData, getContacts],
+    [userData, getLastUserContacts],
   );
 
   const removeContact = React.useCallback(
     async (id: string) => {
       if (userData) {
-        removeUserContact(userData, id);
-        await getContacts();
+        await removeUserContact(userData, id);
+        getLastUserContacts();
       }
     },
-    [getContacts, userData],
+    [getLastUserContacts, userData],
   );
 
   const api = React.useMemo(
     () => ({
-      getContacts,
+      getLastUserContacts,
       addContact,
       removeContact,
     }),
-    [addContact, getContacts, removeContact],
+    [addContact, removeContact, getLastUserContacts],
   );
-
-  React.useEffect(() => {
-    getContacts();
-  }, [getContacts]);
 
   return [contacts, api];
 };

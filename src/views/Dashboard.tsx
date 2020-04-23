@@ -8,9 +8,11 @@ import {
   IncrementScore,
   useScoreListener,
   useScoreServices,
+  ScoreTracker,
 } from 'modules/score';
-import { MessageForm, AddContact } from 'modules/contacts';
+import { ContactSummary } from 'modules/contacts';
 import { useAppState } from 'modules/app';
+import { Heading, HEADING } from 'components';
 
 const Dashboard: React.FC = () => {
   const [{ userData }] = useUserServices();
@@ -37,7 +39,15 @@ const Dashboard: React.FC = () => {
 
   return (
     <section className="app__content">
-      <MessageForm />
+      <aside className="u-f--spaceBetween u-sb-12">
+        <Heading tag="h1" className={HEADING.PRIMARY.XXLARGE.LIGHT}>
+          Stayin'
+          <br />
+          indoors
+        </Heading>
+        <ScoreTracker mode="small" />
+      </aside>
+      <ContactSummary />
       <AddActivity />
       <strong>Update score realtime: </strong>
       {userScore && userScore.score}
@@ -49,7 +59,6 @@ const Dashboard: React.FC = () => {
           {title}: {score} points
         </div>
       ))}
-      <AddContact />
       <LogOut />
     </section>
   );

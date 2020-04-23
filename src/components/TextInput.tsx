@@ -15,6 +15,7 @@ export const TextInput: React.FC<Props> = ({
   label,
   componentRef,
   name,
+  className,
   hasValue,
   ...props
 }) => {
@@ -29,12 +30,16 @@ export const TextInput: React.FC<Props> = ({
 
   const shouldTransformLabel = isFocused || hasValue;
 
+  const inputClassName = shouldTransformLabel
+    ? 'input input--focused'
+    : 'input';
+
   const labelClassName = shouldTransformLabel
     ? 'input__label u-t__fontSize--base input__label--focused'
     : 'input__label u-t__fontSize--base';
 
   return (
-    <div className="input">
+    <div className={inputClassName}>
       <label htmlFor={name} className={labelClassName}>
         {label}
       </label>
@@ -42,7 +47,7 @@ export const TextInput: React.FC<Props> = ({
         id={name}
         name={name}
         ref={componentRef}
-        className="input__control input__control--text u-t__fontSize--base"
+        className={`input__control input__control--text u-t__fontSize--base ${className}`}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}

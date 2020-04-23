@@ -10,7 +10,6 @@ interface State {
 }
 
 export interface Message {
-  from: string;
   to: string;
   body: string;
 }

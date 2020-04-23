@@ -2,6 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { ReactComponent as PersonIcon } from 'assets/icons/person.svg';
+import { ReactComponent as DashboardIcon } from 'assets/icons/squares.svg';
+import { ReactComponent as ActivitiesIcon } from 'assets/icons/trophy.svg';
+import { ReactComponent as SpeechBubbleIcon } from 'assets/icons/speech_bubble.svg';
 import { useAppState } from 'modules/app';
 
 export const Navigation = () => {
@@ -11,17 +14,34 @@ export const Navigation = () => {
 
   return (
     <nav className={navClassName}>
-      <NavLink to="/1" className="nav__link" activeClassName="">
+      <NavLink
+        to="/"
+        exact
+        className="nav__link"
+        activeClassName="nav__link--active"
+      >
+        <DashboardIcon className="nav__icon" />
+      </NavLink>
+      <NavLink
+        to="/activities"
+        className="nav__link"
+        activeClassName="nav__link--active"
+      >
+        <ActivitiesIcon className="nav__icon" />
+      </NavLink>
+      <NavLink
+        to="/contacts"
+        className="nav__link"
+        activeClassName="nav__link--active"
+      >
         <PersonIcon className="nav__icon" />
       </NavLink>
-      <NavLink to="/" className="nav__link" activeClassName="nav__link--active">
-        <PersonIcon className="nav__icon" />
-      </NavLink>
-      <NavLink to="/3" className="nav__link" activeClassName="">
-        <PersonIcon className="nav__icon" />
-      </NavLink>
-      <NavLink to="/4" className="nav__link" activeClassName="">
-        <PersonIcon className="nav__icon" />
+      <NavLink
+        to="/assistant"
+        className="nav__link"
+        activeClassName="nav__link--active"
+      >
+        <SpeechBubbleIcon className="nav__icon" />
       </NavLink>
       <div
         className="nav__background"

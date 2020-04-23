@@ -7,20 +7,28 @@ interface Props {
 
 export const HEADING = {
   PRIMARY: {
+    XSMALL: {
+      MEDIUM:
+        'heading u-t__fontFamily--primary u-t__fontSize--xsmall u-t__fontWeight--medium',
+    },
     XLARGE: {
       BOLD:
-        'heading u-t__fontFamily--primary u-t__fontSize--xlarge u-t__fontWeight--bold ',
+        'heading u-t__fontFamily--primary u-t__fontSize--xlarge u-t__fontWeight--bold',
+    },
+
+    XXLARGE: {
+      LIGHT:
+        'heading u-t__fontFamily--primary u-t__fontSize--xxlarge u-t__fontWeight--light',
     },
   },
-
   SECONDARY: {
     SMALL: {
       BOLD:
-        'heading u-t__fontFamily--secondary u-t__fontSize--small u-t__fontWeight--bold ',
+        'heading u-t__fontFamily--secondary u-t__fontSize--small u-t__fontWeight--bold',
     },
     XLARGE: {
       BOLD:
-        'heading u-t__fontFamily--secondary u-t__fontSize--xlarge u-t__fontWeight--bold ',
+        'heading u-t__fontFamily--secondary u-t__fontSize--xlarge u-t__fontWeight--bold',
     },
   },
 };

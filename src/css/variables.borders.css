@@ -1,5 +1,7 @@
 :root {
+    --border__radius--8px: 8px;
     --border__radius--10px: 10px;
+    --border__radius--12px: 12px;
     --border__radius--20px: 20px;
     --border__radius--24px: 24px;
 }

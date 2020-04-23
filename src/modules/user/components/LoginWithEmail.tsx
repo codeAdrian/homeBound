@@ -18,7 +18,7 @@ const LoginWithEmail: React.FC = () => {
   };
 
   return (
-    <form id="sadasdasda" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         hasValue={!!email}
         name="email"

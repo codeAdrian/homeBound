@@ -34,10 +34,6 @@
     padding: var(--spacing--14px);
 }
 
-.button--size-large {
-    padding: var(--spacing--16px);
-}
-
 .button--size-xlarge {
     padding: var(--spacing--20px);
 }
@@ -87,4 +83,21 @@
 .button--top {
     border-radius: var(--border__radius--20px) var(--border__radius--20px) 0 0;
     box-shadow: inset 0 -1px 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.button--square-large {
+    border-radius: var(--border__radius--12px);
+}
+
+.button--size-xxlarge {
+    padding: var(--spacing--40px);
+
+    & * + * {
+        padding-left: var(--spacing--8px);
+    }
+}
+
+.button--square-cta {
+    color: var(--color__cta);
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }

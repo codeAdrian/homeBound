@@ -4,6 +4,7 @@
 @import 'variables.spacing.css';
 @import 'variables.typography.css';
 @import 'variables.borders.css';
+@import 'variables.levels.css';
 
 @import 'base.animations.css';
 @import 'base.typography.css';
@@ -16,5 +17,8 @@
 @import 'component.splashScreen.css';
 @import 'component.icons.css';
 @import 'component.navigation.css';
+@import 'component.modal.css';
 
 @import 'module.app.css';
+@import 'module.score.css';
+@import 'module.contacts.css';

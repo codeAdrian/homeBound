@@ -9,6 +9,11 @@ body {
     font-family: var(--font__family--secondary);
 }
 
+.u-t__fontSize--xxsmall {
+    font-size: var(--font__size--xxsmall);
+    line-height: var(--font__line--xxsmall);
+}
+
 .u-t__fontSize--xsmall {
     font-size: var(--font__size--xsmall);
     line-height: var(--font__line--xsmall);
