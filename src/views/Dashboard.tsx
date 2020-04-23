@@ -12,7 +12,7 @@ import {
 } from 'modules/score';
 import { ContactSummary } from 'modules/contacts';
 import { useAppState } from 'modules/app';
-import { Heading, HEADING } from 'components';
+import { Heading, HEADING, Card } from 'components';
 
 const Dashboard: React.FC = () => {
   const [{ userData }] = useUserServices();
@@ -49,6 +49,7 @@ const Dashboard: React.FC = () => {
       </aside>
       <ContactSummary />
       <AddActivity />
+
       <strong>Update score realtime: </strong>
       {userScore && userScore.score}
       <IncrementScore user={userData} />

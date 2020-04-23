@@ -13,6 +13,8 @@ export const BUTTON = {
     LARGE: {
       CTA:
         'button button--square-large button--size-xxlarge button--block u-t__fontSize--large u-t__fontWeight--light button--square-cta',
+      PRIMARY:
+        'button button--square-large button--size-xxlarge button--block u-t__fontSize--large u-t__fontWeight--light button--square-primary',
     },
     GHOST: {
       MIXED: 'button button--ghost button--size-mixed button--square',

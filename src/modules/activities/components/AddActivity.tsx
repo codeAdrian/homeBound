@@ -14,6 +14,7 @@ const AddActivity = () => {
       date: new Date(),
       title: `Activity - ${randomNum}`,
       score: randomNum,
+      style: Math.floor(Math.random() * 2),
     });
   };
 

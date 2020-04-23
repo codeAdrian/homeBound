@@ -13,6 +13,7 @@ import { useModalControls } from 'modules/modal';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 import { ReactComponent as PlusLargeIcon } from 'assets/icons/plus_large.svg';
 import { getGroupedContacts } from 'util/mapping';
+import { useAppState } from 'modules/app';
 
 export type GroupedContacts = {
   [k: string]: { date: Date; contacts: UserContact[] };
@@ -25,6 +26,15 @@ export const Contacts = () => {
     { userContacts },
     { getLastUserContacts, removeContact },
   ] = useContactsServices();
+  const [, { setAppTheme }] = useAppState();
+
+  React.useEffect(() => {
+    setAppTheme({
+      color: '#F7CE53',
+      shapeClass: 'app__deco--default',
+      showNav: true,
+    });
+  }, [setAppTheme]);
 
   React.useEffect(() => {
     getLastUserContacts();

@@ -3,6 +3,7 @@ export type UserActivity = {
   title: string;
   id: string;
   score: number;
+  style: number;
 };
 
 export interface ActivitiesState {

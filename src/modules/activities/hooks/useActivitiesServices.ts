@@ -17,6 +17,7 @@ export interface ActivityInput {
   date: Date;
   title: string;
   score: number;
+  style: number;
 }
 
 interface Api {
