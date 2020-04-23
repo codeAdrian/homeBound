@@ -6,7 +6,10 @@ import { Button, BUTTON, Card, CardSlider, CardSpace } from 'components';
 import { useActivitiesServices } from 'modules/activities';
 
 export const ActivitySummary = () => {
-  const [{ userActivities }] = useActivitiesServices();
+  const [
+    { userActivities },
+    { removeActivity, completeActivity },
+  ] = useActivitiesServices();
 
   if (!userActivities || isEmpty(userActivities))
     return (
@@ -27,7 +30,12 @@ export const ActivitySummary = () => {
       </label>
       <CardSlider>
         {userActivities?.map((activity) => (
-          <Card activity={activity} mode="grid" />
+          <Card
+            onComplete={completeActivity}
+            onRemove={removeActivity}
+            activity={activity}
+            mode="grid"
+          />
         ))}
         {userActivities?.length > 2 && <CardSpace />}
       </CardSlider>

@@ -20,7 +20,7 @@ const AddActivity: React.FC<Props> = ({ callback }) => {
       date: dateValue,
       title,
       score: Math.floor(Math.random() * 9 + 2),
-      style: Math.floor(Math.random() * 2),
+      style: Math.floor(Math.random() * 3),
     });
 
     reset();
@@ -36,6 +36,7 @@ const AddActivity: React.FC<Props> = ({ callback }) => {
         name="title"
         label="Title"
         type="text"
+        max={32}
         componentRef={register({
           required: 'Required',
         })}

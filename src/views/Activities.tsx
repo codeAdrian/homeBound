@@ -4,12 +4,19 @@ import isEmpty from 'lodash/isEmpty';
 import { Heading, HEADING, Button, BUTTON, Card, Tabs } from 'components';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 import { useAppState } from 'modules/app';
-import { useActivitiesServices, ActivityModal } from 'modules/activities';
+import {
+  useActivitiesServices,
+  ActivityModal,
+  CompletedActivity,
+} from 'modules/activities';
 import { useModalControls } from 'modules/modal';
 
 export const Activities = () => {
   const [isModalOpen, { toggleModalState }] = useModalControls();
-  const [{ userActivities }] = useActivitiesServices();
+  const [
+    { userActivities },
+    { removeActivity, completeActivity },
+  ] = useActivitiesServices();
   const [, { setAppTheme }] = useAppState();
 
   React.useEffect(() => {
@@ -29,7 +36,7 @@ export const Activities = () => {
         <Button
           icon={<PlusIcon />}
           className={BUTTON.ROUNDED.CTA.LARGE.GLOW}
-          onClick={() => false}
+          onClick={toggleModalState}
         />
       </aside>
       <main>
@@ -37,7 +44,12 @@ export const Activities = () => {
           contentMain={
             <>
               {userActivities?.map((activity) => (
-                <Card activity={activity} mode="list" />
+                <Card
+                  onComplete={completeActivity}
+                  onRemove={removeActivity}
+                  activity={activity}
+                  mode="list"
+                />
               ))}
               <Button
                 icon={<PlusIcon />}
@@ -54,7 +66,7 @@ export const Activities = () => {
               />
             </>
           }
-          contentSecondary={<div>secondary content</div>}
+          contentSecondary={<CompletedActivity />}
           titleMain="Your todo"
           titleSecondary="Completed activities"
         />

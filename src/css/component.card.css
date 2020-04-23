@@ -54,7 +54,8 @@
 }
 
 .card__deco--list {
-    max-width: 96px;
+    min-width: 96px;
+    flex-basis: 96px;
 
     &::before {
         height: 74px;

@@ -9,6 +9,8 @@ import { UserActivity } from 'modules/activities';
 interface Props {
   mode: 'list' | 'grid';
   activity: UserActivity;
+  onRemove?: (id: string) => void;
+  onComplete?: (id: string) => void;
 }
 
 const CARD_STYLE = [
@@ -17,8 +19,13 @@ const CARD_STYLE = [
   'card__deco--quaternary',
 ];
 
-export const Card: React.FC<Props> = ({ mode, activity }) => {
-  const { title, score, style } = activity;
+export const Card: React.FC<Props> = ({
+  mode,
+  activity,
+  onRemove,
+  onComplete,
+}) => {
+  const { title, score, style, id } = activity;
   const isList = mode === 'list';
   const cardClassName = isList ? 'card--list' : 'cardGrid';
   const cardContentClassName = isList
@@ -34,9 +41,21 @@ export const Card: React.FC<Props> = ({ mode, activity }) => {
     ? 'card__remove--list'
     : 'card__remove--grid';
 
+  const handleRemove = React.useCallback(() => {
+    if (!onRemove) return;
+    onRemove(id);
+  }, [id, onRemove]);
+
+  const handleComplete = React.useCallback(() => {
+    if (!onComplete) return;
+    onComplete(id);
+  }, [id, onComplete]);
+
   return (
     <article className={`card ${cardClassName}`}>
-      <CheckIcon className="card__complete" />
+      {handleComplete && (
+        <CheckIcon onClick={handleComplete} className="card__complete" />
+      )}
       <div className={`card__deco ${cardDecoClassName} ${CARD_STYLE[style]}`}>
         <MascotIcon className="card__image" />
       </div>
@@ -50,9 +69,15 @@ export const Card: React.FC<Props> = ({ mode, activity }) => {
           >
             +{score}
           </span>
-          <div className={cardRemoveClassName}>
-            <Button className={BUTTON.ROUNDED.CTA.SMALL} icon={<TrashIcon />} />
-          </div>
+          {onRemove && (
+            <div className={cardRemoveClassName}>
+              <Button
+                onClick={handleRemove}
+                className={BUTTON.ROUNDED.CTA.SMALL}
+                icon={<TrashIcon />}
+              />
+            </div>
+          )}
         </div>
       </div>
     </article>
