@@ -4,6 +4,7 @@
     border-radius: var(--border__radius--12px);
     padding: var(--spacing--4px);
     width: 100%;
+    color: var(--color__text);
 }
 
 .card--list {
@@ -108,8 +109,9 @@
 }
 
 .card--space {
-    width: 100px;
+    min-width: 20px;
     visibility: hidden;
+    flex-basis: 20px;
 }
 
 .card__content--list {

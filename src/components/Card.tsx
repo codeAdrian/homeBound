@@ -25,6 +25,7 @@ export const Card: React.FC<Props> = ({ mode, activity }) => {
     ? 'card__content--list'
     : 'card__content--grid';
   const cardTextClassName = isList ? 'card__text--list' : 'card__text--grid';
+  const cardDecoClassName = isList ? 'card__deco--list' : 'card__deco--grid';
   const cardScoreClassName = isList ? 'card__score--list' : 'card__score--grid';
   const cardFooterClassName = isList
     ? 'card__footer--list'
@@ -36,7 +37,7 @@ export const Card: React.FC<Props> = ({ mode, activity }) => {
   return (
     <article className={`card ${cardClassName}`}>
       <CheckIcon className="card__complete" />
-      <div className={`card__deco card__deco--list ${CARD_STYLE[style]}`}>
+      <div className={`card__deco ${cardDecoClassName} ${CARD_STYLE[style]}`}>
         <MascotIcon className="card__image" />
       </div>
       <div className={cardContentClassName}>

@@ -4,9 +4,11 @@ import isEmpty from 'lodash/isEmpty';
 import { Heading, HEADING, Button, BUTTON, Card, Tabs } from 'components';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 import { useAppState } from 'modules/app';
-import { useActivitiesServices } from 'modules/activities';
+import { useActivitiesServices, ActivityModal } from 'modules/activities';
+import { useModalControls } from 'modules/modal';
 
 export const Activities = () => {
+  const [isModalOpen, { toggleModalState }] = useModalControls();
   const [{ userActivities }] = useActivitiesServices();
   const [, { setAppTheme }] = useAppState();
 
@@ -39,17 +41,22 @@ export const Activities = () => {
               ))}
               <Button
                 icon={<PlusIcon />}
+                onClick={toggleModalState}
                 className={BUTTON.SQUARE.LARGE.PRIMARY}
               >
                 {userActivities && isEmpty(userActivities)
                   ? 'Add tasks'
                   : 'Add more tasks'}
               </Button>
+              <ActivityModal
+                isModalOpen={isModalOpen}
+                toggleModalState={toggleModalState}
+              />
             </>
           }
           contentSecondary={<div>secondary content</div>}
-          titleMain="Title main"
-          titleSecondary="Title secondary"
+          titleMain="Your todo"
+          titleSecondary="Completed activities"
         />
       </main>
     </section>

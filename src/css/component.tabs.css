@@ -23,13 +23,13 @@
 }
 
 .tabs__button {
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.25s ease;
     margin-right: var(--spacing--24px);
     padding-bottom: var(--spacing--12px);
     box-shadow: inset 0 0 0 0 currentColor;
 
     & span {
-        transition: opacity 0.3s ease;
+        transition: opacity 0.25s ease;
         opacity: 0.4;
     }
 }
