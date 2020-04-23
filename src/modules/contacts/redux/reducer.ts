@@ -1,17 +1,8 @@
-import { ContactsActionTypes, ContactsActions } from 'modules/contacts';
-
-export type UserContact = {
-  date: Date;
-  name: string;
-  id: string;
-  phoneNumber: string;
-};
-
-export interface ContactsState {
-  isLoading: boolean;
-  userContacts?: UserContact[];
-  error?: string;
-}
+import {
+  ContactsActionTypes,
+  ContactsActions,
+  ContactsState,
+} from 'modules/contacts';
 
 const INITIAL_STATE: ContactsState = {
   userContacts: undefined,

@@ -1,21 +1,4 @@
-import { ScoreActionTypes, ScoreActions } from 'modules/score';
-
-export type ScoreHistory = {
-  date: Date;
-  title: string;
-  score: number;
-};
-
-export type UserScore = {
-  score: number;
-  history: ScoreHistory[];
-};
-
-export interface ScoreState {
-  isLoading: boolean;
-  userScore?: UserScore;
-  error?: string;
-}
+import { ScoreActionTypes, ScoreActions, ScoreState } from 'modules/score';
 
 const INITIAL_STATE: ScoreState = {
   userScore: undefined,

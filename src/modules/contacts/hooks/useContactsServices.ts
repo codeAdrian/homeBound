@@ -47,7 +47,7 @@ export const useContactsServices = () => {
   const addContact = React.useCallback(
     async (contact: ContactInput) => {
       if (userData) {
-        await addUserContact(userData, contact);
+        addUserContact(userData, contact);
         await getContacts();
       }
     },
@@ -57,7 +57,7 @@ export const useContactsServices = () => {
   const removeContact = React.useCallback(
     async (id: string) => {
       if (userData) {
-        await removeUserContact(userData, id);
+        removeUserContact(userData, id);
         await getContacts();
       }
     },

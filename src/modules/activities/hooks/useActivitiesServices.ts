@@ -50,7 +50,7 @@ export const useActivitiesServices = () => {
     async (activity: ActivityInput) => {
       if (userData) {
         await addUserActivity(userData, activity);
-        await getActivities();
+        getActivities();
       }
     },
     [userData, getActivities],
@@ -60,7 +60,7 @@ export const useActivitiesServices = () => {
     async (id: string) => {
       if (userData) {
         await removeUserActivity(userData, id);
-        await getActivities();
+        getActivities();
       }
     },
     [getActivities, userData],
@@ -70,7 +70,7 @@ export const useActivitiesServices = () => {
     async (id: string) => {
       if (userData) {
         await completeUserActivity(userData, id);
-        await removeActivity(id);
+        removeActivity(id);
       }
     },
     [userData, removeActivity],
