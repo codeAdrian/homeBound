@@ -11,8 +11,7 @@ import {
   removeUserActivity,
   completeUserActivity,
 } from 'modules/activities';
-
-type State = ActivitiesState;
+import { CustomHook } from 'models';
 
 export interface ActivityInput {
   date: Date;
@@ -27,10 +26,10 @@ interface Api {
   completeActivity: (id: string) => void;
 }
 
-export const useActivitiesServices = () => {
+export const useActivitiesServices: CustomHook<ActivitiesState, Api> = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector(getUserData());
-  const activities = useSelector(getActivitiesState());
+  const { userData } = useSelector(getUserData);
+  const activities = useSelector(getActivitiesState);
 
   const getActivities = React.useCallback(async () => {
     if (!userData) return;
@@ -50,7 +49,7 @@ export const useActivitiesServices = () => {
     async (activity: ActivityInput) => {
       if (userData) {
         await addUserActivity(userData, activity);
-        await getActivities();
+        getActivities();
       }
     },
     [userData, getActivities],
@@ -60,7 +59,7 @@ export const useActivitiesServices = () => {
     async (id: string) => {
       if (userData) {
         await removeUserActivity(userData, id);
-        await getActivities();
+        getActivities();
       }
     },
     [getActivities, userData],
@@ -70,7 +69,7 @@ export const useActivitiesServices = () => {
     async (id: string) => {
       if (userData) {
         await completeUserActivity(userData, id);
-        await removeActivity(id);
+        removeActivity(id);
       }
     },
     [userData, removeActivity],
@@ -90,5 +89,5 @@ export const useActivitiesServices = () => {
     getActivities();
   }, [getActivities]);
 
-  return [activities, api] as [State, Api];
+  return [activities, api];
 };

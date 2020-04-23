@@ -1,6 +1,6 @@
 import { FirestoreService } from 'modules/firebase';
 
-const getUserActivitiesListener = async (
+const getUserActivitiesListener = (
   user: firebase.UserInfo,
   successFunction: (data: unknown) => void,
   errorFunction: (error: string) => void,
@@ -13,7 +13,7 @@ const getUserActivitiesListener = async (
   });
 };
 
-const getUserActivities = async (user: firebase.UserInfo) => {
+const getUserActivities = (user: firebase.UserInfo) => {
   const firestore = new FirestoreService('activities');
 
   return firestore.getSubcollection(user.uid, 'userActivity');

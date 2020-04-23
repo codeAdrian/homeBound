@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import * as React from 'react';
 
+import { CustomHook } from 'models';
 import { getUserData } from 'modules/user';
 import {
   ContactsState,
@@ -10,8 +11,6 @@ import {
   removeUserContact,
   getLastContacts,
 } from 'modules/contacts';
-
-type State = ContactsState;
 
 export interface ContactInput {
   date: Date;
@@ -25,10 +24,10 @@ interface Api {
   removeContact: (id: string) => void;
 }
 
-export const useContactsServices = () => {
+export const useContactsServices: CustomHook<ContactsState, Api> = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector(getUserData());
-  const contacts = useSelector(getContactsState());
+  const { userData } = useSelector(getUserData);
+  const contacts = useSelector(getContactsState);
 
   const successFunction = React.useCallback(
     (payload: any) => {
@@ -65,7 +64,7 @@ export const useContactsServices = () => {
     async (contact: ContactInput) => {
       if (userData) {
         await addUserContact(userData, contact);
-        await getLastUserContacts();
+        getLastUserContacts();
       }
     },
     [userData, getLastUserContacts],
@@ -75,7 +74,7 @@ export const useContactsServices = () => {
     async (id: string) => {
       if (userData) {
         await removeUserContact(userData, id);
-        await getLastUserContacts();
+        getLastUserContacts();
       }
     },
     [getLastUserContacts, userData],
@@ -90,5 +89,5 @@ export const useContactsServices = () => {
     [addContact, removeContact, getLastUserContacts],
   );
 
-  return [contacts, api] as [State, Api];
+  return [contacts, api];
 };

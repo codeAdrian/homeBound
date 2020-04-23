@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { CustomHook } from 'models';
 import {
   getUserData,
   UserActionTypes,
@@ -8,17 +9,15 @@ import {
   UserState,
 } from 'modules/user';
 
-export const useUserServices = () => {
+interface Api {
+  updateUserData: (user: firebase.UserInfo) => void;
+  resetUserData: VoidFunction;
+}
+
+export const useUserServices: CustomHook<UserState, Api> = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector(getUserData());
-
-  type State = UserState;
-
-  interface Api {
-    updateUserData: (user: firebase.UserInfo) => void;
-    resetUserData: VoidFunction;
-  }
+  const user = useSelector(getUserData);
 
   const updateUserData = React.useCallback(
     async (userData) => {
@@ -46,5 +45,5 @@ export const useUserServices = () => {
     [resetUserData, updateUserData],
   );
 
-  return [state, api] as [State, Api];
+  return [state, api];
 };

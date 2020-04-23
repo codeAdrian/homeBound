@@ -2,19 +2,16 @@ import { FirestoreService } from 'modules/firebase';
 import { updateScoreHistory } from 'modules/score';
 import { ActivityInput } from 'modules/activities';
 
-const addUserActivity = async (
-  user: firebase.UserInfo,
-  value: ActivityInput,
-) => {
+const addUserActivity = (user: firebase.UserInfo, value: ActivityInput) => {
   const firestore = new FirestoreService(`activities/${user.uid}/userActivity`);
 
-  await firestore.addAsync(value);
+  firestore.addAsync(value);
 };
 
-const removeUserActivity = async (user: firebase.UserInfo, id: string) => {
+const removeUserActivity = (user: firebase.UserInfo, id: string) => {
   const firestore = new FirestoreService(`activities/${user.uid}/userActivity`);
 
-  await firestore.removeAsync(id);
+  firestore.removeAsync(id);
 };
 
 const completeUserActivity = async (user: firebase.UserInfo, id: string) => {

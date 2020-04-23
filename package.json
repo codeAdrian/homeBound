@@ -1,5 +1,5 @@
 {
-  "name": "homeBound",
+  "name": "homebound",
   "version": "0.1.0",
   "private": true,
   "author": {
@@ -24,8 +24,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0"
+    "redux-thunk": "^2.3.0"
   },
   "proxy": "http://localhost:3001",
   "scripts": {

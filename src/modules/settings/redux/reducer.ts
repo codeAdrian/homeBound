@@ -1,12 +1,8 @@
-import { SettingsActionTypes, SettingsActions } from 'modules/settings';
-
-export type UserSettings = { [key: string]: boolean };
-
-export interface SettingsState {
-  isLoading: boolean;
-  userSettings?: UserSettings;
-  error?: string;
-}
+import {
+  SettingsActionTypes,
+  SettingsActions,
+  SettingsState,
+} from 'modules/settings';
 
 const INITIAL_STATE: SettingsState = {
   userSettings: undefined,

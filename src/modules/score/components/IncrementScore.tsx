@@ -7,9 +7,9 @@ interface Props {
 }
 
 export const IncrementScore: React.FC<Props> = ({ user }: Props) => {
-  const onClick = async () => {
+  const onClick = () => {
     const score = Math.floor(Math.random() * (10 - 1) + 1);
-    await updateScoreHistory(user, {
+    updateScoreHistory(user, {
       date: new Date(),
       score: score,
       title: `Test - ${score}`,

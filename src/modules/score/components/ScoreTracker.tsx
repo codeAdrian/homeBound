@@ -40,7 +40,8 @@ export const ScoreTracker = ({ mode }: Props) => {
   return (
     <aside className={mainClass}>
       <CircularProgressbar
-        value={score > 1000 ? score % 1000 : score}
+        value={score > 100 ? score % 100 : score}
+        maxValue={100}
         circleRatio={0.8}
         styles={buildStyles(SVG_STYLES)}
       />

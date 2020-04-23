@@ -1,17 +1,8 @@
-import { ActivitiesActionTypes, ActivitiesActions } from 'modules/activities';
-
-export type UserActivity = {
-  date: Date;
-  title: string;
-  id: string;
-  score: number;
-};
-
-export interface ActivitiesState {
-  isLoading: boolean;
-  userActivities?: UserActivity[];
-  error?: string;
-}
+import {
+  ActivitiesActionTypes,
+  ActivitiesActions,
+  ActivitiesState,
+} from 'modules/activities';
 
 const INITIAL_STATE: ActivitiesState = {
   userActivities: undefined,
