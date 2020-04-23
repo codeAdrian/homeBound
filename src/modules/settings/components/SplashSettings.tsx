@@ -25,6 +25,8 @@ const SplashSettings: React.FC = () => {
     });
   }, [COLORS, questionNum, setAppTheme]);
 
+  console.log({ userSettings, questionNum });
+
   if (userSettings && userSettings.surveyCompleted) return <Redirect to="/" />;
 
   if (questionNum >= QUESTIONS.length) return <SplashScreen />;
@@ -34,8 +36,7 @@ const SplashSettings: React.FC = () => {
   const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!userData) return;
     const { value } = e.currentTarget;
-    const newIndex = questionNum + 1;
-    const isLastQuestion = newIndex >= QUESTIONS.length;
+    const isLastQuestion = questionNum + 1 >= QUESTIONS.length;
 
     const updatedValue = {
       [label]: value === 'true',
@@ -43,8 +44,7 @@ const SplashSettings: React.FC = () => {
     };
 
     updateSettings(userData, updatedValue);
-
-    setQuestionNum(newIndex);
+    setQuestionNum(questionNum + 1);
   };
 
   return (

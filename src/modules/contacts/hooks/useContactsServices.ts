@@ -27,8 +27,8 @@ interface Api {
 
 export const useContactsServices = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector(getUserData());
-  const contacts = useSelector(getContactsState());
+  const { userData } = useSelector(getUserData);
+  const contacts = useSelector(getContactsState);
 
   const getContacts = React.useCallback(async () => {
     if (!userData) return;

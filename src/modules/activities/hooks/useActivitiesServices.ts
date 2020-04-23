@@ -29,8 +29,8 @@ interface Api {
 
 export const useActivitiesServices = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector(getUserData());
-  const activities = useSelector(getActivitiesState());
+  const { userData } = useSelector(getUserData);
+  const activities = useSelector(getActivitiesState);
 
   const getActivities = React.useCallback(async () => {
     if (!userData) return;

@@ -14,10 +14,11 @@ export const useAuthStateChange = () => {
       if (userAuth) {
         updateUserData(userAuth);
         getSettings(userAuth);
-      } else {
-        resetSettings();
-        resetUserData();
+        return;
       }
+
+      resetSettings();
+      resetUserData();
     },
     [getSettings, resetSettings, resetUserData, updateUserData],
   );

@@ -17,8 +17,8 @@ interface Api {
 
 export const useScoreServices = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector(getUserData());
-  const score = useSelector(getUserScore());
+  const { userData } = useSelector(getUserData);
+  const score = useSelector(getUserScore);
 
   const getScoreHistory = React.useCallback(async () => {
     if (!userData) return;

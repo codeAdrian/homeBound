@@ -11,7 +11,7 @@ import {
 export const useUserServices = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector(getUserData());
+  const user = useSelector(getUserData);
 
   type State = UserState;
 

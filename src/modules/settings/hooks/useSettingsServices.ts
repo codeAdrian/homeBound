@@ -22,7 +22,7 @@ interface Api {
 
 export const useSettingsServices = () => {
   const dispatch = useDispatch();
-  const settings = useSelector(getUserSettings());
+  const settings = useSelector(getUserSettings);
 
   const resetSettings = React.useCallback(() => {
     dispatch({ type: SettingsActionTypes.Reset });

@@ -11,7 +11,7 @@ interface Api {
 
 export const useAppState = () => {
   const dispatch = useDispatch();
-  const state = useSelector(getAppConfig());
+  const state = useSelector(getAppConfig);
 
   const setAppTheme = React.useCallback(
     (theme: Theme) => {
