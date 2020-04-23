@@ -1,6 +1,7 @@
 .button {
     width: auto;
     max-width: none;
+    color: inherit;
     min-width: 0;
     background-color: transparent;
     outline: 0;

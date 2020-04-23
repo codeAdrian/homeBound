@@ -4,12 +4,21 @@ import { ReactComponent as CheckIcon } from 'assets/icons/check.svg';
 import { ReactComponent as MascotIcon } from 'assets/icons/mascot.svg';
 import { ReactComponent as TrashIcon } from 'assets/icons/trash.svg';
 import { Button, BUTTON } from 'components';
+import { UserActivity } from 'modules/activities';
 
 interface Props {
   mode: 'list' | 'grid';
+  activity: UserActivity;
 }
 
-export const Card: React.FC<Props> = ({ mode }) => {
+const CARD_STYLE = [
+  'card__deco--secondary',
+  'card__deco--tertiary',
+  'card__deco--quaternary',
+];
+
+export const Card: React.FC<Props> = ({ mode, activity }) => {
+  const { title, score, style } = activity;
   const isList = mode === 'list';
   const cardClassName = isList ? 'card--list' : 'cardGrid';
   const cardContentClassName = isList
@@ -27,18 +36,18 @@ export const Card: React.FC<Props> = ({ mode }) => {
   return (
     <article className={`card ${cardClassName}`}>
       <CheckIcon className="card__complete" />
-      <div className="card__deco card__deco--list">
+      <div className={`card__deco card__deco--list ${CARD_STYLE[style]}`}>
         <MascotIcon className="card__image" />
       </div>
       <div className={cardContentClassName}>
         <div className={`${cardTextClassName} u-t__fontSize--xsmall`}>
-          Did a round of excercise
+          {title}
         </div>
         <div className={cardFooterClassName}>
           <span
             className={`${cardScoreClassName} u-t__fontFamily--secondary u-t__fontSize--base u-t__fontWeight--bold`}
           >
-            +2
+            +{score}
           </span>
           <div className={cardRemoveClassName}>
             <Button className={BUTTON.ROUNDED.CTA.SMALL} icon={<TrashIcon />} />

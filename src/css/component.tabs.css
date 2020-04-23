@@ -1,0 +1,43 @@
+.tabs__nav--cta {
+    color: var(--color__cta);
+}
+
+.tabs__nav {
+    display: flex;
+    margin: 0 var(--spacing--n40px);
+    padding: 0 var(--spacing--40px);
+    justify-content: flex-start;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        bottom: -1px;
+        opacity: 0.1;
+        background-color: currentColor;
+    }
+}
+
+.tabs__button {
+    transition: box-shadow 0.3s ease;
+    margin-right: var(--spacing--24px);
+    padding-bottom: var(--spacing--12px);
+    box-shadow: inset 0 0 0 0 currentColor;
+
+    & span {
+        transition: opacity 0.3s ease;
+        opacity: 0.4;
+    }
+}
+
+.tabs__button--active {
+    box-shadow: inset 0 -2px 0 0 currentColor;
+
+    & span {
+        opacity: 1;
+    }
+}

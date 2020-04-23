@@ -1,10 +1,13 @@
 import React from 'react';
+import isEmpty from 'lodash/isEmpty';
 
-import { Heading, HEADING, Button, BUTTON } from 'components';
+import { Heading, HEADING, Button, BUTTON, Card, Tabs } from 'components';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 import { useAppState } from 'modules/app';
+import { useActivitiesServices } from 'modules/activities';
 
 export const Activities = () => {
+  const [{ userActivities }] = useActivitiesServices();
   const [, { setAppTheme }] = useAppState();
 
   React.useEffect(() => {
@@ -16,8 +19,8 @@ export const Activities = () => {
   }, [setAppTheme]);
 
   return (
-    <section className="app__content">
-      <aside className="u-f--spaceBetween u-sb-12">
+    <section className="app__content app--light">
+      <aside className="u-f--spaceBetween u-sb-40">
         <Heading tag="h1" className={HEADING.PRIMARY.XXLARGE.LIGHT}>
           Activities
         </Heading>
@@ -27,7 +30,28 @@ export const Activities = () => {
           onClick={() => false}
         />
       </aside>
-      <main>Content</main>
+      <main>
+        <Tabs
+          contentMain={
+            <>
+              {userActivities?.map((activity) => (
+                <Card activity={activity} mode="list" />
+              ))}
+              <Button
+                icon={<PlusIcon />}
+                className={BUTTON.SQUARE.LARGE.PRIMARY}
+              >
+                {userActivities && isEmpty(userActivities)
+                  ? 'Add tasks'
+                  : 'Add more tasks'}
+              </Button>
+            </>
+          }
+          contentSecondary={<div>secondary content</div>}
+          titleMain="Title main"
+          titleSecondary="Title secondary"
+        />
+      </main>
     </section>
   );
 };

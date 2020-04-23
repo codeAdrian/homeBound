@@ -5,3 +5,4 @@ export * from './Heading';
 export * from './Card';
 export * from './CardSpace';
 export * from './CardSlider';
+export * from './Tabs';
