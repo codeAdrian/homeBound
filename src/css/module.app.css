@@ -11,13 +11,13 @@
     flex-direction: column;
     height: 100%;
     transition: background-color 0.8s ease;
-    padding: var(--spacing--28px) var(--spacing--40px) 0;
+    padding: var(--spacing--32px) var(--spacing--40px) 0;
     border-radius: var(--border__radius--20px);
     overflow: auto;
 }
 
 .app__background--withNav {
-    padding: var(--spacing--28px) var(--spacing--40px) var(--spacing--80px);
+    padding: var(--spacing--32px) var(--spacing--40px) var(--spacing--80px);
 }
 
 .app__background--primary {

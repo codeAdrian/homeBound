@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, BUTTON } from 'components';
 import { Modal } from 'modules/modal';
 import { MessageForm, UserContact } from 'modules/contacts';
-import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
+import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
 
 interface Props {
   currentContact?: UserContact;
@@ -18,7 +18,7 @@ export const ContactModal: React.FC<Props> = ({
     <Modal isModalOpen={!!currentContact}>
       <div className="contactModal">
         <Button
-          icon={<PlusIcon />}
+          icon={<CloseIcon />}
           className={BUTTON.ROUNDED.CTA.LARGE.GLOW}
           onClick={() => setCurrentContact(undefined)}
         />

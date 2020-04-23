@@ -3,7 +3,7 @@ import React from 'react';
 import { Modal } from 'modules/modal';
 import { Button, BUTTON, Heading, HEADING } from 'components';
 import { AddContact } from 'modules/contacts';
-import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
+import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
 
 interface Props {
   isModalOpen: boolean;
@@ -22,7 +22,7 @@ export const AddContactModal: React.FC<Props> = ({
             Add Contact
           </Heading>
           <Button
-            icon={<PlusIcon />}
+            icon={<CloseIcon />}
             className={BUTTON.ROUNDED.CTA.LARGE.GLOW}
             onClick={toggleModalState}
           />

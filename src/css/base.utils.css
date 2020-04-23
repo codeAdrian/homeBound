@@ -46,6 +46,10 @@
     margin-bottom: var(--spacing--16px);
 }
 
+.u-sb-8 {
+    margin-bottom: var(--spacing--8px);
+}
+
 .u-sr-32 {
     padding-right: var(--spacing--32px);
 }

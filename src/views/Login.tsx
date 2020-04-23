@@ -19,9 +19,11 @@ const Login: React.FC = () => {
   return (
     <section className="app__content app--light l-vertical">
       <article>
-        <Heading className={HEADING.PRIMARY.XLARGE.BOLD} tag="h1">
-          Hi there, welcome back
-        </Heading>
+        <div className="u-sb-8">
+          <Heading className={HEADING.PRIMARY.XLARGE.BOLD} tag="h1">
+            Hi there, welcome back
+          </Heading>
+        </div>
         <p className="u-o-8">Wow, you're a regular! We like that.</p>
       </article>
       <article>

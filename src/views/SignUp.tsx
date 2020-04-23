@@ -19,9 +19,11 @@ const SignUp: React.FC = () => {
   return (
     <section className="app__content app--light l-vertical">
       <article>
-        <Heading className={HEADING.PRIMARY.XLARGE.BOLD} tag="h1">
-          Signup right now
-        </Heading>
+        <div className="u-sb-8">
+          <Heading className={HEADING.PRIMARY.XLARGE.BOLD} tag="h1">
+            Signup right now
+          </Heading>
+        </div>
         <p className="o-08">
           It's not like you've got anything better to do at the moment
         </p>

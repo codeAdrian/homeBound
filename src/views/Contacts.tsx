@@ -1,4 +1,5 @@
 import React from 'react';
+import isEmpty from 'lodash/isEmpty';
 
 import {
   useContactsServices,
@@ -10,6 +11,7 @@ import {
 import { Button, BUTTON, Heading, HEADING } from 'components';
 import { useModalControls } from 'modules/modal';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
+import { ReactComponent as PlusLargeIcon } from 'assets/icons/plus_large.svg';
 import { getGroupedContacts } from 'util/mapping';
 
 export type GroupedContacts = {
@@ -51,11 +53,21 @@ export const Contacts = () => {
         <div className="u-t__fontSize--small u-o-6 u-sr-32 u-sb-28">
           Keep track of people you see and don't forget to check up on them
         </div>
-        <ContactGroup
-          groupedContacts={groupedContacts}
-          removeContact={removeContact}
-          setCurrentContact={setCurrentContact}
-        />
+        {groupedContacts && isEmpty(groupedContacts) ? (
+          <Button
+            onClick={toggleModalState}
+            icon={<PlusLargeIcon />}
+            className={BUTTON.SQUARE.LARGE.CTA}
+          >
+            Add contacts
+          </Button>
+        ) : (
+          <ContactGroup
+            groupedContacts={groupedContacts}
+            removeContact={removeContact}
+            setCurrentContact={setCurrentContact}
+          />
+        )}
         <AddContactModal
           isModalOpen={isModalOpen}
           toggleModalState={toggleModalState}
