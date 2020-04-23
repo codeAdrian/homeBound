@@ -86,9 +86,5 @@ export const useActivitiesServices: CustomHook<ActivitiesState, Api> = () => {
     [addActivity, getActivities, removeActivity, completeActivity],
   );
 
-  React.useEffect(() => {
-    getActivities();
-  }, [getActivities]);
-
   return [activities, api];
 };

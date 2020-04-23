@@ -4,7 +4,8 @@
 
 .tabs__nav {
     display: flex;
-    margin: 0 var(--spacing--n40px);
+    margin-left: var(--spacing--n40px);
+    margin-right: var(--spacing--n40px);
     padding: 0 var(--spacing--40px);
     justify-content: flex-start;
     position: relative;

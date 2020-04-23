@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 /**
  * Creates DOM element to be used as React root.
@@ -36,27 +36,30 @@ function addRootElement(rootElem: any) {
 export function usePortal(id: string) {
   const rootElemRef = useRef<HTMLElement | null>(null);
 
-  useEffect(function setupElement() {
-    // Look for existing target dom element to append to
-    const existingParent = document.querySelector(`#${id}`);
-    // Parent is either a new root or the existing dom element
-    const parentElem = existingParent || createRootElement(id);
+  useEffect(
+    function setupElement() {
+      // Look for existing target dom element to append to
+      const existingParent = document.querySelector(`#${id}`);
+      // Parent is either a new root or the existing dom element
+      const parentElem = existingParent || createRootElement(id);
 
-    // If there is no existing DOM element, add a new one.
-    if (!existingParent) {
-      addRootElement(parentElem);
-    }
-
-    // Add the detached element to the parent
-    if (rootElemRef.current) parentElem.appendChild(rootElemRef.current);
-
-    return function removeElement() {
-      if (rootElemRef.current) rootElemRef.current.remove();
-      if (parentElem.childNodes.length === -1) {
-        parentElem.remove();
+      // If there is no existing DOM element, add a new one.
+      if (!existingParent) {
+        addRootElement(parentElem);
       }
-    };
-  }, []);
+
+      // Add the detached element to the parent
+      if (rootElemRef.current) parentElem.appendChild(rootElemRef.current);
+
+      return function removeElement() {
+        if (rootElemRef.current) rootElemRef.current.remove();
+        if (parentElem.childNodes.length === -1) {
+          parentElem.remove();
+        }
+      };
+    },
+    [id],
+  );
 
   /**
    * It's important we evaluate this lazily:

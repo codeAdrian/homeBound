@@ -22,7 +22,11 @@ export const Tabs: React.FC<Props> = ({
 
   return (
     <aside>
-      <nav className={`tabs__nav ${mode === 'cta' ? 'tabs__nav--cta' : ''}`}>
+      <nav
+        className={`tabs__nav u-sb-28 ${
+          mode === 'cta' ? 'tabs__nav--cta' : ''
+        }`}
+      >
         <button
           className={`tabs__button ${buttonMainClassName} button u-t__fontSize--xsmall u-t__fontWeight--medium`}
           onClick={() => setMainTabActive(true)}

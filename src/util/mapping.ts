@@ -7,7 +7,7 @@ import { GroupedContacts } from 'views';
 export const getGroupedContacts = (userContacts: UserContact[]) => {
   const groupedContacts: GroupedContacts = {};
 
-  userContacts.map((contact) => {
+  userContacts.forEach((contact) => {
     const newDate = format(toDate(contact.date), '-YMMdd');
 
     if (!groupedContacts[newDate]) {

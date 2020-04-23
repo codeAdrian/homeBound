@@ -1,23 +1,23 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
 
-import { Heading, HEADING, Button, BUTTON, Card, Tabs } from 'components';
+import { Heading, HEADING, Button, BUTTON, Tabs } from 'components';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 import { useAppState } from 'modules/app';
 import {
-  useActivitiesServices,
-  ActivityModal,
   CompletedActivity,
+  ActivityList,
+  useActivitiesServices,
 } from 'modules/activities';
 import { useModalControls } from 'modules/modal';
 
 export const Activities = () => {
+  const [, { getActivities }] = useActivitiesServices();
   const [isModalOpen, { toggleModalState }] = useModalControls();
-  const [
-    { userActivities },
-    { removeActivity, completeActivity },
-  ] = useActivitiesServices();
   const [, { setAppTheme }] = useAppState();
+
+  React.useEffect(() => {
+    getActivities();
+  }, [getActivities]);
 
   React.useEffect(() => {
     setAppTheme({
@@ -42,30 +42,10 @@ export const Activities = () => {
       <main>
         <Tabs
           contentMain={
-            <>
-              {userActivities?.map((activity) => (
-                <Card
-                  onComplete={completeActivity}
-                  onRemove={removeActivity}
-                  activity={activity}
-                  mode="list"
-                />
-              ))}
-              <Button
-                icon={<PlusIcon />}
-                onClick={toggleModalState}
-                className={BUTTON.SQUARE.LARGE.PRIMARY}
-              >
-                {userActivities && isEmpty(userActivities)
-                  ? 'Add tasks'
-                  : 'Add more tasks'}
-              </Button>
-              <ActivityModal
-                isModalOpen={isModalOpen}
-                toggleModalState={toggleModalState}
-                isLight
-              />
-            </>
+            <ActivityList
+              isModalOpen={isModalOpen}
+              toggleModalState={toggleModalState}
+            />
           }
           contentSecondary={<CompletedActivity />}
           titleMain="Your todo"

@@ -7,7 +7,7 @@ import { ActivitySummary } from 'modules/activities';
 import { useScoreListener, ScoreTracker } from 'modules/score';
 import { ContactSummary } from 'modules/contacts';
 import { useAppState } from 'modules/app';
-import { Heading, HEADING, Tabs } from 'components';
+import { Heading, HEADING } from 'components';
 
 const Dashboard: React.FC = () => {
   const [{ userData }] = useUserServices();
