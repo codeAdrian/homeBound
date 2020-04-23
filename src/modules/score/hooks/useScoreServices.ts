@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as React from 'react';
 
 import { getUserData } from 'modules/user';
+import { CustomHook } from 'models';
 import {
   getUserScoreHistoryData,
   ScoreActionTypes,
@@ -9,13 +10,11 @@ import {
   ScoreState,
 } from 'modules/score';
 
-type State = ScoreState;
-
 interface Api {
   getScoreHistory: VoidFunction;
 }
 
-export const useScoreServices = () => {
+export const useScoreServices: CustomHook<ScoreState, Api> = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector(getUserData);
   const score = useSelector(getUserScore);
@@ -38,5 +37,5 @@ export const useScoreServices = () => {
 
   const state = score;
 
-  return [state, api] as [State, Api];
+  return [state, api];
 };

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import * as React from 'react';
 
+import { CustomHook } from 'models';
 import { getUserData } from 'modules/user';
 import {
   ContactsState,
@@ -10,8 +11,6 @@ import {
   ContactsActionTypes,
   removeUserContact,
 } from 'modules/contacts';
-
-type State = ContactsState;
 
 export interface ContactInput {
   date: Date;
@@ -25,7 +24,7 @@ interface Api {
   removeContact: (id: string) => void;
 }
 
-export const useContactsServices = () => {
+export const useContactsServices: CustomHook<ContactsState, Api> = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector(getUserData);
   const contacts = useSelector(getContactsState);
@@ -77,5 +76,5 @@ export const useContactsServices = () => {
     getContacts();
   }, [getContacts]);
 
-  return [contacts, api] as [State, Api];
+  return [contacts, api];
 };

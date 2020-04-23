@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { CustomHook } from 'models';
 import {
   getUserDocumentSettings,
   updateUserSettings,
@@ -8,8 +9,6 @@ import {
   getUserSettings,
   SettingsState,
 } from 'modules/settings';
-
-type State = SettingsState;
 
 interface Api {
   getSettings: (userData: firebase.UserInfo) => void;
@@ -20,7 +19,7 @@ interface Api {
   ) => Promise<void>;
 }
 
-export const useSettingsServices = () => {
+export const useSettingsServices: CustomHook<SettingsState, Api> = () => {
   const dispatch = useDispatch();
   const settings = useSelector(getUserSettings);
 
@@ -61,5 +60,5 @@ export const useSettingsServices = () => {
 
   const state = settings;
 
-  return [state, api] as [State, Api];
+  return [state, api];
 };

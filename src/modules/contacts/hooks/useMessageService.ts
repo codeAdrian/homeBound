@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { CustomHook } from 'models';
 import { messageContact } from 'modules/contacts';
 
 interface State {
@@ -20,7 +21,7 @@ interface Api {
 
 type FormatState = (error: boolean, submit: boolean, success: boolean) => State;
 
-export const useMessageService = () => {
+export const useMessageService: CustomHook<State, Api> = () => {
   const formatState = React.useCallback<FormatState>(
     (hasError, isSubmitting, submitSuccess) => ({
       hasError,
@@ -56,5 +57,5 @@ export const useMessageService = () => {
     [sendMessage],
   );
 
-  return [hookState, api] as [State, Api];
+  return [hookState, api];
 };

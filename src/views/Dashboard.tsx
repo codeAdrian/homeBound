@@ -44,13 +44,11 @@ const Dashboard: React.FC = () => {
       <IncrementScore user={userData} />
       <strong>Update user history on demand:</strong>
       <button onClick={getScoreHistory}>Update</button>
-      {userScore?.history &&
-        userScore?.history.length > 0 &&
-        userScore?.history.map(({ score, title }) => (
-          <div>
-            {title}: {score} points
-          </div>
-        ))}
+      {userScore?.history?.map(({ score, title }) => (
+        <div>
+          {title}: {score} points
+        </div>
+      ))}
       <AddContact />
       <LogOut />
     </section>

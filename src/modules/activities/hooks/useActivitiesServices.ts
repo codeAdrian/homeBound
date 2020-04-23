@@ -11,8 +11,7 @@ import {
   removeUserActivity,
   completeUserActivity,
 } from 'modules/activities';
-
-type State = ActivitiesState;
+import { CustomHook } from 'models';
 
 export interface ActivityInput {
   date: Date;
@@ -27,7 +26,7 @@ interface Api {
   completeActivity: (id: string) => void;
 }
 
-export const useActivitiesServices = () => {
+export const useActivitiesServices: CustomHook<ActivitiesState, Api> = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector(getUserData);
   const activities = useSelector(getActivitiesState);
@@ -90,5 +89,5 @@ export const useActivitiesServices = () => {
     getActivities();
   }, [getActivities]);
 
-  return [activities, api] as [State, Api];
+  return [activities, api];
 };
