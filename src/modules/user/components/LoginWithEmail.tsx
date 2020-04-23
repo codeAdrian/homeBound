@@ -3,11 +3,14 @@ import { useForm, FieldValues } from 'react-hook-form';
 
 import { emailRegex } from 'util/validation';
 import { FirebaseService } from 'modules/firebase';
+import { TextInput, Button, BUTTON } from 'components';
 
 const LoginWithEmail: React.FC = () => {
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register, errors, watch } = useForm();
   const firebase = FirebaseService.Instance;
   const authProvider = firebase.auth();
+
+  const { email, password } = watch();
 
   const onSubmit = (values: FieldValues) => {
     const { email, password } = values;
@@ -16,10 +19,12 @@ const LoginWithEmail: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h1>Login</h1>
-      <input
+      <TextInput
+        hasValue={!!email}
         name="email"
-        ref={register({
+        label="Email"
+        type="text"
+        componentRef={register({
           required: 'Required',
           pattern: {
             value: emailRegex,
@@ -29,14 +34,17 @@ const LoginWithEmail: React.FC = () => {
       />
       {errors.email && errors.email.message}
 
-      <input
+      <TextInput
+        hasValue={!!password}
+        autoComplete="new-password"
         name="password"
+        label="Password"
         type="password"
-        ref={register({ required: 'Required' })}
+        componentRef={register({ required: 'Required' })}
       />
-      {errors.username && errors.username.message}
+      {errors.password && errors.password.message}
 
-      <button type="submit">Submit</button>
+      <Button className={BUTTON.PILL.PRIMARY.BASE}>Login</Button>
     </form>
   );
 };

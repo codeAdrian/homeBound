@@ -15,14 +15,14 @@ const getUserScoreHistoryData = async (user: firebase.UserInfo) => {
   return firestore.getSubcollection(user.uid, 'history');
 };
 
-const getUserScoreData = async (
+const getUserScoreData = (
   user: firebase.UserInfo,
   successFunction: (data: unknown) => void,
   errorFunction: (error: string) => void,
 ) => {
   const firestore = new FirestoreService(`score`);
 
-  await firestore.getByIdAsync(user.uid, {
+  firestore.getByIdAsync(user.uid, {
     successFunction,
     errorFunction,
   });

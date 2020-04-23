@@ -1,14 +1,15 @@
 export const QUESTIONS = [
   {
-    question: 'Question 1 text',
-    answerPositive: 'Positive answer 1',
-    answerNegative: 'Negative answer 1',
-    label: 'test1',
+    question: 'Are you currently assigned a mandatory self-isolation?',
+    answerPositive: 'Yup, gotta stay indoors',
+    answerNegative: "Nope, but stayin' inside all the same",
+    label: 'hasAssignedSelfIsolation',
   },
   {
-    question: 'Question 2 text',
-    answerPositive: 'Positive answer 2',
-    answerNegative: 'Negative answer 2',
-    label: 'test2',
+    question:
+      'Do you live by yourself or are theme more people in your household?',
+    answerPositive: "Livin' alone",
+    answerNegative: 'Oh no, there are more of us',
+    label: 'isLivingAlone',
   },
 ];

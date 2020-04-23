@@ -1,0 +1,77 @@
+.nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--level-3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    opacity: 1;
+    transition: opacity 0.8s 0.4s ease;
+}
+
+.nav--hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.nav__background {
+    content: '';
+    z-index: var(--level-2);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0.9;
+    border-radius: 20px;
+    backdrop-filter: blur(60px);
+    transition: background-color 0.8s ease;
+}
+
+.nav__link {
+    position: relative;
+    z-index: var(--level-4);
+    fill: var(--color__white);
+    outline: 0;
+    border-width: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+    border-radius: var(--border__radius--10px);
+    background-color: transparent;
+    padding: var(--spacing--10px) var(--spacing--12px);
+    opacity: 0.3;
+    width: 40px;
+    height: 40px;
+
+    &,
+    &:visited {
+        color: currentColor;
+    }
+}
+
+.nav__icon {
+    &,
+    & * {
+        fill: currentColor;
+    }
+}
+
+.nav__link--active {
+    opacity: 1;
+    background-color: var(--color__cta);
+    box-shadow: 0px var(--spacing--8px) var(--spacing--16px)
+        var(--color__glow--cta);
+
+    &,
+    &:visited {
+        color: var(--color__white);
+    }
+}

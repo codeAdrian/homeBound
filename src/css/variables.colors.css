@@ -1,0 +1,16 @@
+:root {
+    --color__cta: #ff3c3c;
+    --color__background--primary: #fac936;
+    --color__background--secondary: #6a62ff;
+    --color__background--tertiary: #f84e5e;
+    --color__background--quaternary: #1c3ba4;
+
+    --color__text: #303548;
+
+    --color__white: #ffffff;
+    --color__white--transparent: rgba(255, 255, 255, 0.3);
+
+    --color__black: #000000;
+
+    --color__glow--cta: rgba(255, 87, 87, 0.5);
+}

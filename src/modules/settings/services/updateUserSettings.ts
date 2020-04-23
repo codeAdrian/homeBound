@@ -19,9 +19,9 @@ const updateUserSettings = async (
   delete settings.id;
 
   if (isEmpty(settings)) {
-    await firestore.addAsync({ id: user.uid, ...value });
+    firestore.addAsync({ id: user.uid, ...value });
   } else {
-    await firestore.updateByIdAsync(value, user.uid);
+    firestore.updateByIdAsync(value, user.uid);
   }
 };
 
