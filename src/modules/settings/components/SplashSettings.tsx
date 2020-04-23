@@ -1,50 +1,57 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import {
   SplashQuestion,
-  updateUserSettings,
-  SettingsActionTypes,
-  SettingsState,
   QUESTIONS,
+  useSettingsServices,
 } from 'modules/settings';
-import { UserState } from 'modules/user';
+import { useUserServices } from 'modules/user';
+import { useAppState } from 'modules/app';
+import { SplashScreen } from 'components';
 
-interface Props {
-  userData: UserState['userData'];
-  userSettings: SettingsState['userSettings'];
-}
-
-const SplashSettings: React.FC<Props> = ({ userSettings, userData }) => {
-  const dispatch = useDispatch();
+const SplashSettings: React.FC = () => {
+  const COLORS = React.useMemo(() => ['#6A62FF', '#F85E5E', '#FAC936'], []);
+  const [{ userSettings }, { updateSettings }] = useSettingsServices();
+  const [{ userData }] = useUserServices();
+  const [, { setAppTheme }] = useAppState();
   const [questionNum, setQuestionNum] = React.useState(0);
 
-  if ((userSettings && userSettings.surveyCompleted) || !userData) return null;
+  React.useEffect(() => {
+    setAppTheme({
+      color: COLORS[questionNum],
+      shapeClass: 'app__deco--default',
+      showNav: false,
+    });
+  }, [COLORS, questionNum, setAppTheme]);
+
+  if (userSettings && userSettings.surveyCompleted) return <Redirect to="/" />;
+
+  if (questionNum >= QUESTIONS.length) return <SplashScreen />;
 
   const { label } = QUESTIONS[questionNum];
 
   const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!userData) return;
     const { value } = e.currentTarget;
-    const newIndex = questionNum + 1;
-    const isLastQuestion = newIndex >= QUESTIONS.length;
+    const isLastQuestion = questionNum + 1 >= QUESTIONS.length;
 
     const updatedValue = {
       [label]: value === 'true',
       surveyCompleted: isLastQuestion,
     };
 
-    const updatedSettings = await updateUserSettings(userData, updatedValue);
-
-    dispatch({
-      type: SettingsActionTypes.Success,
-      payload: updatedSettings,
-    });
-
-    setQuestionNum(newIndex);
+    updateSettings(userData, updatedValue);
+    setQuestionNum(questionNum + 1);
   };
 
   return (
-    <SplashQuestion handleOnClick={handleOnClick} {...QUESTIONS[questionNum]} />
+    <SplashQuestion
+      questionNum={questionNum + 1}
+      questionMax={QUESTIONS.length}
+      handleOnClick={handleOnClick}
+      {...QUESTIONS[questionNum]}
+    />
   );
 };
 

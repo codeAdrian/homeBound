@@ -10,7 +10,7 @@
     "string-quotes": "single",
     "no-duplicate-selectors": true,
     "no-missing-end-of-source-newline": true,
-    "color-hex-case": "upper",
+    "color-hex-case": "lower",
     "selector-max-id": 0,
     "selector-combinator-space-after": "always",
     "declaration-block-trailing-semicolon": "always",

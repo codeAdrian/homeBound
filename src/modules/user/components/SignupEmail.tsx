@@ -4,18 +4,14 @@ import { useForm, FieldValues } from 'react-hook-form';
 import { emailRegex } from 'util/validation';
 import { FirebaseService } from 'modules/firebase';
 import { createUserDocument } from 'modules/user';
+import { TextInput, BUTTON, Button } from 'components';
 
 const SignUpEmail: React.FC = () => {
   const { handleSubmit, register, errors, watch } = useForm();
-  const password = React.useRef({});
-
   const firebase = FirebaseService.Instance;
   const authProvider = firebase.auth();
 
-  password.current = watch('password', '');
-
-  const validateSameValue = (value: string) =>
-    value === password.current || 'The passwords do not match';
+  const { email, password } = watch();
 
   const onSubmit = async (values: FieldValues) => {
     const { email, password } = values;
@@ -39,23 +35,30 @@ const SignUpEmail: React.FC = () => {
 
   const passwordRef = register({ required: 'Required', min: 6 });
 
-  const passwordConfirmRef = register({
-    required: true,
-    validate: validateSameValue,
-  });
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input name="email" ref={emailRef} />
+      <TextInput
+        hasValue={!!email}
+        name="email"
+        label="Email"
+        type="text"
+        componentRef={emailRef}
+      />
       {errors.email && errors.email.message}
 
-      <input name="password" type="password" ref={passwordRef} />
+      <TextInput
+        hasValue={!!password}
+        label="Password"
+        name="password"
+        autoComplete="new-password"
+        type="password"
+        componentRef={passwordRef}
+      />
       {errors.password && errors.password.message}
 
-      <input name="passwordConfirm" type="password" ref={passwordConfirmRef} />
-      {errors.passwordConfirm && errors.passwordConfirm.message}
-
-      <button type="submit">Submit</button>
+      <p>
+        <Button className={BUTTON.PILL.PRIMARY.BASE}>Sign Up</Button>
+      </p>
     </form>
   );
 };

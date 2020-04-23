@@ -2,7 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { FirestoreService } from 'modules/firebase';
 
-const formatUserDocumentData = (user: firebase.User) => {
+const formatUserDocumentData = (user: firebase.UserInfo) => {
   const { displayName, email, photoURL, uid } = user;
   const createdAt = new Date();
 
@@ -16,7 +16,7 @@ const formatUserDocumentData = (user: firebase.User) => {
   };
 };
 
-const getUserDocument = async (uid: firebase.User['uid']) => {
+const getUserDocument = async (uid: firebase.UserInfo['uid']) => {
   if (!uid) return null;
   const firestore = new FirestoreService('users');
 
@@ -24,20 +24,32 @@ const getUserDocument = async (uid: firebase.User['uid']) => {
 };
 
 const createUserDocument = async (
-  user: firebase.User,
-  additionalData?: Partial<firebase.User>,
+  user: firebase.UserInfo,
+  additionalData?: Partial<firebase.UserInfo>,
 ) => {
   if (isEmpty(user)) return;
-  const firestore = new FirestoreService('users');
+  const userStore = new FirestoreService('users');
+  const settingsStore = new FirestoreService('settings');
+  const scoreStore = new FirestoreService('score');
   const userRef = await getUserDocument(user.uid);
 
   if (userRef.uid) return userRef;
 
   const userData = formatUserDocumentData(user);
 
-  firestore.addAsync({
+  userStore.addAsync({
     ...userData,
     ...additionalData,
+  });
+
+  settingsStore.addAsync({
+    id: user.uid,
+    surveyCompleted: false,
+  });
+
+  scoreStore.addAsync({
+    id: user.uid,
+    score: 0,
   });
 
   const updatedDocument = await getUserDocument(user.uid);

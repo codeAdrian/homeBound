@@ -1,11 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { FirebaseService } from 'modules/firebase';
 import { useAuthStateChange } from 'modules/user';
 
 const useAuthData = () => {
-  const dispatch = useDispatch();
   const handleAuthChange = useAuthStateChange();
   const unsubscribeFromAuth = useRef<VoidFunction>(() => false);
 
@@ -18,7 +16,7 @@ const useAuthData = () => {
     return () => {
       unsubscribeFromAuth.current();
     };
-  }, [dispatch, handleAuthChange]);
+  }, [handleAuthChange]);
 };
 
 export { useAuthData };

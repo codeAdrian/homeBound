@@ -1,0 +1,35 @@
+.scoretracker {
+    width: 55px;
+    position: relative;
+    margin-bottom: var(--spacing--8px);
+}
+
+.scoretracker--large {
+    width: 100px;
+    margin-bottom: var(--spacing--28px);
+}
+
+.scoretracker__deco {
+    position: absolute;
+    top: 0;
+    padding: var(--spacing--8px);
+}
+
+.scoretracker__deco--large {
+    padding: var(--spacing--13px);
+}
+
+.scoretracker__value {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    transform: translate3d(0, -50%, 0);
+    padding-top: var(--spacing--6px);
+}
+
+.scoretracker__text {
+    text-transform: uppercase;
+    display: none;
+}

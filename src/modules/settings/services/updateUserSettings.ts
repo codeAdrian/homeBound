@@ -2,33 +2,27 @@ import isEmpty from 'lodash/isEmpty';
 
 import { FirestoreService } from 'modules/firebase';
 
-export const getUserDocumentSettings = async (uid: firebase.User['uid']) => {
-  if (!uid) return null;
+export const getUserDocumentSettings = async (user?: firebase.UserInfo) => {
+  if (isEmpty(user) || !user) return null;
   const firestore = new FirestoreService('settings');
-
-  return firestore.getByIdAsync(uid);
+  return firestore.getByIdAsync(user.uid);
 };
 
 const updateUserSettings = async (
-  user: firebase.UserInfo,
-  value: { [key: string]: boolean },
+  user?: firebase.UserInfo,
+  value?: { [key: string]: boolean },
 ) => {
+  if (!user || !value || isEmpty(user) || isEmpty(value)) return;
   const firestore = new FirestoreService('settings');
-  const settings = await getUserDocumentSettings(user.uid);
+  const settings = await getUserDocumentSettings(user);
 
-  console.log(settings);
+  delete settings.id;
 
-  const { id, ...data } = settings;
-
-  if (isEmpty(data)) {
-    await firestore.addAsync({ id: user.uid, ...value });
+  if (isEmpty(settings)) {
+    firestore.addAsync({ id: user.uid, ...value });
   } else {
-    await firestore.updateByIdAsync(value, user.uid);
+    firestore.updateByIdAsync(value, user.uid);
   }
-
-  const updatedSettings = await getUserDocumentSettings(user.uid);
-
-  return updatedSettings;
 };
 
 export { updateUserSettings };
