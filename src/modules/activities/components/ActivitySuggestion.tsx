@@ -4,47 +4,13 @@ import isEmpty from 'lodash/isEmpty';
 import { Button, BUTTON } from 'components';
 import { ReactComponent as PlusIconLight } from 'assets/icons/plus.svg';
 import { ReactComponent as PlusIconDark } from 'assets/icons/plus_large.svg';
-import { useSettingsServices, UserSettings } from 'modules/settings';
-import { useActivitiesServices } from 'modules/activities';
+import { useSettingsServices } from 'modules/settings';
+import { useActivitiesServices, SUGGESTIONS } from 'modules/activities';
 
 interface Props {
   isLight?: boolean;
   callback: VoidFunction;
 }
-
-interface Suggestion {
-  value: string;
-  label: string;
-  restrictions?: UserSettings;
-}
-
-const SUGGESTIONS: Suggestion[] = [
-  {
-    value: 'Excercise',
-    label: 'Excercise',
-  },
-  { value: 'Eat a healthy meal', label: ' Eat healthy' },
-  { value: 'Call a family member or a friend', label: 'Make a call' },
-  {
-    value: 'Play a board game with housemates',
-    label: 'Board game',
-    restrictions: { hasAssignedSelfIsolation: false, isLivingAlone: false },
-  },
-  {
-    value: 'Play an online multiplayer game',
-    label: 'Online game',
-  },
-  {
-    value: 'Movie night with housemates',
-    label: 'Movie night',
-    restrictions: { hasAssignedSelfIsolation: false, isLivingAlone: false },
-  },
-  {
-    value: 'Online movie watching with friends',
-    label: 'Movie night',
-    restrictions: { hasAssignedSelfIsolation: true, isLivingAlone: true },
-  },
-];
 
 export const ActivitySuggestion: React.FC<Props> = ({ isLight, callback }) => {
   const [, { addActivity }] = useActivitiesServices();
