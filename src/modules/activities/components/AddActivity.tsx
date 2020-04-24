@@ -30,11 +30,14 @@ const AddActivity: React.FC<Props> = ({ callback }) => {
   const { title } = watch();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="l-vertical l-page u-f--grow1"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <TextInput
         hasValue={!!title}
         name="title"
-        label="Title"
+        label="What do you want to do?"
         type="text"
         max={32}
         componentRef={register({

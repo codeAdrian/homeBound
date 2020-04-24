@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Modal } from 'modules/modal';
-import { Button, BUTTON, Heading, HEADING } from 'components';
+import { Button, BUTTON, Heading, HEADING, Tabs } from 'components';
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg';
-import { AddActivity } from 'modules/activities';
+import { AddActivity, ActivitySuggestion } from 'modules/activities';
 
 interface Props {
   isModalOpen: boolean;
@@ -18,9 +18,9 @@ export const ActivityModal: React.FC<Props> = ({
 }) => {
   return (
     <Modal isModalOpen={isModalOpen}>
-      <div className={`contactModal ${isLight ? 'app--light' : ''}`}>
+      <div className={`contactModal l-page ${isLight ? 'app--light' : ''}`}>
         <section className="contactModal l-page">
-          <aside className="u-f--spaceBetween u-sb-12">
+          <aside className="u-f--spaceBetween u-sb-40">
             <Heading tag="h1" className={HEADING.PRIMARY.XXLARGE.LIGHT}>
               Add Activity
             </Heading>
@@ -30,8 +30,18 @@ export const ActivityModal: React.FC<Props> = ({
               onClick={() => toggleModalState()}
             />
           </aside>
-          <main>
-            <AddActivity callback={toggleModalState} />
+          <main className="l-page">
+            <Tabs
+              titleMain="Add activity"
+              titleSecondary="Suggested activities"
+              contentMain={<AddActivity callback={toggleModalState} />}
+              contentSecondary={
+                <ActivitySuggestion
+                  callback={toggleModalState}
+                  isLight={isLight}
+                />
+              }
+            />
           </main>
         </section>
       </div>

@@ -21,7 +21,7 @@ export const Tabs: React.FC<Props> = ({
   const buttonSecondaryClassName = !mainTabActive ? 'tabs__button--active' : '';
 
   return (
-    <aside>
+    <>
       <nav
         className={`tabs__nav u-sb-28 ${
           mode === 'cta' ? 'tabs__nav--cta' : ''
@@ -40,7 +40,7 @@ export const Tabs: React.FC<Props> = ({
           <span>{titleSecondary}</span>
         </button>
       </nav>
-      <section>{mainTabActive ? contentMain : contentSecondary}</section>
-    </aside>
+      {mainTabActive ? contentMain : contentSecondary}
+    </>
   );
 };
