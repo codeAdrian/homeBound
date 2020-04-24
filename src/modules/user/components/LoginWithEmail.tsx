@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
+import { toast, ToastType, ToastPosition } from 'react-toastify';
 
 import { emailRegex } from 'util/validation';
 import { FirebaseService } from 'modules/firebase';
@@ -12,9 +13,17 @@ const LoginWithEmail: React.FC = () => {
 
   const { email, password } = watch();
 
-  const onSubmit = (values: FieldValues) => {
+  const onSubmit = async (values: FieldValues) => {
     const { email, password } = values;
-    authProvider.signInWithEmailAndPassword(email, password);
+    try {
+      await authProvider.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      toast(error.message, {
+        closeButton: false,
+        position: ToastPosition.TOP_CENTER,
+        type: ToastType.ERROR,
+      });
+    }
   };
 
   return (

@@ -24,3 +24,5 @@
 @import 'module.app.css';
 @import 'module.score.css';
 @import 'module.contacts.css';
+
+@import 'vendor.toastify.css';

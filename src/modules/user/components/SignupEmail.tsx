@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast, ToastPosition, ToastType } from 'react-toastify';
 import { useForm, FieldValues } from 'react-hook-form';
 
 import { emailRegex } from 'util/validation';
@@ -15,12 +16,20 @@ const SignUpEmail: React.FC = () => {
 
   const onSubmit = async (values: FieldValues) => {
     const { email, password } = values;
-    const { user } = await authProvider.createUserWithEmailAndPassword(
-      email,
-      password,
-    );
-    if (!user) return;
-    await createUserDocument(user);
+    try {
+      const { user } = await authProvider.createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      if (!user) return;
+      await createUserDocument(user);
+    } catch (error) {
+      toast(error.message, {
+        closeButton: false,
+        position: ToastPosition.TOP_CENTER,
+        type: ToastType.ERROR,
+      });
+    }
   };
 
   const emailPattern = {
@@ -61,9 +70,9 @@ const SignUpEmail: React.FC = () => {
         />
       </div>
 
-      <p>
+      <div className="u-sb-16">
         <Button className={BUTTON.PILL.PRIMARY.BASE}>Sign Up</Button>
-      </p>
+      </div>
     </form>
   );
 };

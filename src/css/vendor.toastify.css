@@ -1,0 +1,10 @@
+.Toastify__toast-container {
+    padding: 0;
+    position: absolute;
+    top: 0;
+}
+
+.Toastify__toast {
+    border-radius: var(--border__radius--20px) var(--border__radius--20px) 0 0;
+    padding: var(--spacing--16px) var(--spacing--40px);
+}

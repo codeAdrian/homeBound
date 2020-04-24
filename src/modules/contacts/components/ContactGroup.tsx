@@ -20,6 +20,7 @@ export const ContactGroup: React.FC<Props> = ({
         {...groupedContacts[key]}
         removeContact={removeContact}
         setCurrentContact={setCurrentContact}
+        key={key}
       />
     ),
     [groupedContacts, removeContact, setCurrentContact],

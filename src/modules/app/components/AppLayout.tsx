@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import { Routing } from 'modules/routing';
 import { useAppState } from 'modules/app';
@@ -17,6 +19,7 @@ export const AppLayout: React.FC = () => {
         className={appClassName}
         style={{ backgroundColor: theme.color }}
       >
+        <ToastContainer transition={Slide} />
         <Navigation />
         <Routing />
       </section>

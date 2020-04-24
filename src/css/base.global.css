@@ -30,6 +30,8 @@ svg {
 }
 
 .root {
+    border-radius: var(--border__radius--20px);
+    overflow: hidden;
     position: relative;
     height: 568px;
     width: 320px;

@@ -34,6 +34,7 @@ export const ActivityList: React.FC<Props> = ({
     <>
       {userActivities?.map((activity) => (
         <Card
+          key={activity.id}
           onComplete={completeActivity}
           onRemove={removeActivity}
           activity={activity}

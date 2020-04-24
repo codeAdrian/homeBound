@@ -41,6 +41,7 @@ export const ActivitySummary = () => {
       <CardSlider>
         {userActivities?.map((activity) => (
           <Card
+            key={activity.id}
             onComplete={completeActivity}
             onRemove={removeActivity}
             activity={activity}
