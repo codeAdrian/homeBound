@@ -30,7 +30,7 @@ export const ActivitySuggestion: React.FC<Props> = ({ isLight, callback }) => {
 
       callback();
     },
-    [addActivity],
+    [addActivity, callback],
   );
 
   if (isEmpty(userSettings)) return null;
