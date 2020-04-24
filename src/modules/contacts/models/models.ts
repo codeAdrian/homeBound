@@ -4,7 +4,7 @@ export type UserContact = {
   date: Timestamp;
   name: string;
   id: string;
-  phoneNumber: string;
+  phoneNumber?: string;
 };
 
 export interface ContactsState {

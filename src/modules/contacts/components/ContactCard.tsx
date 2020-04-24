@@ -30,11 +30,13 @@ export const ContactCard: React.FC<Props> = ({
         />{' '}
         <span className="u-t-truncate">{contact.name}</span>
       </div>
-      <Button
-        className={BUTTON.ROUNDED.CTA.SMALL}
-        icon={<TextBubble />}
-        onClick={() => setCurrentContact(contact)}
-      />
+      {contact.phoneNumber && (
+        <Button
+          className={BUTTON.ROUNDED.CTA.SMALL}
+          icon={<TextBubble />}
+          onClick={() => setCurrentContact(contact)}
+        />
+      )}
     </li>
   );
   return (

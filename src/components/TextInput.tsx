@@ -1,9 +1,11 @@
 import React from 'react';
+import { NestDataObject, FieldError } from 'react-hook-form';
 
 interface OwnProps {
   name: string;
   label: string;
   hasValue?: boolean;
+  errors?: NestDataObject<Record<string, any>, FieldError>;
   componentRef: (
     ref: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null,
   ) => void;
@@ -16,6 +18,7 @@ export const TextInput: React.FC<Props> = ({
   componentRef,
   name,
   className,
+  errors,
   hasValue,
   ...props
 }) => {
@@ -27,6 +30,8 @@ export const TextInput: React.FC<Props> = ({
   const handleBlur = () => {
     setIsFocused(false);
   };
+
+  const error = errors && errors[name];
 
   const shouldTransformLabel = isFocused || hasValue;
 
@@ -53,6 +58,11 @@ export const TextInput: React.FC<Props> = ({
         {...props}
       />
       <span className="input__deco--text" />
+      {error && (
+        <div className="input__error u-t__fontSize--xsmall u-o-6 u-t__fontWeight--bold">
+          {error.message}
+        </div>
+      )}
     </div>
   );
 };

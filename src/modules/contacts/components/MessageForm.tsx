@@ -14,6 +14,7 @@ const MessageForm: React.FC<Props> = ({ currentContact }) => {
   const { handleSubmit, register, reset } = useForm();
 
   const onSubmit = (values: FieldValues) => {
+    if (!currentContact.phoneNumber) return;
     const { message } = values;
     const body = `Message from ${userData?.displayName}: ${message}`;
     sendMessage({

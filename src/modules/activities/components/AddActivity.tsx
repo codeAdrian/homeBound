@@ -10,7 +10,7 @@ interface Props {
 
 const AddActivity: React.FC<Props> = ({ callback }) => {
   const [, { addActivity }] = useActivitiesServices();
-  const { handleSubmit, register, watch, reset } = useForm();
+  const { handleSubmit, register, watch, reset, errors } = useForm();
 
   const onSubmit = (values: FieldValues) => {
     const { title } = values;
@@ -35,13 +35,14 @@ const AddActivity: React.FC<Props> = ({ callback }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput
+        errors={errors}
         hasValue={!!title}
         name="title"
         label="What do you want to do?"
         type="text"
         max={32}
         componentRef={register({
-          required: 'Required',
+          required: 'This field is required',
         })}
       />
 

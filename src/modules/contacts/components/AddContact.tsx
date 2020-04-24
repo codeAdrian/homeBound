@@ -10,7 +10,7 @@ interface Props {
 }
 
 const AddContact: React.FC<Props> = ({ callback }) => {
-  const { handleSubmit, register, watch, reset } = useForm();
+  const { handleSubmit, register, watch, reset, errors } = useForm();
   const [, { addContact }] = useContactsServices();
 
   const onSubmit = (values: FieldValues) => {
@@ -34,32 +34,25 @@ const AddContact: React.FC<Props> = ({ callback }) => {
     callback();
   };
 
+  const pattern = /^\+((?:9[679]|8[035789]|6[789]|5[90]|42|3[578]|2[1-689])|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)(?:\W*\d){0,13}\d$/gm;
+
   const { date, name, phoneNumber } = watch();
 
   return (
     <form className="l-vertical u-f--grow1" onSubmit={handleSubmit(onSubmit)}>
       <div>
         <TextInput
+          errors={errors}
           hasValue={!!name}
           name="name"
           label="Name"
           type="text"
           componentRef={register({
-            required: 'Required',
+            required: 'This field is required',
           })}
         />
-
         <TextInput
-          hasValue={!!phoneNumber}
-          name="phoneNumber"
-          label="Phone Number"
-          type="text"
-          componentRef={register({
-            required: 'Required',
-          })}
-        />
-
-        <TextInput
+          errors={errors}
           className="input__control--date"
           max={format(new Date(), 'Y-MM-dd')}
           hasValue={!!date}
@@ -67,7 +60,20 @@ const AddContact: React.FC<Props> = ({ callback }) => {
           label="Date"
           type="date"
           componentRef={register({
-            required: 'Required',
+            required: 'This field is required',
+          })}
+        />
+        <TextInput
+          errors={errors}
+          hasValue={!!phoneNumber}
+          name="phoneNumber"
+          label="Phone Number (optional)"
+          type="text"
+          componentRef={register({
+            pattern: {
+              value: pattern,
+              message: 'Phone number must start with +XXX',
+            },
           })}
         />
       </div>

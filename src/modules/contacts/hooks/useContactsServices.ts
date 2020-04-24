@@ -15,7 +15,7 @@ import {
 export interface ContactInput {
   date: Date;
   name: string;
-  phoneNumber: string;
+  phoneNumber?: string;
 }
 
 interface Api {
