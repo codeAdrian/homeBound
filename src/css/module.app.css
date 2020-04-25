@@ -13,6 +13,8 @@
     transition: background-color 0.8s ease;
     border-radius: var(--border__radius--20px);
     overflow: auto;
+    scrollbar-color: rgb(0, 0, 0);
+    scrollbar-width: thin;
 }
 
 .app__background--withNav {
