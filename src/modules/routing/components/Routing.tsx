@@ -2,7 +2,16 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute, PublicRoute } from 'modules/routing';
-import { Dashboard, Login, SignUp, Welcome, Contacts, Activities } from 'views';
+import {
+  Dashboard,
+  Login,
+  SignUp,
+  Welcome,
+  Contacts,
+  Activities,
+  Assistant,
+  NotFound,
+} from 'views';
 import { useAuthData } from 'modules/user';
 
 export const Routing: React.FC = () => {
@@ -16,7 +25,8 @@ export const Routing: React.FC = () => {
       <PrivateRoute exact path="/welcome" component={Welcome} />
       <PrivateRoute exact path="/contacts" component={Contacts} />
       <PrivateRoute exact path="/activities" component={Activities} />
-      <Route component={Dashboard} />
+      <PrivateRoute exact path="/assistant" component={Assistant} />
+      <Route component={NotFound} />
     </Switch>
   );
 };
