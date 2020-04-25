@@ -6,7 +6,7 @@ export const SUGGESTIONS: Suggestion[] = [
     label: 'Excercise',
   },
   { value: 'Eat a healthy meal', label: ' Eat healthy' },
-  { value: 'Call a family member or a friend', label: 'Make a call' },
+  { value: 'Call a family member or a friend', label: 'Stay in touch' },
   {
     value: 'Play a board game with housemates',
     label: 'Board game',

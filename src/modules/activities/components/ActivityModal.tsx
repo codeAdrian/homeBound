@@ -32,15 +32,15 @@ export const ActivityModal: React.FC<Props> = ({
           </aside>
           <main className="l-page">
             <Tabs
-              titleMain="Add activity"
-              titleSecondary="Suggested activities"
-              contentMain={<AddActivity callback={toggleModalState} />}
-              contentSecondary={
+              titleMain="Suggested activities"
+              titleSecondary="Add activity"
+              contentMain={
                 <ActivitySuggestion
                   callback={toggleModalState}
                   isLight={isLight}
                 />
               }
+              contentSecondary={<AddActivity callback={toggleModalState} />}
             />
           </main>
         </section>
