@@ -7,6 +7,7 @@ import {
   CompletedActivity,
   ActivityList,
   useActivitiesServices,
+  ActivityModal,
 } from 'modules/activities';
 import { useModalControls } from 'modules/modal';
 
@@ -40,13 +41,13 @@ export const Activities = () => {
         />
       </aside>
       <main>
+        <ActivityModal
+          isModalOpen={isModalOpen}
+          toggleModalState={toggleModalState}
+          isLight
+        />
         <Tabs
-          contentMain={
-            <ActivityList
-              isModalOpen={isModalOpen}
-              toggleModalState={toggleModalState}
-            />
-          }
+          contentMain={<ActivityList toggleModalState={toggleModalState} />}
           contentSecondary={<CompletedActivity />}
           titleMain="Your todo"
           titleSecondary="Completed activities"

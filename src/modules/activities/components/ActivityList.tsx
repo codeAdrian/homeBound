@@ -2,18 +2,14 @@ import React from 'react';
 import { isEmpty } from 'lodash';
 
 import { Card, Button, BUTTON } from 'components';
-import { ActivityModal, useActivitiesServices } from 'modules/activities';
+import { useActivitiesServices } from 'modules/activities';
 import { ReactComponent as PlusIcon } from 'assets/icons/plus.svg';
 
 interface Props {
-  isModalOpen: boolean;
   toggleModalState: VoidFunction;
 }
 
-export const ActivityList: React.FC<Props> = ({
-  isModalOpen,
-  toggleModalState,
-}) => {
+export const ActivityList: React.FC<Props> = ({ toggleModalState }) => {
   const [
     { userActivities, isLoading },
     { removeActivity, completeActivity },
@@ -50,11 +46,6 @@ export const ActivityList: React.FC<Props> = ({
           ? 'Add tasks'
           : 'Add more tasks'}
       </Button>
-      <ActivityModal
-        isModalOpen={isModalOpen}
-        toggleModalState={toggleModalState}
-        isLight
-      />
     </>
   );
 };
