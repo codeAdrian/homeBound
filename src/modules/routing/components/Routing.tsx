@@ -14,6 +14,7 @@ import {
   NotFound,
 } from 'views';
 import { useAuthData } from 'modules/user';
+import { GeneralError } from 'views/GeneralError';
 
 export const Routing: React.FC = () => {
   useAuthData();
