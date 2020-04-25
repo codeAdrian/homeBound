@@ -46,7 +46,9 @@ const Dashboard: React.FC = () => {
 
       <ActivitySummary />
 
-      <LogOut />
+      <div className="u-sb-16">
+        <LogOut />
+      </div>
     </section>
   );
 };
