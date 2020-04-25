@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast, ToastPosition, ToastType } from 'react-toastify';
 
 import { ReactComponent as CheckIcon } from 'assets/icons/check.svg';
 import { ReactComponent as MascotIcon } from 'assets/icons/mascot.svg';
@@ -25,6 +26,7 @@ export const Card: React.FC<Props> = ({
   onRemove,
   onComplete,
 }) => {
+  const [isLoading, setIsLoading] = React.useState(false);
   const { title, score, style, id } = activity;
   const isList = mode === 'list';
   const cardClassName = isList ? 'card--list' : 'cardGrid';
@@ -41,18 +43,40 @@ export const Card: React.FC<Props> = ({
     ? 'card__remove--list'
     : 'card__remove--grid';
 
-  const handleRemove = React.useCallback(() => {
+  const handleRemove = React.useCallback(async () => {
+    setIsLoading(true);
     if (!onRemove) return;
-    onRemove(id);
+    try {
+      await onRemove(id);
+    } catch (error) {
+      setIsLoading(false);
+      toast(error.message, {
+        closeButton: false,
+        position: ToastPosition.TOP_CENTER,
+        type: ToastType.ERROR,
+      });
+    }
   }, [id, onRemove]);
 
-  const handleComplete = React.useCallback(() => {
+  const handleComplete = React.useCallback(async () => {
+    setIsLoading(true);
     if (!onComplete) return;
-    onComplete(id);
+    try {
+      await onComplete(id);
+    } catch (error) {
+      setIsLoading(false);
+      toast(error.message, {
+        closeButton: false,
+        position: ToastPosition.TOP_CENTER,
+        type: ToastType.ERROR,
+      });
+    }
   }, [id, onComplete]);
 
   return (
-    <article className={`card ${cardClassName}`}>
+    <article
+      className={`card ${cardClassName} ${isLoading ? 'card--loading' : ''}`}
+    >
       {onComplete && (
         <CheckIcon onClick={handleComplete} className="card__complete" />
       )}

@@ -5,6 +5,12 @@
     padding: var(--spacing--4px);
     width: 100%;
     color: var(--color__text);
+    transition: opacity 0.3s ease;
+}
+
+.card--loading {
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 .card--list {
