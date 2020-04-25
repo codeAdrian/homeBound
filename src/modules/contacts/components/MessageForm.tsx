@@ -14,6 +14,7 @@ const MessageForm: React.FC<Props> = ({ currentContact }) => {
   const { handleSubmit, register, reset } = useForm();
 
   const onSubmit = (values: FieldValues) => {
+    if (!currentContact.phoneNumber) return;
     const { message } = values;
     const body = `Message from ${userData?.displayName}: ${message}`;
     sendMessage({
@@ -24,25 +25,27 @@ const MessageForm: React.FC<Props> = ({ currentContact }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <p>
-        <strong>Name:</strong> {currentContact?.name}
-      </p>
-      <p>
-        <strong>Phone number:</strong> {currentContact?.phoneNumber}
-      </p>
+    <form className="l-vertical u-f--grow1" onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <p>
+          <strong>Name:</strong> {currentContact?.name}
+        </p>
+        <p>
+          <strong>Phone number:</strong> {currentContact?.phoneNumber}
+        </p>
 
-      <label className="u-t__fontSize--xsmall u-o-6 input__label--textArea">
-        Message
-      </label>
-      <textarea
-        className="input__control--textArea"
-        name="message"
-        maxLength={150}
-        ref={register({
-          required: 'Required',
-        })}
-      />
+        <label className="u-t__fontSize--xsmall u-o-6 input__label--textArea">
+          Message
+        </label>
+        <textarea
+          className="input__control--textArea"
+          name="message"
+          maxLength={150}
+          ref={register({
+            required: 'Required',
+          })}
+        />
+      </div>
       <Button className={BUTTON.PILL.CTA.BASE.GLOW}>Send message</Button>
     </form>
   );

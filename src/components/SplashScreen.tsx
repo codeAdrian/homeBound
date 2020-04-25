@@ -15,7 +15,7 @@ export const SplashScreen = () => {
   }, [setAppTheme]);
 
   return (
-    <section className="splashScreen app__content">
+    <section className="app__content splashScreen">
       <Logo className="splashScreen__logo" />
       <div className="splashScreen__title">
         <strong className="u-t__fontFamily--secondary u-t__fontSize--xxlarge">

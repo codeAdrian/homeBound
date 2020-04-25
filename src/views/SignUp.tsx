@@ -21,7 +21,7 @@ const SignUp: React.FC = () => {
       <article>
         <div className="u-sb-8">
           <Heading className={HEADING.PRIMARY.XLARGE.BOLD} tag="h1">
-            Signup right now
+            Sign up right now
           </Heading>
         </div>
         <p className="o-08">

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { FirebaseService } from 'modules/firebase';
+import { Button, BUTTON } from 'components';
 
 const LogOut: React.FC = () => {
   const firebase = FirebaseService.Instance;
@@ -10,7 +11,11 @@ const LogOut: React.FC = () => {
     auth.signOut();
   }, [auth]);
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return (
+    <Button className={BUTTON.PILL.PRIMARY.BASE} onClick={handleLogout}>
+      Sign out
+    </Button>
+  );
 };
 
 export { LogOut };

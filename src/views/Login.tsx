@@ -27,13 +27,13 @@ const Login: React.FC = () => {
         <p className="u-o-8">Wow, you're a regular! We like that.</p>
       </article>
       <article>
-        <p>
+        <div className="u-sb-16">
           <LoginWithEmail />
-        </p>
+        </div>
         <p className="u-t-center u-o-8">or use</p>
-        <p>
+        <div className="u-sb-16">
           <LoginWithGoogle>Log in with Google</LoginWithGoogle>
-        </p>
+        </div>
         <p className="u-t-center">
           <span className="u-o-8">Don't have an account? </span>
           <Link to="/signup">Sign up</Link>

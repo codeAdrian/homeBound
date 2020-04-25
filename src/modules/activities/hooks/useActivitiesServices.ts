@@ -17,6 +17,7 @@ export interface ActivityInput {
   date: Date;
   title: string;
   score: number;
+  style: number;
 }
 
 interface Api {
@@ -84,10 +85,6 @@ export const useActivitiesServices: CustomHook<ActivitiesState, Api> = () => {
     }),
     [addActivity, getActivities, removeActivity, completeActivity],
   );
-
-  React.useEffect(() => {
-    getActivities();
-  }, [getActivities]);
 
   return [activities, api];
 };

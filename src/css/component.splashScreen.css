@@ -4,6 +4,9 @@
     justify-content: center;
     text-align: center;
     height: 100%;
+    position: absolute !important;
+    left: 0;
+    right: 0;
 }
 
 .splashScreen__logo {

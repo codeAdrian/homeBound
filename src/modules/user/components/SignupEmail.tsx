@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast, ToastPosition, ToastType } from 'react-toastify';
 import { useForm, FieldValues } from 'react-hook-form';
 
 import { emailRegex } from 'util/validation';
@@ -15,12 +16,20 @@ const SignUpEmail: React.FC = () => {
 
   const onSubmit = async (values: FieldValues) => {
     const { email, password } = values;
-    const { user } = await authProvider.createUserWithEmailAndPassword(
-      email,
-      password,
-    );
-    if (!user) return;
-    await createUserDocument(user);
+    try {
+      const { user } = await authProvider.createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      if (!user) return;
+      await createUserDocument(user);
+    } catch (error) {
+      toast(error.message, {
+        closeButton: false,
+        position: ToastPosition.TOP_CENTER,
+        type: ToastType.ERROR,
+      });
+    }
   };
 
   const emailPattern = {
@@ -29,36 +38,41 @@ const SignUpEmail: React.FC = () => {
   };
 
   const emailRef = register({
-    required: true,
+    required: 'This field is required',
     pattern: emailPattern,
   });
 
-  const passwordRef = register({ required: 'Required', min: 6 });
+  const passwordRef = register({
+    required: 'This field is required',
+    min: { value: 6, message: 'Password should be at least 6 characters' },
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <TextInput
-        hasValue={!!email}
-        name="email"
-        label="Email"
-        type="text"
-        componentRef={emailRef}
-      />
-      {errors.email && errors.email.message}
+      <div className="u-sb-28">
+        <TextInput
+          errors={errors}
+          hasValue={!!email}
+          name="email"
+          label="Email"
+          type="text"
+          componentRef={emailRef}
+        />
 
-      <TextInput
-        hasValue={!!password}
-        label="Password"
-        name="password"
-        autoComplete="new-password"
-        type="password"
-        componentRef={passwordRef}
-      />
-      {errors.password && errors.password.message}
+        <TextInput
+          errors={errors}
+          hasValue={!!password}
+          label="Password"
+          name="password"
+          autoComplete="new-password"
+          type="password"
+          componentRef={passwordRef}
+        />
+      </div>
 
-      <p>
+      <div className="u-sb-16">
         <Button className={BUTTON.PILL.PRIMARY.BASE}>Sign Up</Button>
-      </p>
+      </div>
     </form>
   );
 };

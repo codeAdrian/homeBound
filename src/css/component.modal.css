@@ -10,6 +10,8 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease;
+    border-radius: var(--border__radius--20px);
+    overflow: auto;
 }
 
 .modal--open {

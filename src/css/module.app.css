@@ -11,13 +11,27 @@
     flex-direction: column;
     height: 100%;
     transition: background-color 0.8s ease;
-    padding: var(--spacing--32px) var(--spacing--40px) 0;
     border-radius: var(--border__radius--20px);
     overflow: auto;
+    scrollbar-color: rgb(0, 0, 0);
+    scrollbar-width: thin;
+}
+
+.app__content {
+    overflow-x: visible;
+    position: relative;
+    z-index: var(--level-1);
+    opacity: 0;
+    padding: var(--spacing--32px) var(--spacing--40px) 0;
+    animation: fadeIn 0.8s 0.1s ease forwards;
+    flex: 1;
 }
 
 .app__background--withNav {
-    padding: var(--spacing--32px) var(--spacing--40px) var(--spacing--80px);
+    & .app__content {
+        flex: 0;
+        padding: var(--spacing--32px) var(--spacing--40px) var(--spacing--80px);
+    }
 }
 
 .app__background--primary {
@@ -48,15 +62,6 @@
         transition: all 2s ease;
         fill: #ffffff;
     }
-}
-
-.app__content {
-    overflow-x: visible;
-    position: relative;
-    z-index: var(--level-1);
-    opacity: 0;
-    animation: fadeIn 0.8s 0.1s ease forwards;
-    flex: 1;
 }
 
 .app__deco--default {

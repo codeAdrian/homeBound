@@ -11,9 +11,10 @@ export const Navigation = () => {
   const [{ theme }] = useAppState();
 
   const navClassName = theme.showNav ? 'nav' : 'nav nav--hidden';
+  const navTheme = theme.color === '#6A62FF' ? 'app--light' : '';
 
   return (
-    <nav className={navClassName}>
+    <nav className={`${navClassName} ${navTheme}`}>
       <NavLink
         to="/"
         exact

@@ -18,7 +18,11 @@
 @import 'component.icons.css';
 @import 'component.navigation.css';
 @import 'component.modal.css';
+@import 'component.tabs.css';
+@import 'component.card.css';
 
 @import 'module.app.css';
 @import 'module.score.css';
 @import 'module.contacts.css';
+
+@import 'vendor.toastify.css';
