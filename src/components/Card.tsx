@@ -26,59 +26,49 @@ export const Card: React.FC<Props> = ({
   onRemove,
   onComplete,
 }) => {
+  const isList = mode === 'list';
+  const getClassName = (component: string) =>
+    isList ? `card__${component}--list ` : `card__${component}--grid`;
+
   const [isLoading, setIsLoading] = React.useState(false);
   const { title, score, style, id } = activity;
-  const isList = mode === 'list';
   const cardClassName = isList ? 'card--list' : 'cardGrid';
-  const cardContentClassName = isList
-    ? 'card__content--list'
-    : 'card__content--grid';
-  const cardTextClassName = isList ? 'card__text--list' : 'card__text--grid';
-  const cardDecoClassName = isList ? 'card__deco--list' : 'card__deco--grid';
-  const cardScoreClassName = isList ? 'card__score--list' : 'card__score--grid';
-  const cardFooterClassName = isList
-    ? 'card__footer--list'
-    : 'card__footer--grid';
-  const cardRemoveClassName = isList
-    ? 'card__remove--list'
-    : 'card__remove--grid';
+  const cardContentClassName = getClassName('content');
+  const cardTextClassName = getClassName('text');
+  const cardDecoClassName = getClassName('deco');
+  const cardScoreClassName = getClassName('score');
+  const cardFooterClassName = getClassName('footer');
+  const cardRemoveClassName = getClassName('remove');
 
-  const handleRemove = React.useCallback(async () => {
-    setIsLoading(true);
-    if (!onRemove) return;
-    try {
-      await onRemove(id);
-    } catch (error) {
-      setIsLoading(false);
-      toast(error.message, {
-        closeButton: false,
-        position: ToastPosition.TOP_CENTER,
-        type: ToastType.ERROR,
-      });
-    }
-  }, [id, onRemove]);
-
-  const handleComplete = React.useCallback(async () => {
-    setIsLoading(true);
-    if (!onComplete) return;
-    try {
-      await onComplete(id);
-    } catch (error) {
-      setIsLoading(false);
-      toast(error.message, {
-        closeButton: false,
-        position: ToastPosition.TOP_CENTER,
-        type: ToastType.ERROR,
-      });
-    }
-  }, [id, onComplete]);
+  const handleClick = React.useCallback(
+    async (e: React.MouseEvent<HTMLButtonElement>) => {
+      const { currentTarget } = e;
+      try {
+        if ('value' in currentTarget && currentTarget.value === 'remove') {
+          onRemove && (await onRemove(id));
+        } else {
+          onComplete && (await onComplete(id));
+        }
+      } catch (error) {
+        setIsLoading(false);
+        toast(error.message, {
+          closeButton: false,
+          position: ToastPosition.TOP_CENTER,
+          type: ToastType.ERROR,
+        });
+      }
+    },
+    [id, onComplete, onRemove],
+  );
 
   return (
     <article
       className={`card ${cardClassName} ${isLoading ? 'card--loading' : ''}`}
     >
       {onComplete && (
-        <CheckIcon onClick={handleComplete} className="card__complete" />
+        <Button onClick={handleClick} className="button card__complete">
+          <CheckIcon />
+        </Button>
       )}
       <div className={`card__deco ${cardDecoClassName} ${CARD_STYLE[style]}`}>
         <MascotIcon className="card__image" />
@@ -96,7 +86,8 @@ export const Card: React.FC<Props> = ({
           {onRemove && (
             <div className={cardRemoveClassName}>
               <Button
-                onClick={handleRemove}
+                value="remove"
+                onClick={handleClick}
                 className={BUTTON.ROUNDED.CTA.SMALL}
                 icon={<TrashIcon />}
               />

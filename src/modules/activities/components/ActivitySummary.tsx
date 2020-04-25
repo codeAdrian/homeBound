@@ -10,8 +10,12 @@ export const ActivitySummary = () => {
   const [isModalOpen, { toggleModalState }] = useModalControls();
   const [
     { userActivities },
-    { removeActivity, completeActivity },
+    { removeActivity, completeActivity, getActivities },
   ] = useActivitiesServices();
+
+  React.useEffect(() => {
+    getActivities();
+  }, [getActivities]);
 
   if (!userActivities || isEmpty(userActivities))
     return (
