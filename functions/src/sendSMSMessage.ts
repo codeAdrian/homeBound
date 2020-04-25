@@ -2,11 +2,11 @@ import * as functions from 'firebase-functions';
 import { Twilio } from 'twilio';
 
 export const sendSMSMessage = functions.https.onCall(async (data) => {
-  const { sid, token } = functions.config();
+  const { sid, token } = functions.config().twilio;
   const client = new Twilio(sid, token);
 
   const { from, to, body } = data;
-  client.messages
+  return client.messages
     .create({
       from,
       to,
