@@ -5,10 +5,10 @@
   "author": {
     "name": "Adrian Bece",
     "email": "adrian@prototyp.digital",
-    "url": "https://prototyp.digital"
+    "url": "https://github.com/codeadrian"
   },
   "contributors": [
-    "Vlatko Vlahek <vlatko@prototyp.digital> (https://prototyp.digital)",
+    "Vlatko Vlahek <vlatko@prototyp.digital> (https://github.com/vlaja)",
     "Igor Plac <igor@prototyp.digital> (https://prototyp.digital)",
     "Valenina Bermanec <valentina@prototyp.digital> (https://prototyp.digital)"
   ],
@@ -24,7 +24,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-toastify": "^5.5.0",
-    "redux": "^4.0.5",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-app-rewired start",
