@@ -10,6 +10,8 @@ import {
   Contacts,
   Activities,
   Profile,
+  Assistant,
+  NotFound,
 } from 'views';
 import { useAuthData } from 'modules/user';
 
@@ -25,7 +27,8 @@ export const Routing: React.FC = () => {
       <PrivateRoute exact path="/contacts" component={Contacts} />
       <PrivateRoute exact path="/activities" component={Activities} />
       <PrivateRoute exact path="/profile" component={Profile} />
-      <Route component={Dashboard} />
+      <PrivateRoute exact path="/assistant" component={Assistant} />
+      <Route component={NotFound} />
     </Switch>
   );
 };
