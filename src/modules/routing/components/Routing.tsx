@@ -13,7 +13,6 @@ import {
   NotFound,
 } from 'views';
 import { useAuthData } from 'modules/user';
-import { GeneralError } from 'views/GeneralError';
 
 export const Routing: React.FC = () => {
   useAuthData();
@@ -27,7 +26,7 @@ export const Routing: React.FC = () => {
       <PrivateRoute exact path="/contacts" component={Contacts} />
       <PrivateRoute exact path="/activities" component={Activities} />
       <PrivateRoute exact path="/assistant" component={Assistant} />
-      <Route component={NotFound} />
+      <Route path="*" component={NotFound} />
     </Switch>
   );
 };
