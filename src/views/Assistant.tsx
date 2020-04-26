@@ -21,9 +21,6 @@ export const Assistant = () => {
     <section className="app__content app--light">
       <aside className="u-f--spaceBetween u-sb-36">
         <Heading tag="h1" className={HEADING.PRIMARY.XXLARGE.LIGHT}>
-          <Link to="/" className="button">
-            <BackIcon />
-          </Link>
           Let's chat!
         </Heading>
       </aside>
