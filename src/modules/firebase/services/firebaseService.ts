@@ -14,7 +14,16 @@ export class FirebaseService {
   };
 
   public static get AuthProvider() {
-    return firebase.auth();
+    return this.Instance.auth();
+  }
+
+  public static get FunctionsProvider() {
+    const functions = this.Instance.functions();
+    if (process.env.NODE_ENV === 'development') {
+      functions.useFunctionsEmulator('http://localhost:5001');
+    }
+
+    return functions;
   }
 
   public static get AuthProviderGoogle() {
