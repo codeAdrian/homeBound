@@ -8,8 +8,7 @@ import { TextInput, Button, BUTTON } from 'components';
 
 const LoginWithEmail: React.FC = () => {
   const { handleSubmit, register, errors, watch } = useForm();
-  const firebase = FirebaseService.Instance;
-  const authProvider = firebase.auth();
+  const authProvider = FirebaseService.AuthProvider;
 
   const { email, password } = watch();
 

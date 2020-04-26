@@ -8,9 +8,7 @@ const useAuthData = () => {
   const unsubscribeFromAuth = useRef<VoidFunction>(() => false);
 
   useEffect(() => {
-    const firebase = FirebaseService.Instance;
-    const auth = firebase.auth();
-
+    const auth = FirebaseService.AuthProvider;
     unsubscribeFromAuth.current = auth.onAuthStateChanged(handleAuthChange);
 
     return () => {

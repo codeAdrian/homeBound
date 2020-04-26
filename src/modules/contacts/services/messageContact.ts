@@ -12,8 +12,7 @@ const messageContact: MessagingFuncion = async (
   handleSuccess,
   handleError,
 ) => {
-  const firebase = FirebaseService.Instance;
-  const functions = firebase.functions();
+  const functions = FirebaseService.FunctionsProvider;
 
   const {
     NODE_ENV,
