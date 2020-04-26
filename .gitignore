@@ -31,3 +31,4 @@ yarn-error.log*
 # functions
 functions/node_modules
 functions/lib
+.runtimeconfig.json
