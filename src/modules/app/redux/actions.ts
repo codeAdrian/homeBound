@@ -7,7 +7,7 @@ export const AppActions = {
   Success: (settings: AppVariables) =>
     createAction(AppActionTypes.Success, settings),
 
-  Error: (error?: string) => createAction(AppActionTypes.Error, { error }),
+  Error: (error?: string) => createAction(AppActionTypes.Error, error),
 };
 
 export type AppActions = ActionUnion<typeof AppActions>;

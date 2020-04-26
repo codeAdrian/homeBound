@@ -30,7 +30,7 @@ export const settingsReducer = (
     case SettingsActionTypes.Error:
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload,
         isLoading: false,
       };
     case SettingsActionTypes.Reset:
