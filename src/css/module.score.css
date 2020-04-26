@@ -33,3 +33,7 @@
     text-transform: uppercase;
     display: none;
 }
+
+.scoretracker__text--large {
+    display: block;
+}
