@@ -1,7 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-
 export class FirebaseService {
   private static instance: firebase.app.App;
   private static firebaseConfig = {
@@ -13,8 +12,6 @@ export class FirebaseService {
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
   };
-  ;
-
   public static get AuthProvider() {
     return firebase.auth();
   }

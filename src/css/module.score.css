@@ -7,6 +7,7 @@
 .scoretracker--large {
     width: 100px;
     margin-bottom: var(--spacing--28px);
+    left: -6px;
 }
 
 .scoretracker__deco {

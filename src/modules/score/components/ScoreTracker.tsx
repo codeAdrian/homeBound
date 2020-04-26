@@ -31,7 +31,7 @@ export const ScoreTracker = ({ mode }: Props) => {
 
   const fontSize = isLarge ? 'u-t__fontSize--xlarge' : 'u-t__fontSize--base';
   const mainClass = isLarge
-    ? 'scoretracker scoretracker--large'
+    ? 'scoretracker scoretracker--large u-ab-center'
     : 'scoretracker';
 
   const textClass = getClassName('text');

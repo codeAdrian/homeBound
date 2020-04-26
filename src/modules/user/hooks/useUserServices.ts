@@ -7,12 +7,16 @@ import {
   UserActionTypes,
   createUserDocument,
   UserState,
+  updateUserDocument,
 } from 'modules/user';
 
 interface Api {
   updateUserData: (user: firebase.UserInfo) => void;
   resetUserData: VoidFunction;
-  updateUserProfile: (user: Partial<firebase.UserInfo>) => void;
+  updateUserProfile: (
+    user: Partial<firebase.UserInfo>,
+    value: Partial<firebase.UserInfo>,
+  ) => void;
 }
 
 export const useUserServices: CustomHook<UserState, Api> = () => {
@@ -20,9 +24,16 @@ export const useUserServices: CustomHook<UserState, Api> = () => {
 
   const user = useSelector(getUserData);
 
-  const updateUserProfile = React.useCallback(async (userData) => {
-    console.log('Test');
-  }, []);
+  const updateUserProfile = React.useCallback(
+    async (userData, value) => {
+      const payload = await updateUserDocument(userData, value);
+      dispatch({
+        type: UserActionTypes.Success,
+        payload,
+      });
+    },
+    [dispatch],
+  );
 
   const updateUserData = React.useCallback(
     async (userData) => {

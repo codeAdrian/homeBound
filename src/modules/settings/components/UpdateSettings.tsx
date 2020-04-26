@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { ReactComponent as Checkbox } from 'assets/icons/checkbox.svg';
 import { QUESTIONS, useSettingsServices } from 'modules/settings';

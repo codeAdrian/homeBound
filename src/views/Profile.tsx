@@ -1,14 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { useUserServices } from 'modules/user';
-import { useSettingsServices } from 'modules/settings/hooks';
+import { useUserServices, UpdateProfile } from 'modules/user';
 import { useAppState } from 'modules/app';
 import { ScoreTracker } from 'modules/score';
 import { UpdateSettings } from 'modules/settings';
+import { ReactComponent as IconBack } from 'assets/icons/chevron_left.svg';
 
 export const Profile = () => {
   const [{ userData }] = useUserServices();
-  const [{ userSettings }] = useSettingsServices();
   const [, { setAppTheme }] = useAppState();
 
   React.useEffect(() => {
@@ -22,8 +22,16 @@ export const Profile = () => {
   }, [setAppTheme, userData]);
   return (
     <section className="app__content">
-      <ScoreTracker mode="large" />
-      <UpdateSettings />
+      <aside className="u-f--spaceBetween u-f--spaceBetween--top u-sb-40">
+        <Link to="/">
+          <IconBack />
+        </Link>
+        <ScoreTracker mode="large" />
+      </aside>
+      <main>
+        <UpdateProfile />
+        <UpdateSettings />
+      </main>
     </section>
   );
 };
