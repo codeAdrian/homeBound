@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { Heading, HEADING } from 'components';
 import { useAppState } from 'modules/app';
-import { ReactComponent as BackIcon } from 'assets/icons/chevron_left.svg';
 import { ChatMessage } from 'components/ChatMessage';
+import { useAssistant } from 'modules/assistant';
 
 export const Assistant = () => {
+  useAssistant();
   const [, { setAppTheme }] = useAppState();
 
   React.useEffect(() => {
