@@ -44,13 +44,21 @@ const MessageForm: React.FC<Props> = ({ currentContact }) => {
 
   return (
     <form className="l-vertical u-f--grow1" onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <p>
-          <strong>Name:</strong> {currentContact?.name}
-        </p>
-        <p>
-          <strong>Phone number:</strong> {currentContact?.phoneNumber}
-        </p>
+      <div className="u-sb-16">
+        <div className="u-f--spaceBetween">
+          <p>
+            <label className="u-t__fontSize--xsmall u-o-6 input__label--textArea">
+              Contact name
+            </label>
+            <div>{currentContact?.name}</div>
+          </p>
+          <p>
+            <label className="u-t__fontSize--xsmall u-o-6 input__label--textArea">
+              Phone number
+            </label>
+            <div>{currentContact?.phoneNumber}</div>
+          </p>
+        </div>
 
         <label className="u-t__fontSize--xsmall u-o-6 input__label--textArea">
           Message
@@ -64,11 +72,11 @@ const MessageForm: React.FC<Props> = ({ currentContact }) => {
           })}
         />
       </div>
-      <div className="u-sb-16">
+      <div className="u-sb-28">
         <Button className={BUTTON.PILL.CTA.BASE.GLOW}>Send message</Button>
       </div>
       {(!REACT_APP_TWILIO_PHONE_NUMBER || !REACT_APP_TEST_PHONE_NUMBER) && (
-        <div className="u-t__fontSize--xsmall u-o-6">
+        <div className="u-t__fontSize--xsmall u-o-6 u-sb-16">
           <strong>NOTE:</strong> Twilio SMS functionality is disabled for this
           demo. You can run the instance locally and provide API keys and a test
           phone number to test it.
