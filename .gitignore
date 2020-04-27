@@ -26,7 +26,6 @@ yarn-error.log*
 
 # firebase
 .firebase/
-.runtimeconfig.json
 
 # functions
 functions/node_modules
