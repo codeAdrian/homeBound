@@ -12,6 +12,7 @@ import { getAssistantData, AssistantActions } from '../redux';
 interface Api {
   getUserMessages: () => Promise<void>;
   postMessage: (message: string) => Promise<void>;
+  getUserToken: () => Promise<void>;
 }
 
 interface AssistantState {
@@ -29,6 +30,7 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
       const checkIfUserChannelExists = functions.httpsCallable(
         'checkIfUserChannelExists',
       );
+      console.log('init');
 
       const { data } = await checkIfUserChannelExists({
         userId: userData?.uid,
@@ -52,15 +54,32 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
       userId: userData?.uid,
     });
 
+    console.log('messages data', data);
+    if (!data.length) {
+      console.error('No messages');
+      return;
+    }
+
     const messages = JSON.parse(data);
     typeof messages === 'string'
       ? dispatch(AssistantActions.Error(messages))
       : dispatch(AssistantActions.Success(messages));
   }, [dispatch, userData, functions]);
 
+  const getUserToken = useCallback(async () => {
+    const getUserToken = functions.httpsCallable('getUserToken');
+    const { data } = await getUserToken({
+      identity: userData?.email,
+    });
+    // Client.create(data).then((client) => {
+    //   console.log('yeeeey we got client', client);
+    // });
+    console.log('Generated token', data);
+  }, [userData, functions]);
+
   const postMessage = useCallback(
     async (message: string) => {
-      Client.create('cbd').
+      // Client.create('cbd')
       // const postUserMessage = functions.httpsCallable('postUserMessage');
       // const { data } = await postUserMessage({
       //   userId: userData?.uid,
@@ -74,8 +93,9 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
     () => ({
       postMessage,
       getUserMessages,
+      getUserToken,
     }),
-    [postMessage, getUserMessages],
+    [postMessage, getUserMessages, getUserToken],
   );
 
   return [state, api];
