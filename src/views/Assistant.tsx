@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Heading, HEADING } from 'components';
 import { useAppState } from 'modules/app';
-import { ChatMessage } from 'components/ChatMessage';
-import { useAssistant } from 'modules/assistant';
+import { useAssistant, ChatMessage } from 'modules/assistant';
 
 export const Assistant = () => {
-  useAssistant();
+  const [messages, api] = useAssistant();
   const [, { setAppTheme }] = useAppState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setAppTheme({
       color: '#6A62FF',
       shapeClass: 'app__deco--default',
       showNav: true,
     });
   }, [setAppTheme]);
+
+  useEffect(() => {
+    api.getUserMessages();
+    api.postMessage('Hi');
+  }, [api]);
 
   return (
     <section className="app__content app--light">

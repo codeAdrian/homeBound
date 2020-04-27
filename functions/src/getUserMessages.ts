@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { Twilio } from 'twilio';
 
-export const checkIfUserChannelExists = functions.https.onCall(async (data) => {
+export const getUserMessages = functions.https.onCall(async (data) => {
   const { sid, token } = functions.config().twilio;
   const client = new Twilio(sid, token);
 
@@ -14,14 +14,14 @@ export const checkIfUserChannelExists = functions.https.onCall(async (data) => {
 
   try {
     const { userId } = data;
-    const channel = await client.chat
+    const messageResponse = await client.chat
       .services(coronaChat.sid)
       .channels(userId)
-      .fetch();
+      .messages.list();
 
-    return channel !== undefined;
+    return JSON.stringify(messageResponse.map((m) => m));
   } catch (e) {
     console.log(e);
-    return false;
+    return [];
   }
 });
