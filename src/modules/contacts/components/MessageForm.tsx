@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
+import { toast, ToastType, ToastPosition } from 'react-toastify';
 
 import { useMessageService, UserContact } from 'modules/contacts';
 import { useUserServices } from 'modules/user';
@@ -13,8 +14,25 @@ const MessageForm: React.FC<Props> = ({ currentContact }) => {
   const [, { sendMessage }] = useMessageService();
   const { handleSubmit, register, reset } = useForm();
 
+  const {
+    REACT_APP_TWILIO_PHONE_NUMBER,
+    REACT_APP_TEST_PHONE_NUMBER,
+  } = process.env;
+
   const onSubmit = (values: FieldValues) => {
     if (!currentContact.phoneNumber) return;
+
+    if (!REACT_APP_TWILIO_PHONE_NUMBER || !REACT_APP_TEST_PHONE_NUMBER) {
+      toast(
+        'SMS would be sent, but Twilio SMS functionality is disabled for this demo.',
+        {
+          closeButton: false,
+          position: ToastPosition.TOP_CENTER,
+          type: ToastType.WARNING,
+        },
+      );
+      return;
+    }
     const { message } = values;
     const body = `Message from ${userData?.displayName}: ${message}`;
     sendMessage({
@@ -46,7 +64,16 @@ const MessageForm: React.FC<Props> = ({ currentContact }) => {
           })}
         />
       </div>
-      <Button className={BUTTON.PILL.CTA.BASE.GLOW}>Send message</Button>
+      <div className="u-sb-16">
+        <Button className={BUTTON.PILL.CTA.BASE.GLOW}>Send message</Button>
+      </div>
+      {(!REACT_APP_TWILIO_PHONE_NUMBER || !REACT_APP_TEST_PHONE_NUMBER) && (
+        <div className="u-t__fontSize--xsmall u-o-6">
+          <strong>NOTE:</strong> Twilio SMS functionality is disabled for this
+          demo. You can run the instance locally and provide API keys and a test
+          phone number to test it.
+        </div>
+      )}
     </form>
   );
 };
