@@ -18,7 +18,8 @@ export const Assistant = () => {
 
   useEffect(() => {
     api.getUserMessages();
-    api.postMessage('Hi');
+    api.getUserToken();
+    // api.postMessage('Hi');
   }, [api]);
 
   return (

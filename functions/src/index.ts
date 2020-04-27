@@ -7,3 +7,4 @@ export * from './sendSMSMessage';
 export * from './checkIfUserChannelExists';
 export * from './createUserChanel';
 export * from './getUserMessages';
+export * from './getUserToken';
