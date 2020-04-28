@@ -14,26 +14,33 @@ export const createUserChannel = functions.https.onCall(async (data) => {
 
   try {
     const { userId } = data;
-    const channel = await client.chat
+    let channel = await client.chat
       .services(coronaChat.sid)
-      .channels.create({ friendlyName: userId, uniqueName: userId });
+      .channels(userId)
+      .fetch();
 
-    await client.chat
-      .services(coronaChat.sid)
-      .channels(channel.sid)
-      .webhooks.create({
-        type: 'webhook',
-        configuration: {
-          filters: ['onMessageSent'],
-          method: 'POST',
-          url:
-            'https://channels.autopilot.twilio.com/v1/ACb57077d04b3c7e514a7f26f8cfc9c28a/UA5d7e5d90dde8b6c82e8395bc5eaa9425/twilio-chat',
-        },
-      });
+    if (!channel) {
+      channel = await client.chat
+        .services(coronaChat.sid)
+        .channels.create({ friendlyName: userId, uniqueName: userId });
 
-    return true;
+      await client.chat
+        .services(coronaChat.sid)
+        .channels(channel.sid)
+        .webhooks.create({
+          type: 'webhook',
+          configuration: {
+            filters: ['onMessageSent', 'onChannelAdded'],
+            method: 'POST',
+            url:
+              'https://channels.autopilot.twilio.com/v1/ACb57077d04b3c7e514a7f26f8cfc9c28a/UA5d7e5d90dde8b6c82e8395bc5eaa9425/twilio-chat',
+          },
+        });
+    }
+
+    return channel.sid;
   } catch (e) {
     console.log(e);
-    return false;
+    return null;
   }
 });

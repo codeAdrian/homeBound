@@ -1,13 +1,18 @@
+import { Paginator } from 'twilio-chat/lib/interfaces/paginator';
+import { Message } from 'twilio-chat/lib/message';
+
 import { ActionUnion, createAction } from 'modules/redux-store';
-import { Message } from 'modules/contacts';
 
 import { AssistantActionTypes } from './types';
 
 export const AssistantActions = {
   Request: () => createAction(AssistantActionTypes.Request),
 
-  Success: (messages: Message[]) =>
+  Success: (messages?: Paginator<Message>) =>
     createAction(AssistantActionTypes.Success, { messages }),
+
+  UpdateToken: (token: string) =>
+    createAction(AssistantActionTypes.UpdateToken, { token }),
 
   Error: (error?: string) =>
     createAction(AssistantActionTypes.Error, { error }),

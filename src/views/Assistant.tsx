@@ -5,8 +5,9 @@ import { useAppState } from 'modules/app';
 import { useAssistant, ChatMessage } from 'modules/assistant';
 
 export const Assistant = () => {
-  const [messages, api] = useAssistant();
+  const [state, api] = useAssistant();
   const [, { setAppTheme }] = useAppState();
+  const { messages } = state;
 
   useEffect(() => {
     setAppTheme({
@@ -15,12 +16,6 @@ export const Assistant = () => {
       showNav: true,
     });
   }, [setAppTheme]);
-
-  useEffect(() => {
-    api.getUserMessages();
-    api.getUserToken();
-    // api.postMessage('Hi');
-  }, [api]);
 
   return (
     <section className="app__content app--light">
