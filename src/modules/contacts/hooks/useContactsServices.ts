@@ -10,6 +10,7 @@ import {
   ContactsActionTypes,
   removeUserContact,
   getLastContacts,
+  UserContact,
 } from 'modules/contacts';
 
 export interface ContactInput {
@@ -30,7 +31,7 @@ export const useContactsServices: CustomHook<ContactsState, Api> = () => {
   const contacts = useSelector(getContactsState);
 
   const successFunction = React.useCallback(
-    (payload: any) => {
+    (payload: UserContact[]) => {
       dispatch({
         type: ContactsActionTypes.Success,
         payload,
@@ -40,7 +41,7 @@ export const useContactsServices: CustomHook<ContactsState, Api> = () => {
   );
 
   const errorFunction = React.useCallback(
-    (payload: any) => {
+    (payload: string) => {
       dispatch({
         type: ContactsActionTypes.Error,
         payload,

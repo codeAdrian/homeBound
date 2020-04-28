@@ -4822,6 +4822,14 @@ env-variable@0.0.x:
   resolved "https://registry.yarnpkg.com/env-variable/-/env-variable-0.0.6.tgz#74ab20b3786c545b62b4a4813ab8cf22726c9808"
   integrity sha512-bHz59NlBbtS0NhftmR8+ExBEekE7br0e01jw+kk0NDro7TtZzBYZ5ScGPs3OmwnpyfHTHOtr1Y6uedCdrIldtg==
 
+enzyme-to-json@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.4.4.tgz#b30726c59091d273521b6568c859e8831e94d00e"
+  integrity sha512-50LELP/SCPJJGic5rAARvU7pgE3m1YaNj7JLM+Qkhl5t7PAs6fiyc8xzc50RnkKPFQCv0EeFVjEWdIFRGPWMsA==
+  dependencies:
+    lodash "^4.17.15"
+    react-is "^16.12.0"
+
 errno@^0.1.3, errno@~0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
@@ -10976,7 +10984,7 @@ react-hook-form@^5.4.2:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-5.4.2.tgz#a610f565387191612e3b4286c813949542e84caf"
   integrity sha512-0okvGDiIboTxgWdLTgqsuNeuJPE9YLNuwS0z+1iNvGCYXcHFsrnryI0RCtcFMClflmFKuA4OtD9xZxSrmdLkbw==
 
-react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
+react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -11100,6 +11108,13 @@ react-transition-group@^4:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
+
+react-use-is-online@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-use-is-online/-/react-use-is-online-1.0.3.tgz#e5822a3be577a794e2f01e6720f5e4f0706ccd04"
+  integrity sha512-uQyHg4L4bq6id5+6r/n5zOBO1RRRykmYOoYy8WI2x3mowo++BQBYCyNf30WvJJqLB/lCjPnqn1vCl8LOov3EEA==
+  dependencies:
+    enzyme-to-json "^3.4.4"
 
 react@^16.13.1:
   version "16.13.1"

@@ -8,3 +8,4 @@ export * from './Contacts';
 export * from './Activities';
 export * from './Assistant';
 export * from './NotFound';
+export * from './Profile';

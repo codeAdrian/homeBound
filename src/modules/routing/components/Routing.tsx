@@ -9,6 +9,7 @@ import {
   Welcome,
   Contacts,
   Activities,
+  Profile,
   Assistant,
   NotFound,
 } from 'views';
@@ -25,6 +26,7 @@ export const Routing: React.FC = () => {
       <PrivateRoute exact path="/welcome" component={Welcome} />
       <PrivateRoute exact path="/contacts" component={Contacts} />
       <PrivateRoute exact path="/activities" component={Activities} />
+      <PrivateRoute exact path="/profile" component={Profile} />
       <PrivateRoute exact path="/assistant" component={Assistant} />
       <Route path="*" component={NotFound} />
     </Switch>

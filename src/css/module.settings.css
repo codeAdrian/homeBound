@@ -1,0 +1,55 @@
+.settingsCard {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: var(--spacing--24px) var(--spacing--40px) 0;
+    margin-right: var(--spacing--n40px);
+    margin-left: var(--spacing--n40px);
+    margin-bottom: var(--spacing--12px);
+}
+
+.settingsCard__control {
+    color: var(--color__cta);
+    padding: 0 var(--spacing--40px);
+    margin-right: var(--spacing--n40px);
+    margin-left: var(--spacing--n40px);
+
+    & svg {
+        transition: opacity 0.2s ease;
+        opacity: 0.2;
+    }
+}
+
+.settingsCard__label {
+    flex-grow: 1;
+    padding-right: var(--spacing--12px);
+    padding-top: var(--spacing--20px);
+    padding-bottom: var(--spacing--20px);
+    cursor: pointer;
+    display: flex;
+
+    & span {
+        flex-grow: 1;
+    }
+}
+
+.settingsCard__number {
+    letter-spacing: 0.1em;
+    color: var(--color__text);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing--10px);
+}
+
+.settingsCard__control--first {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.settingsCard__input {
+    display: none;
+
+    &:checked {
+        & + label {
+            & svg {
+                opacity: 1;
+            }
+        }
+    }
+}

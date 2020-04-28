@@ -24,19 +24,20 @@ export const ScoreTracker = ({ mode }: Props) => {
 
   const isLarge = mode === 'large';
 
+  const getClassName = (component: string) =>
+    isLarge
+      ? `scoretracker__${component} scoretracker__${component}--large`
+      : `scoretracker__${component}`;
+
   const fontSize = isLarge ? 'u-t__fontSize--xlarge' : 'u-t__fontSize--base';
   const mainClass = isLarge
-    ? 'scoretracker scoretracker--large'
+    ? 'scoretracker scoretracker--large u-ab-center'
     : 'scoretracker';
 
-  const textClass = isLarge
-    ? 'scoretracker__text scoretracker__text--large'
-    : 'scoretracker__text';
+  const textClass = getClassName('text');
+  const decoClass = getClassName('deco');
 
-  const decoClass = isLarge
-    ? 'scoretracker__deco scoretracker__deco--large'
-    : 'scoretracker__deco';
-
+  const valueClass = getClassName('value');
   return (
     <aside className={mainClass}>
       <CircularProgressbar
@@ -45,7 +46,7 @@ export const ScoreTracker = ({ mode }: Props) => {
         circleRatio={0.8}
         styles={buildStyles(SVG_STYLES)}
       />
-      <span className="scoretracker__value">
+      <span className={valueClass}>
         <div
           className={`u-t__fontFamily--secondary ${fontSize} u-t__fontWeight--bold u-c-cta`}
         >
