@@ -11,13 +11,13 @@
 
 Run `yarn install` on cloned project on a local machine.
 
+Create `.env` in project root based on `.env.sample` file. Add Firebase API keys, Twilio phone numberthere and test phone number (for trial account).
+
 Deploy Twilio api keys to firebase
 
 ```
 node_modules/.bin/firebase functions:config:set twilio.sid="..." twilio.token="..." twilio.twilioapikey="..." twilio.twilioapisecret="..."
 ```
-
-Create `.env` in project root based on `.env.sample` file. Add Firebase API keys, Twilio phone numberthere and test phone number (for trial account).
 
 Run the project with
 
