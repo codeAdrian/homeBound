@@ -24,7 +24,7 @@ export const createUserChannel = functions.https.onCall(async (data) => {
       .webhooks.create({
         type: 'webhook',
         configuration: {
-          filters: ['onMessageSent', 'onMemberAdd'],
+          filters: ['onMessageSent'],
           method: 'POST',
           url:
             'https://channels.autopilot.twilio.com/v1/ACb57077d04b3c7e514a7f26f8cfc9c28a/UA5d7e5d90dde8b6c82e8395bc5eaa9425/twilio-chat',

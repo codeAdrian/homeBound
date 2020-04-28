@@ -30,6 +30,9 @@ export const Assistant = () => {
       <main className="chat__wrapper">
         {messages?.items.map((item) => (
           <ChatMessage
+            key={item.sid}
+            message={item}
+            onClick={api.postMessage}
             origin={item.author === userData?.email ? 'user' : 'bot'}
           >
             {item.body}
