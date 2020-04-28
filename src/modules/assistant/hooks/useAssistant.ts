@@ -51,8 +51,6 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
       userId: userData?.uid,
     });
 
-    console.log(freshChannel);
-
     channel.current = await client.current.getChannelBySid(freshChannel.data);
     channel.current.join();
   }, [state.token, userData, functions]);
