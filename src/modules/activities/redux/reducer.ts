@@ -30,7 +30,7 @@ export const activitiesReducer = (
     case ActivitiesActionTypes.Error:
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload,
         isLoading: false,
       };
     case ActivitiesActionTypes.Reset:

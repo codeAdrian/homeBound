@@ -7,7 +7,7 @@ export const SettingsActions = {
   Success: (settings: UserSettings) =>
     createAction(SettingsActionTypes.Success, settings),
 
-  Error: (error?: string) => createAction(SettingsActionTypes.Error, { error }),
+  Error: (error?: string) => createAction(SettingsActionTypes.Error, error),
   Reset: () => createAction(SettingsActionTypes.Reset),
 };
 

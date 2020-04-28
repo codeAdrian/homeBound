@@ -30,7 +30,7 @@ export const contactsReducer = (
     case ContactsActionTypes.Error:
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload,
         isLoading: false,
       };
     case ContactsActionTypes.Reset:

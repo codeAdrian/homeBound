@@ -7,7 +7,7 @@ export const ContactsActions = {
   Success: (contacts: UserContact[]) =>
     createAction(ContactsActionTypes.Success, contacts),
 
-  Error: (error?: string) => createAction(ContactsActionTypes.Error, { error }),
+  Error: (error?: string) => createAction(ContactsActionTypes.Error, error),
   Reset: () => createAction(ContactsActionTypes.Reset),
 };
 

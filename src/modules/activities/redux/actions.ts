@@ -7,8 +7,7 @@ export const ActivitiesActions = {
   Success: (settings: UserActivity[]) =>
     createAction(ActivitiesActionTypes.Success, settings),
 
-  Error: (error?: string) =>
-    createAction(ActivitiesActionTypes.Error, { error }),
+  Error: (error?: string) => createAction(ActivitiesActionTypes.Error, error),
   Reset: () => createAction(ActivitiesActionTypes.Reset),
 };
 
