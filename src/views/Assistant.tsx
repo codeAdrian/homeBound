@@ -7,10 +7,18 @@ import { useAssistant, ChatMessage } from 'modules/assistant';
 import { getUserData } from 'modules/user';
 
 export const Assistant = () => {
+  const chatBottomRef = React.useRef<HTMLDivElement>(null);
   const [state, api] = useAssistant();
   const { userData } = useSelector(getUserData);
   const [, { setAppTheme }] = useAppState();
   const { messages } = state;
+
+  const handleMessaesUpdate = React.useCallback(() => {
+    if (!chatBottomRef || !chatBottomRef.current) return;
+    chatBottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  useEffect(handleMessaesUpdate, [messages]);
 
   useEffect(() => {
     setAppTheme({
@@ -38,6 +46,7 @@ export const Assistant = () => {
             {item.body}
           </ChatMessage>
         ))}
+        <div ref={chatBottomRef} />
       </main>
     </section>
   );
