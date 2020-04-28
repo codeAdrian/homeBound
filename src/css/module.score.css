@@ -7,6 +7,7 @@
 .scoretracker--large {
     width: 100px;
     margin-bottom: var(--spacing--28px);
+    left: -6px;
 }
 
 .scoretracker__deco {
@@ -29,7 +30,15 @@
     padding-top: var(--spacing--6px);
 }
 
+.scoretracker__value--large {
+    padding-top: var(--spacing--16px);
+}
+
 .scoretracker__text {
     text-transform: uppercase;
     display: none;
+}
+
+.scoretracker__text--large {
+    display: block;
 }

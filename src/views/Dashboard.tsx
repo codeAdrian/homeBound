@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
-import { useSettingsServices } from 'modules/settings';
 import { LogOut, useUserServices } from 'modules/user';
-import { ActivitySummary } from 'modules/activities';
+import { useSettingsServices } from 'modules/settings';
 import { useScoreListener, ScoreTracker } from 'modules/score';
+import { ActivitySummary } from 'modules/activities';
 import { ContactSummary } from 'modules/contacts';
 import { useAppState } from 'modules/app';
 import { Heading, HEADING } from 'components';
@@ -39,7 +39,9 @@ const Dashboard: React.FC = () => {
           <br />
           indoors
         </Heading>
-        <ScoreTracker mode="small" />
+        <Link to="/profile">
+          <ScoreTracker mode="small" />
+        </Link>
       </aside>
 
       <ContactSummary />

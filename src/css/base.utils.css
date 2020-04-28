@@ -88,6 +88,10 @@
     align-items: center;
 }
 
+.u-f--spaceBetween--top {
+    align-items: flex-start;
+}
+
 .u-f--grow1 {
     flex-grow: 1;
 }

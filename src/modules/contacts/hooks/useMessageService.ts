@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast, ToastType, ToastPosition } from 'react-toastify';
 
 import { CustomHook } from 'models';
 import { messageContact } from 'modules/contacts';
@@ -35,9 +36,19 @@ export const useMessageService: CustomHook<State, Api> = () => {
 
   const handleSuccess = React.useCallback(() => {
     setHookState(formatState(false, false, true));
+    toast('SMS Message has been sent successfully', {
+      closeButton: false,
+      position: ToastPosition.TOP_CENTER,
+      type: ToastType.SUCCESS,
+    });
   }, [formatState]);
 
   const handleError = React.useCallback(() => {
+    toast('Uh oh... SMS message could not be sent. Try again later.', {
+      closeButton: false,
+      position: ToastPosition.TOP_CENTER,
+      type: ToastType.ERROR,
+    });
     setHookState(formatState(true, false, false));
   }, [formatState]);
 
