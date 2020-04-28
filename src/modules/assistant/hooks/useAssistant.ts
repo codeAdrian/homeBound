@@ -51,8 +51,6 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
       userId: userData?.uid,
     });
 
-    console.log(freshChannel.data);
-
     if (!channel.current) {
       channel.current = await client.current.getChannelBySid(freshChannel.data);
       channel.current.join();
@@ -79,8 +77,20 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
 
     return () => {
       unSubcribeFromChannel();
+
+      const removeUserChannel = functions.httpsCallable('removeUserChannel');
+      removeUserChannel({
+        userId: userData?.uid,
+      });
     };
-  }, [state.token, getUserMessages, subscribeToChannel, unSubcribeFromChannel]);
+  }, [
+    state.token,
+    getUserMessages,
+    subscribeToChannel,
+    unSubcribeFromChannel,
+    functions,
+    userData,
+  ]);
 
   const postMessage = useCallback(async (message: string) => {
     channel.current?.sendMessage(message);
