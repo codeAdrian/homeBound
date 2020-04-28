@@ -66,9 +66,9 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
     channel.current = await client.current.getChannelBySid(freshChannel.data);
     if (channel.current.status !== 'joined') {
       await channel.current.join();
-      channel.current.sendMessage('Hi');
     }
 
+    channel.current.sendMessage('Hi');
     channel.current.on('messageAdded', onReceiveMessage);
   }, [state.token, userData, functions, onReceiveMessage]);
 
@@ -83,12 +83,11 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
   useEffect(() => {
     if (state.token) {
       subscribeToChannel();
+      return;
     }
+  }, [state.token, subscribeToChannel]);
 
-    return () => {
-      unSubcribeFromChannel();
-    };
-  }, [state.token, unSubcribeFromChannel, subscribeToChannel]);
+  useEffect(() => unSubcribeFromChannel, [unSubcribeFromChannel]);
 
   const postMessage = useCallback(
     async (event: React.MouseEvent<HTMLDivElement>) => {
