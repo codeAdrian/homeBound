@@ -7,7 +7,9 @@
 -   Firebase Firestore (with Blaze account)
 -   Twilio account (trial or fully activated)
 
-### Firebase setup
+### Project setup
+
+Clone the repository (develop or master branch)
 
 Run `yarn install` on cloned project on a local machine.
 
