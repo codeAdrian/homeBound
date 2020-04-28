@@ -9,8 +9,7 @@ import { TextInput, BUTTON, Button } from 'components';
 
 const SignUpEmail: React.FC = () => {
   const { handleSubmit, register, errors, watch } = useForm();
-  const firebase = FirebaseService.Instance;
-  const authProvider = firebase.auth();
+  const authProvider = FirebaseService.AuthProvider;
 
   const { email, password } = watch();
 

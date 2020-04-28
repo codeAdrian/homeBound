@@ -1,15 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Heading, HEADING } from 'components';
 import { useAppState } from 'modules/app';
-import { ReactComponent as BackIcon } from 'assets/icons/chevron_left.svg';
-import { ChatMessage } from 'components/ChatMessage';
+import { useAssistant, ChatMessage } from 'modules/assistant';
+import { getUserData } from 'modules/user';
 
 export const Assistant = () => {
+  const [state, api] = useAssistant();
+  const { userData } = useSelector(getUserData);
   const [, { setAppTheme }] = useAppState();
+  const { messages } = state;
 
-  React.useEffect(() => {
+  useEffect(() => {
     setAppTheme({
       color: '#6A62FF',
       shapeClass: 'app__deco--default',
@@ -21,15 +24,20 @@ export const Assistant = () => {
     <section className="app__content app--light">
       <aside className="u-f--spaceBetween u-sb-36">
         <Heading tag="h1" className={HEADING.PRIMARY.XXLARGE.LIGHT}>
-          <Link to="/" className="button">
-            <BackIcon />
-          </Link>
           Let's chat!
         </Heading>
       </aside>
       <main className="chat__wrapper">
-        <ChatMessage origin="bot">This is a bot message</ChatMessage>
-        <ChatMessage origin="user">This is a bot message</ChatMessage>
+        {messages?.items.map((item) => (
+          <ChatMessage
+            key={item.sid}
+            message={item}
+            onClick={api.postMessage}
+            origin={item.author === userData?.email ? 'user' : 'bot'}
+          >
+            {item.body}
+          </ChatMessage>
+        ))}
       </main>
     </section>
   );

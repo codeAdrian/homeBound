@@ -4,8 +4,7 @@ import { FirebaseService } from 'modules/firebase';
 import { Button, BUTTON } from 'components';
 
 const LogOut: React.FC = () => {
-  const firebase = FirebaseService.Instance;
-  const auth = firebase.auth();
+  const auth = FirebaseService.AuthProvider;
 
   const handleLogout = React.useCallback(() => {
     auth.signOut();

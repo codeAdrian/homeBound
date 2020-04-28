@@ -1,4 +1,6 @@
+export * from './Assistant';
 export * from './Dashboard';
+export * from './GeneralError';
 export * from './Login';
 export * from './SignUp';
 export * from './Welcome';
