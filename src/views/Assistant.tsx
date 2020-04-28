@@ -13,12 +13,12 @@ export const Assistant = () => {
   const [, { setAppTheme }] = useAppState();
   const { messages } = state;
 
-  const handleMessaesUpdate = React.useCallback(() => {
+  const handleMessagesUpdate = React.useCallback(() => {
     if (!chatBottomRef || !chatBottomRef.current) return;
     chatBottomRef.current.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
-  useEffect(handleMessaesUpdate, [messages]);
+  useEffect(handleMessagesUpdate, [messages]);
 
   useEffect(() => {
     setAppTheme({

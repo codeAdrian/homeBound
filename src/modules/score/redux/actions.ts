@@ -7,7 +7,7 @@ export const SettingsActions = {
   Success: (settings: UserScore) =>
     createAction(ScoreActionTypes.Success, settings),
 
-  Error: (error?: string) => createAction(ScoreActionTypes.Error, { error }),
+  Error: (error?: string) => createAction(ScoreActionTypes.Error, error),
 };
 
 export type ScoreActions = ActionUnion<typeof SettingsActions>;

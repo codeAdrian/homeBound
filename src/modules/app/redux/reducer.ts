@@ -30,7 +30,7 @@ export const appReducer = (
     case AppActionTypes.Error:
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload,
         isLoading: false,
       };
     default:

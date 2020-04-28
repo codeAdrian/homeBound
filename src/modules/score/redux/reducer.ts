@@ -26,7 +26,7 @@ export const scoreReducer = (
     case ScoreActionTypes.Error:
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload,
         isLoading: false,
       };
     default:
