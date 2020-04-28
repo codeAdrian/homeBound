@@ -13,10 +13,10 @@ export const removeUserChannel = functions.https.onCall(async (data) => {
   }
 
   try {
-    const { userId } = data;
+    const { channelId } = data;
     const channel = await client.chat
       .services(coronaChat.sid)
-      .channels(userId)
+      .channels(channelId)
       .fetch();
 
     return await channel.remove();
