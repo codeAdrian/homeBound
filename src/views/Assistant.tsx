@@ -36,7 +36,7 @@ export const Assistant = () => {
         </Heading>
       </aside>
       <main className="chat__wrapper">
-        {messages?.items.map((item) => (
+        {messages?.map((item) => (
           <ChatMessage
             key={item.sid}
             message={item}

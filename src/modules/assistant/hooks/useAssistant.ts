@@ -3,20 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Client } from 'twilio-chat';
 import { Channel } from 'twilio-chat/lib/channel';
 import { Message } from 'twilio-chat/lib/message';
-import { Paginator } from 'twilio-chat/lib/interfaces/paginator';
 
-import { CustomHook } from 'models';
-import { FirebaseService } from 'modules/firebase';
 import { getUserData } from 'modules/user';
+import { FirebaseService } from 'modules/firebase';
+import { CustomHook } from 'models';
 
-import { getAssistantData, AssistantActions } from '../redux';
+import { AssistantActions, getAssistantData } from '../redux';
 
 interface Api {
   postMessage: (event: React.MouseEvent<HTMLDivElement>) => Promise<void>;
 }
 
 interface AssistantState {
-  messages?: Paginator<Message>;
+  messages?: Message[];
   token: string;
 }
 
@@ -43,12 +42,8 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
 
   const onReceiveMessage = useCallback(
     async (message: Message) => {
-      console.log(message);
       dispatch(AssistantActions.Request());
-      const messages = await channel.current?.getMessages();
-      messages
-        ? dispatch(AssistantActions.Success(messages))
-        : dispatch(AssistantActions.Error(messages));
+      dispatch(AssistantActions.Success(message));
     },
     [dispatch],
   );
