@@ -12,7 +12,7 @@ import { getUserData } from 'modules/user';
 import { getAssistantData, AssistantActions } from '../redux';
 
 interface Api {
-  postMessage: (message: string) => Promise<void>;
+  postMessage: (event: React.MouseEvent<HTMLDivElement>) => Promise<void>;
 }
 
 interface AssistantState {
@@ -41,6 +41,18 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
     getUserToken();
   }, [getUserToken]);
 
+  const onReceiveMessage = useCallback(
+    async (message: Message) => {
+      console.log(message);
+      dispatch(AssistantActions.Request());
+      const messages = await channel.current?.getMessages();
+      messages
+        ? dispatch(AssistantActions.Success(messages))
+        : dispatch(AssistantActions.Error(messages));
+    },
+    [dispatch],
+  );
+
   const subscribeToChannel = useCallback(async () => {
     if (!client.current) {
       client.current = await Client.create(state.token);
@@ -52,8 +64,13 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
     });
 
     channel.current = await client.current.getChannelBySid(freshChannel.data);
-    channel.current.join();
-  }, [state.token, userData, functions]);
+    if (channel.current.status !== 'joined') {
+      await channel.current.join();
+      channel.current.sendMessage('Hi');
+    }
+
+    channel.current.on('messageAdded', onReceiveMessage);
+  }, [state.token, userData, functions, onReceiveMessage]);
 
   const unSubcribeFromChannel = useCallback(() => {
     channel.current?.leave();
@@ -63,30 +80,23 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
     });
   }, [functions]);
 
-  const getUserMessages = useCallback(async () => {
-    dispatch(AssistantActions.Request());
-    const messages = await channel.current?.getMessages();
-    messages
-      ? dispatch(AssistantActions.Success(messages))
-      : dispatch(AssistantActions.Error(messages));
-  }, [dispatch]);
-
   useEffect(() => {
     if (state.token) {
-      getUserMessages();
       subscribeToChannel();
     }
-  }, [state.token, getUserMessages, subscribeToChannel]);
 
-  useEffect(() => {
     return () => {
       unSubcribeFromChannel();
     };
-  }, [unSubcribeFromChannel]);
+  }, [state.token, unSubcribeFromChannel, subscribeToChannel]);
 
-  const postMessage = useCallback(async (message: string) => {
-    channel.current?.sendMessage(message);
-  }, []);
+  const postMessage = useCallback(
+    async (event: React.MouseEvent<HTMLDivElement>) => {
+      const { value = 'I need more help' } = event.currentTarget.dataset || {};
+      channel.current?.sendMessage(value);
+    },
+    [],
+  );
 
   const api = useMemo(
     () => ({
