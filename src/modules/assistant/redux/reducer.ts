@@ -40,12 +40,15 @@ export const assistantReducer = (
         token: action.payload.token,
         isLoading: false,
       };
+
     case AssistantActionTypes.Error:
       return {
         ...state,
         error: action.payload.error,
         isLoading: false,
       };
+    case AssistantActionTypes.ClearReducer:
+      return INITIAL_STATE;
     default:
       return state || INITIAL_STATE;
   }

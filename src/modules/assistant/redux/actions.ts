@@ -13,6 +13,8 @@ export const AssistantActions = {
   UpdateToken: (token: string) =>
     createAction(AssistantActionTypes.UpdateToken, { token }),
 
+  ClearReducer: () => createAction(AssistantActionTypes.ClearReducer),
+
   Error: (error?: string) =>
     createAction(AssistantActionTypes.Error, { error }),
 };

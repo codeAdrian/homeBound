@@ -73,7 +73,9 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
     removeUserChannel({
       channelId: channel.current?.sid,
     });
-  }, [functions]);
+
+    dispatch(AssistantActions.ClearReducer());
+  }, [dispatch, functions]);
 
   useEffect(() => {
     if (state.token) {
