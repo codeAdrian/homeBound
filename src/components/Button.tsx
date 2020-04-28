@@ -31,7 +31,12 @@ export const BUTTON = {
       BASE:
         'button button--primary button--block button--pill button--size-base u-t__fontSize--small',
     },
-
+    SECONDARY: {
+      DEFAULT:
+        'button button--secondary button--block button--pill--small button--size-small u-t__fontSize--small',
+      ACTIVE:
+        'button button--secondary button--secondary--active button--block button--pill--small button--size-small u-t__fontSize--small',
+    },
     CTA: {
       BASE: {
         GLOW:

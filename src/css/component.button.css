@@ -53,6 +53,22 @@
     color: var(--color__black);
 }
 
+.button--pill--small {
+    border-radius: var(--border__radius--12px);
+}
+
+.button--secondary {
+    border: 1px solid var(--color__white);
+    background-color: transparent;
+    color: var(--color__white);
+    justify-content: flex-start;
+}
+
+.button--secondary--active {
+    color: var(--color__text);
+    background-color: var(--color__white);
+}
+
 .button--cta {
     background-color: var(--color__cta);
     color: var(--color__white);
@@ -106,4 +122,8 @@
 .button--square-primary {
     color: var(--color__white);
     border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.letter {
+    padding-right: var(--spacing--12px);
 }

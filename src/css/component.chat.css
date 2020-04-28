@@ -9,6 +9,11 @@
     margin-bottom: var(--spacing--28px);
 }
 
+.chat__controls {
+    position: relative;
+    max-width: 196px;
+}
+
 .chat__message--animated {
     animation-direction: normal;
     animation-fill-mode: forwards;
@@ -20,14 +25,12 @@
     left: 0;
     animation-name: slideInLeft;
     transform: translate3d(-100%, 0, 0);
-    animation-delay: 1s;
 }
 
 .chat__message--user {
     left: calc(100% - var(--spacing--28px));
     animation-name: slideInRight;
     transform: translate3d(28px, 0, 0);
-    animation-delay: 2.5s;
 }
 
 .chat__wrapper {
