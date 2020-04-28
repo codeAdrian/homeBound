@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Heading, HEADING } from 'components';
 import { useAppState } from 'modules/app';
 import { useAssistant, ChatMessage } from 'modules/assistant';
+import { getUserData } from 'modules/user';
 
 export const Assistant = () => {
   const [state, api] = useAssistant();
+  const { userData } = useSelector(getUserData);
   const [, { setAppTheme }] = useAppState();
   const { messages } = state;
 
@@ -25,8 +28,13 @@ export const Assistant = () => {
         </Heading>
       </aside>
       <main className="chat__wrapper">
-        <ChatMessage origin="bot">This is a bot message</ChatMessage>
-        <ChatMessage origin="user">This is a bot message</ChatMessage>
+        {messages?.items.map((item) => (
+          <ChatMessage
+            origin={item.author === userData?.email ? 'user' : 'bot'}
+          >
+            {item.body}
+          </ChatMessage>
+        ))}
       </main>
     </section>
   );
