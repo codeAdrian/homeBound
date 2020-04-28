@@ -23,6 +23,16 @@ const getUserDocument = async (uid: firebase.UserInfo['uid']) => {
   return firestore.getByIdAsync(uid);
 };
 
+const updateUserDocument = async (
+  user: firebase.UserInfo,
+  value: Partial<firebase.UserInfo>,
+) => {
+  const firestore = new FirestoreService('users');
+  await firestore.updateByIdAsync(value, user.uid);
+  const userData = await getUserDocument(user.uid);
+  return userData;
+};
+
 const createUserDocument = async (
   user: firebase.UserInfo,
   additionalData?: Partial<firebase.UserInfo>,
@@ -57,4 +67,4 @@ const createUserDocument = async (
   return updatedDocument;
 };
 
-export { createUserDocument, getUserDocument };
+export { createUserDocument, getUserDocument, updateUserDocument };
