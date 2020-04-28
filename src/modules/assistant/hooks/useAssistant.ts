@@ -1,22 +1,23 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Client } from 'twilio-chat';
+import { Channel } from 'twilio-chat/lib/channel';
+import { Message } from 'twilio-chat/lib/message';
+import { Paginator } from 'twilio-chat/lib/interfaces/paginator';
 
 import { CustomHook } from 'models';
 import { FirebaseService } from 'modules/firebase';
 import { getUserData } from 'modules/user';
-import { Message } from 'modules/contacts';
 
 import { getAssistantData, AssistantActions } from '../redux';
 
 interface Api {
-  getUserMessages: () => Promise<void>;
   postMessage: (message: string) => Promise<void>;
-  getUserToken: () => Promise<void>;
 }
 
 interface AssistantState {
-  messages: Message[];
+  messages?: Paginator<Message>;
+  token: string;
 }
 
 export const useAssistant: CustomHook<AssistantState, Api> = () => {
@@ -24,78 +25,72 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector(getUserData);
   const state = useSelector(getAssistantData);
-
-  useEffect(() => {
-    const initUserChannel = async () => {
-      const checkIfUserChannelExists = functions.httpsCallable(
-        'checkIfUserChannelExists',
-      );
-      console.log('init');
-
-      const { data } = await checkIfUserChannelExists({
-        userId: userData?.uid,
-      });
-
-      if (!data) {
-        const createUserChannel = functions.httpsCallable('createUserChannel');
-        await createUserChannel({
-          userId: userData?.uid,
-        });
-      }
-    };
-
-    initUserChannel();
-  }, [userData, functions]);
-
-  const getUserMessages = useCallback(async () => {
-    dispatch(AssistantActions.Request());
-    const getUserMessages = functions.httpsCallable('getUserMessages');
-    const { data } = await getUserMessages({
-      userId: userData?.uid,
-    });
-
-    console.log('messages data', data);
-    if (!data.length) {
-      console.error('No messages');
-      return;
-    }
-
-    const messages = JSON.parse(data);
-    typeof messages === 'string'
-      ? dispatch(AssistantActions.Error(messages))
-      : dispatch(AssistantActions.Success(messages));
-  }, [dispatch, userData, functions]);
+  const client = useRef<Client>();
+  const channel = useRef<Channel>();
 
   const getUserToken = useCallback(async () => {
     const getUserToken = functions.httpsCallable('getUserToken');
     const { data } = await getUserToken({
       identity: userData?.email,
     });
-    // Client.create(data).then((client) => {
-    //   console.log('yeeeey we got client', client);
-    // });
-    console.log('Generated token', data);
-  }, [userData, functions]);
 
-  const postMessage = useCallback(
-    async (message: string) => {
-      // Client.create('cbd')
-      // const postUserMessage = functions.httpsCallable('postUserMessage');
-      // const { data } = await postUserMessage({
-      //   userId: userData?.uid,
-      //   message,
-      // });
-    },
-    [userData, functions],
-  );
+    dispatch(AssistantActions.UpdateToken(data));
+  }, [dispatch, userData, functions]);
+
+  useEffect(() => {
+    getUserToken();
+  }, [getUserToken]);
+
+  const subscribeToChannel = useCallback(async () => {
+    if (!client.current) {
+      client.current = await Client.create(state.token);
+    }
+
+    const createUserChannel = functions.httpsCallable('createUserChannel');
+    const freshChannel = await createUserChannel({
+      userId: userData?.uid,
+    });
+
+    console.log(freshChannel.data);
+
+    if (!channel.current) {
+      channel.current = await client.current.getChannelBySid(freshChannel.data);
+      channel.current.join();
+    }
+  }, [state.token, userData, functions]);
+
+  const unSubcribeFromChannel = useCallback(() => {
+    channel.current?.leave();
+  }, []);
+
+  const getUserMessages = useCallback(async () => {
+    dispatch(AssistantActions.Request());
+    const messages = await channel.current?.getMessages();
+    messages
+      ? dispatch(AssistantActions.Success(messages))
+      : dispatch(AssistantActions.Error(messages));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (state.token) {
+      getUserMessages();
+      subscribeToChannel();
+    }
+
+    return () => {
+      unSubcribeFromChannel();
+    };
+  }, [state.token, getUserMessages, subscribeToChannel, unSubcribeFromChannel]);
+
+  const postMessage = useCallback(async (message: string) => {
+    channel.current?.sendMessage(message);
+  }, []);
 
   const api = useMemo(
     () => ({
       postMessage,
-      getUserMessages,
-      getUserToken,
     }),
-    [postMessage, getUserMessages, getUserToken],
+    [postMessage],
   );
 
   return [state, api];
