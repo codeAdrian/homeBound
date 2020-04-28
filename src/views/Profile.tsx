@@ -16,7 +16,7 @@ export const Profile = () => {
       setAppTheme({
         color: '#F7CE53',
         shapeClass: 'app__deco--default',
-        showNav: true,
+        showNav: false,
       });
     }
   }, [setAppTheme, userData]);
