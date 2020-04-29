@@ -35,7 +35,9 @@ export const ChatControls: React.FC<Props> = ({
         <Button
           data-message={answerFirst}
           value="Yes"
-          onClick={handleAnswer}
+          onClick={
+            selectedAnswer === 'Waiting For Answer' ? handleAnswer : () => null
+          }
           icon={<Letter>A</Letter>}
           className={
             selectedAnswer === 'Yes'
@@ -51,7 +53,9 @@ export const ChatControls: React.FC<Props> = ({
         <Button
           data-message={answerSecond}
           value="No"
-          onClick={handleAnswer}
+          onClick={
+            selectedAnswer === 'Waiting For Answer' ? handleAnswer : () => null
+          }
           icon={<Letter>B</Letter>}
           className={
             selectedAnswer === 'No'
