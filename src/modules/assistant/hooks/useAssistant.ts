@@ -42,7 +42,6 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
 
   const onReceiveMessage = useCallback(
     async (message: Message) => {
-      dispatch(AssistantActions.Request());
       if (message.body !== 'Hi') {
         dispatch(AssistantActions.Success(message));
       }
@@ -51,6 +50,7 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
   );
 
   const subscribeToChannel = useCallback(async () => {
+    dispatch(AssistantActions.Request());
     if (!client.current) {
       client.current = await Client.create(state.token);
     }
@@ -67,7 +67,7 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
 
     channel.current.sendMessage('Hi');
     channel.current.on('messageAdded', onReceiveMessage);
-  }, [state.token, userData, functions, onReceiveMessage]);
+  }, [dispatch, state.token, userData, functions, onReceiveMessage]);
 
   const unSubcribeFromChannel = useCallback(() => {
     channel.current?.leave();
