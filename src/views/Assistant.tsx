@@ -29,8 +29,6 @@ export const Assistant = () => {
     });
   }, [setAppTheme]);
 
-  console.log(state);
-
   return (
     <section className="app__content app--light">
       <aside className="u-f--spaceBetween u-sb-36">
