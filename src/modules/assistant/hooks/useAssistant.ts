@@ -43,7 +43,9 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
   const onReceiveMessage = useCallback(
     async (message: Message) => {
       dispatch(AssistantActions.Request());
-      dispatch(AssistantActions.Success(message));
+      if (message.body !== 'Hi') {
+        dispatch(AssistantActions.Success(message));
+      }
     },
     [dispatch],
   );
