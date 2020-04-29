@@ -5,6 +5,7 @@ import { Heading, HEADING } from 'components';
 import { useAppState } from 'modules/app';
 import { useAssistant, ChatMessage, ChatControls } from 'modules/assistant';
 import { getUserData } from 'modules/user';
+import { ReactComponent as SpeechBubbleIcon } from 'assets/icons/speech_bubble.svg';
 
 export const Assistant = () => {
   const chatBottomRef = React.useRef<HTMLDivElement>(null);
@@ -36,6 +37,20 @@ export const Assistant = () => {
         </Heading>
       </aside>
       <main className="chat__wrapper">
+        {state.isLoading && messages.length === 0 && (
+          <div className="u-t-center chat__loading">
+            <div>
+              <div className="chat__loadingWrapper">
+                <div className="chat__icon chat__icon--animated">
+                  <SpeechBubbleIcon className="nav__icon u-ab-center" />
+                </div>
+              </div>
+              <Heading tag="div" className={HEADING.SECONDARY.XLARGE.BOLD}>
+                Couchy is waking up...
+              </Heading>
+            </div>
+          </div>
+        )}
         {messages?.map((item) => {
           const [firstAnswer, secondAnswer] = item.body.split('|');
           if (secondAnswer) {

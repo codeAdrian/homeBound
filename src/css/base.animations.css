@@ -29,3 +29,12 @@
         transform: translate3d(-100%, 0, 0);
     }
 }
+
+@keyframes jump {
+    from {
+        transform: scale(3) translate3d(0, 0, 0);
+    }
+    to {
+        transform: scale(3) translate3d(0, var(--spacing--6px), 0);
+    }
+}
