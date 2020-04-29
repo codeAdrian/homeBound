@@ -5,55 +5,40 @@ import { Button, Letter, BUTTON } from 'components';
 interface Props {
   answerFirst: string;
   answerSecond: string;
-  onClickFirst: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onClickSecond: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: (message: string) => void;
 }
+
+type AnswerState = 'Yes' | 'No' | 'Waiting For Answer';
 
 export const ChatControls: React.FC<Props> = ({
   answerFirst,
   answerSecond,
-  onClickFirst,
-  onClickSecond,
+  onClick,
 }) => {
-  const [isCompleted, setIsCompleted] = React.useState(false);
-  const [selectedAnswer, setSelectedAnswer] = React.useState(-1);
+  const [selectedAnswer, setSelectedAnswer] = React.useState<AnswerState>(
+    'Waiting For Answer',
+  );
 
   const handleAnswer = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      const { value } = e.currentTarget;
-      setIsCompleted(true);
-      setSelectedAnswer(value === 'Yes' ? 1 : 0);
+      const { value, dataset } = e.currentTarget;
+      const { message } = dataset;
+      setSelectedAnswer(value as AnswerState);
+      onClick(message || '');
     },
-    [],
-  );
-
-  const handleFirstAnswer = React.useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (isCompleted) return;
-      handleAnswer(e);
-      onClickFirst(e);
-    },
-    [handleAnswer, isCompleted, onClickFirst],
-  );
-
-  const handleSecondAnswer = React.useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (isCompleted) return;
-      handleAnswer(e);
-      onClickSecond(e);
-    },
-    [handleAnswer, isCompleted, onClickSecond],
+    [onClick],
   );
 
   return (
     <div className="chat__controls chat__message--animated chat__message--user">
       <div className="u-sb-16">
         <Button
+          data-message={answerFirst}
           value="Yes"
-          onClick={handleFirstAnswer}
+          onClick={handleAnswer}
           icon={<Letter>A</Letter>}
           className={
-            selectedAnswer === 1
+            selectedAnswer === 'Yes'
               ? BUTTON.PILL.SECONDARY.ACTIVE
               : BUTTON.PILL.SECONDARY.DEFAULT
           }
@@ -64,11 +49,12 @@ export const ChatControls: React.FC<Props> = ({
 
       <div className="u-sb-16">
         <Button
+          data-message={answerSecond}
           value="No"
-          onClick={handleSecondAnswer}
+          onClick={handleAnswer}
           icon={<Letter>B</Letter>}
           className={
-            selectedAnswer === 0
+            selectedAnswer === 'No'
               ? BUTTON.PILL.SECONDARY.ACTIVE
               : BUTTON.PILL.SECONDARY.DEFAULT
           }

@@ -11,11 +11,11 @@ import { CustomHook } from 'models';
 import { AssistantActions, getAssistantData } from '../redux';
 
 interface Api {
-  postMessage: (event: React.MouseEvent<HTMLDivElement>) => Promise<void>;
+  postMessage: (message: string) => void;
 }
 
 interface AssistantState {
-  messages?: Message[];
+  messages: Message[];
   token: string;
 }
 
@@ -88,13 +88,9 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
 
   useEffect(() => unSubcribeFromChannel, [unSubcribeFromChannel]);
 
-  const postMessage = useCallback(
-    async (event: React.MouseEvent<HTMLDivElement>) => {
-      const { value = 'I need more help' } = event.currentTarget.dataset || {};
-      channel.current?.sendMessage(value);
-    },
-    [],
-  );
+  const postMessage = useCallback((message: string) => {
+    channel.current?.sendMessage(message);
+  }, []);
 
   const api = useMemo(
     () => ({
