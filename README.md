@@ -13,7 +13,7 @@ Clone the repository (develop or master branch)
 
 Run `yarn install` on cloned project on a local machine.
 
-Create `.env` in project root based on `.env.sample` file. Add Firebase API keys, Twilio phone numberthere and test phone number (for trial account).
+Create `.env` in project root based on `.env.sample` file. Add Firebase API keys, Twilio phone number there and test phone number (for trial account).
 
 Deploy Twilio api keys to firebase
 
