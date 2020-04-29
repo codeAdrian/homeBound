@@ -8,15 +8,10 @@ import { getUserData } from 'modules/user';
 import { FirebaseService } from 'modules/firebase';
 import { CustomHook } from 'models';
 
-import { AssistantActions, getAssistantData } from '../redux';
+import { AssistantActions, getAssistantData, AssistantState } from '../redux';
 
 interface Api {
   postMessage: (message: string) => void;
-}
-
-interface AssistantState {
-  messages: Message[];
-  token: string;
 }
 
 export const useAssistant: CustomHook<AssistantState, Api> = () => {
