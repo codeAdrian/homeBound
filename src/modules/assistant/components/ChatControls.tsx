@@ -21,12 +21,13 @@ export const ChatControls: React.FC<Props> = ({
 
   const handleAnswer = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (selectedAnswer !== 'Waiting For Answer') return;
       const { value, dataset } = e.currentTarget;
       const { message } = dataset;
       setSelectedAnswer(value as AnswerState);
       onClick(message || '');
     },
-    [onClick],
+    [onClick, selectedAnswer],
   );
 
   return (

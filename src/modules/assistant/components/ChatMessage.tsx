@@ -12,7 +12,7 @@ export const ChatMessage: React.FC<Props> = ({ children, origin }) => {
 
   return (
     <div className={className}>
-      <span className="u-t__fontSize--small">{children}</span>
+      <span className="u-t__fontSize--small chat__text">{children}</span>
     </div>
   );
 };

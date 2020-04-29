@@ -38,7 +38,6 @@ export const assistantReducer = (
       return {
         ...state,
         token: action.payload.token,
-        isLoading: false,
       };
 
     case AssistantActionTypes.Error:
