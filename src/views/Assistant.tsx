@@ -58,6 +58,7 @@ export const Assistant = () => {
             </ChatMessage>
           );
         })}
+        <div ref={chatBottomRef} />
       </main>
     </section>
   );
