@@ -3,21 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Client } from 'twilio-chat';
 import { Channel } from 'twilio-chat/lib/channel';
 import { Message } from 'twilio-chat/lib/message';
-import { Paginator } from 'twilio-chat/lib/interfaces/paginator';
 
-import { CustomHook } from 'models';
-import { FirebaseService } from 'modules/firebase';
 import { getUserData } from 'modules/user';
+import { FirebaseService } from 'modules/firebase';
+import { CustomHook } from 'models';
 
-import { getAssistantData, AssistantActions } from '../redux';
+import { AssistantActions, getAssistantData, AssistantState } from '../redux';
 
 interface Api {
-  postMessage: (event: React.MouseEvent<HTMLDivElement>) => Promise<void>;
-}
-
-interface AssistantState {
-  messages?: Paginator<Message>;
-  token: string;
+  postMessage: (message: string) => void;
 }
 
 export const useAssistant: CustomHook<AssistantState, Api> = () => {
@@ -43,17 +37,15 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
 
   const onReceiveMessage = useCallback(
     async (message: Message) => {
-      console.log(message);
-      dispatch(AssistantActions.Request());
-      const messages = await channel.current?.getMessages();
-      messages
-        ? dispatch(AssistantActions.Success(messages))
-        : dispatch(AssistantActions.Error(messages));
+      if (message.body !== 'Hi') {
+        dispatch(AssistantActions.Success(message));
+      }
     },
     [dispatch],
   );
 
   const subscribeToChannel = useCallback(async () => {
+    dispatch(AssistantActions.Request());
     if (!client.current) {
       client.current = await Client.create(state.token);
     }
@@ -70,7 +62,7 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
 
     channel.current.sendMessage('Hi');
     channel.current.on('messageAdded', onReceiveMessage);
-  }, [state.token, userData, functions, onReceiveMessage]);
+  }, [dispatch, state.token, userData, functions, onReceiveMessage]);
 
   const unSubcribeFromChannel = useCallback(() => {
     channel.current?.leave();
@@ -78,7 +70,9 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
     removeUserChannel({
       channelId: channel.current?.sid,
     });
-  }, [functions]);
+
+    dispatch(AssistantActions.ClearReducer());
+  }, [dispatch, functions]);
 
   useEffect(() => {
     if (state.token) {
@@ -89,13 +83,9 @@ export const useAssistant: CustomHook<AssistantState, Api> = () => {
 
   useEffect(() => unSubcribeFromChannel, [unSubcribeFromChannel]);
 
-  const postMessage = useCallback(
-    async (event: React.MouseEvent<HTMLDivElement>) => {
-      const { value = 'I need more help' } = event.currentTarget.dataset || {};
-      channel.current?.sendMessage(value);
-    },
-    [],
-  );
+  const postMessage = useCallback((message: string) => {
+    channel.current?.sendMessage(message);
+  }, []);
 
   const api = useMemo(
     () => ({

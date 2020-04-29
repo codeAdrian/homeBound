@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { Heading, HEADING } from 'components';
 import { useAppState } from 'modules/app';
-import { useAssistant, ChatMessage } from 'modules/assistant';
+import { useAssistant, ChatMessage, ChatControls } from 'modules/assistant';
 import { getUserData } from 'modules/user';
 
 export const Assistant = () => {
@@ -36,16 +36,28 @@ export const Assistant = () => {
         </Heading>
       </aside>
       <main className="chat__wrapper">
-        {messages?.items.map((item) => (
-          <ChatMessage
-            key={item.sid}
-            message={item}
-            onClick={api.postMessage}
-            origin={item.author === userData?.email ? 'user' : 'bot'}
-          >
-            {item.body}
-          </ChatMessage>
-        ))}
+        {messages?.map((item) => {
+          const [firstAnswer, secondAnswer] = item.body.split('|');
+          if (secondAnswer) {
+            return (
+              <ChatControls
+                key={item.sid}
+                onClick={api.postMessage}
+                answerFirst={firstAnswer}
+                answerSecond={secondAnswer}
+              />
+            );
+          }
+
+          return (
+            <ChatMessage
+              key={item.sid}
+              origin={item.author === userData?.email ? 'user' : 'bot'}
+            >
+              {item.body}
+            </ChatMessage>
+          );
+        })}
         <div ref={chatBottomRef} />
       </main>
     </section>
