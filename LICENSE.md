@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2020 Adrian Bece, Vlatko Vlahek, Valentina Bermanec, Igor Plac
+Copyright (c) 2020 Adrian Bece, Vlatko Vlahek, Josip Ravas, Valentina Bermanec, Igor Plac
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
