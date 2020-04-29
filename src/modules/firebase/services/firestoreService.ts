@@ -12,6 +12,34 @@ export class FirestoreService<T extends any> {
     this.collection = this.firestore.collection(collection);
   }
 
+  async filterByDate(
+    listenerProps: ListenerProps,
+  ): Promise<string | T[] | any> {
+    let queryRef: firebase.firestore.Query | undefined;
+
+    if (!listenerProps) return;
+
+    const data = queryRef || this.collection;
+
+    return data
+      .where('date', '<', new Date())
+      .orderBy('date', 'desc')
+      .onSnapshot(
+        (snapshot) => {
+          const items = snapshot.docs.map((document) => {
+            const convertedDocument = document.data() as T;
+            if (!convertedDocument.id) {
+              convertedDocument.id = document.id;
+            }
+            return convertedDocument;
+          });
+
+          listenerProps.successFunction(items);
+        },
+        (error: Error) => listenerProps.errorFunction(error.message),
+      );
+  }
+
   async filterAsync(
     queryParams?: QueryFilter[],
     listenerProps?: ListenerProps,
@@ -171,6 +199,7 @@ export class FirestoreService<T extends any> {
       .get()
       .then((snapshot) =>
         snapshot.docs.map((document) => ({
+          id: document.id,
           ...document.data(),
         })),
       );

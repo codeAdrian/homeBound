@@ -1,42 +1,60 @@
 import * as React from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
+import { toast, ToastType, ToastPosition } from 'react-toastify';
 
 import { emailRegex } from 'util/validation';
 import { FirebaseService } from 'modules/firebase';
+import { TextInput, Button, BUTTON } from 'components';
 
 const LoginWithEmail: React.FC = () => {
-  const { handleSubmit, register, errors } = useForm();
-  const firebase = FirebaseService.Instance;
-  const authProvider = firebase.auth();
+  const { handleSubmit, register, errors, watch } = useForm();
+  const authProvider = FirebaseService.AuthProvider;
 
-  const onSubmit = (values: FieldValues) => {
+  const { email, password } = watch();
+
+  const onSubmit = async (values: FieldValues) => {
     const { email, password } = values;
-    authProvider.signInWithEmailAndPassword(email, password);
+    try {
+      await authProvider.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      toast(error.message, {
+        closeButton: false,
+        position: ToastPosition.TOP_CENTER,
+        type: ToastType.ERROR,
+      });
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h1>Login</h1>
-      <input
-        name="email"
-        ref={register({
-          required: 'Required',
-          pattern: {
-            value: emailRegex,
-            message: 'Invalid email address',
-          },
-        })}
-      />
-      {errors.email && errors.email.message}
+      <div className="u-sb-28">
+        <TextInput
+          errors={errors}
+          hasValue={!!email}
+          name="email"
+          label="Email"
+          type="text"
+          componentRef={register({
+            required: 'This field is required',
+            pattern: {
+              value: emailRegex,
+              message: 'Invalid email address',
+            },
+          })}
+        />
 
-      <input
-        name="password"
-        type="password"
-        ref={register({ required: 'Required' })}
-      />
-      {errors.username && errors.username.message}
+        <TextInput
+          errors={errors}
+          hasValue={!!password}
+          autoComplete="new-password"
+          name="password"
+          label="Password"
+          type="password"
+          componentRef={register({ required: 'This field is required' })}
+        />
+      </div>
 
-      <button type="submit">Submit</button>
+      <Button className={BUTTON.PILL.PRIMARY.BASE}>Login</Button>
     </form>
   );
 };

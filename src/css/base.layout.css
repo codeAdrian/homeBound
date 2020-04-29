@@ -1,0 +1,15 @@
+.l-vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.l-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    & main {
+        flex-grow: 1;
+    }
+}

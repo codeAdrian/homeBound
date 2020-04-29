@@ -1,12 +1,8 @@
-import { SettingsActionTypes, SettingsActions } from 'modules/settings';
-
-export type UserSettings = { [key: string]: boolean };
-
-export interface SettingsState {
-  isLoading: boolean;
-  userSettings?: UserSettings;
-  error?: string;
-}
+import {
+  SettingsActionTypes,
+  SettingsActions,
+  SettingsState,
+} from 'modules/settings';
 
 const INITIAL_STATE: SettingsState = {
   userSettings: undefined,
@@ -34,9 +30,11 @@ export const settingsReducer = (
     case SettingsActionTypes.Error:
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload,
         isLoading: false,
       };
+    case SettingsActionTypes.Reset:
+      return INITIAL_STATE;
     default:
       return state || INITIAL_STATE;
   }

@@ -1,23 +1,57 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 
-import { LogOut, getUserData } from 'modules/user';
-import { SplashSettings, getUserSettings } from 'modules/settings';
-import { ApplicationState } from 'modules/redux-store';
+import { LogOut, useUserServices } from 'modules/user';
+import { useSettingsServices } from 'modules/settings';
+import { useScoreListener, ScoreTracker } from 'modules/score';
+import { ActivitySummary } from 'modules/activities';
+import { ContactSummary } from 'modules/contacts';
+import { useAppState } from 'modules/app';
+import { Heading, HEADING } from 'components';
 
 const Dashboard: React.FC = () => {
-  const { userData } = useSelector((state: ApplicationState) =>
-    getUserData()(state),
-  );
-  const { userSettings } = useSelector((state: ApplicationState) =>
-    getUserSettings()(state),
-  );
+  const [{ userData }] = useUserServices();
+  const [{ userSettings }] = useSettingsServices();
+  const [, { setAppTheme }] = useAppState();
+
+  useScoreListener(userData);
+
+  React.useEffect(() => {
+    if (userData) {
+      setAppTheme({
+        color: '#F7CE53',
+        shapeClass: 'app__deco--default',
+        showNav: true,
+      });
+    }
+  }, [setAppTheme, userData]);
+
+  if (!userData) return <Redirect to="/login" />;
+
+  if (userSettings && !userSettings.surveyCompleted)
+    return <Redirect to="/welcome" />;
 
   return (
-    <>
-      <SplashSettings userSettings={userSettings} userData={userData} />
-      <LogOut />
-    </>
+    <section className="app__content">
+      <aside className="u-f--spaceBetween u-sb-12">
+        <Heading tag="h1" className={HEADING.PRIMARY.XXLARGE.LIGHT}>
+          Stayin'
+          <br />
+          indoors
+        </Heading>
+        <Link to="/profile">
+          <ScoreTracker mode="small" />
+        </Link>
+      </aside>
+
+      <ContactSummary />
+
+      <ActivitySummary />
+
+      <div className="u-sb-16">
+        <LogOut />
+      </div>
+    </section>
   );
 };
 

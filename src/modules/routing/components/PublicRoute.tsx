@@ -1,12 +1,23 @@
 import * as React from 'react';
 import { isEmpty } from 'lodash';
-import { useSelector } from 'react-redux';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { useIsOnline } from 'react-use-is-online';
 
-import { getUserData } from 'modules/user';
+import { useUserServices } from 'modules/user';
+import { SplashScreen, Offline } from 'components';
 
 const PublicRoute: React.FC<RouteProps> = (props) => {
-  const { userData } = useSelector(getUserData());
+  const [{ userData, isLoading }] = useUserServices();
+  const { isOffline } = useIsOnline();
+  const [ready, setIsReady] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => setIsReady(true), 2000);
+  }, []);
+
+  if (isOffline) return <Offline />;
+
+  if ((!userData && isLoading) || !ready) return <SplashScreen />;
 
   return isEmpty(userData) ? <Route {...props} /> : <Redirect to="/" />;
 };

@@ -1,0 +1,23 @@
+.heading {
+    margin: 0;
+    color: currentColor;
+}
+
+.heading--secondary {
+    font-family: var(--font__family--primary);
+}
+
+.heading--bold {
+    font-weight: var(--font__weight--bold);
+}
+
+.headingBanner {
+    display: inline-block;
+    background-color: var(--color__white);
+    color: var(--color__text);
+    padding: var(--spacing--2px) var(--spacing--8px);
+
+    & .heading {
+        margin: 0;
+    }
+}

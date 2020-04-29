@@ -1,0 +1,128 @@
+@keyframes autofill {
+    0%,
+    100% {
+        color: currentColor;
+        background: transparent;
+    }
+}
+
+input:-webkit-autofill {
+    color: currentColor !important;
+    animation-delay: 0.1s;
+    animation-name: autofill;
+    animation-fill-mode: both;
+}
+
+.input {
+    color: currentColor;
+    position: relative;
+    margin-bottom: 20px;
+
+    &:placeholder {
+        color: currentColor;
+    }
+
+    &:-webkit-autofill {
+        color: currentColor;
+    }
+}
+
+.input__label {
+    position: absolute;
+    top: 0;
+    display: inline-block;
+    transform-origin: 0% 0% 0;
+    transform: translate3d(0, 22px, 0) scale3d(1, 1, 1);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    color: currentColor;
+}
+
+.input__label--focused {
+    transform: scale3d(0.85, 0.85, 1);
+    opacity: 0.6;
+}
+
+.input__control {
+    display: block;
+    width: 100%;
+    background: transparent;
+    outline: 0;
+    border-width: 0;
+    box-shadow: none;
+    color: currentColor;
+}
+
+.input__control--text {
+    padding: var(--spacing--20px) 0 var(--spacing--8px);
+}
+
+.input__deco--text {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    background-color: currentColor;
+    bottom: 0;
+    opacity: 0.3;
+}
+
+.input__control--date {
+    &::-webkit-datetime-edit-text {
+        transition: 0.2s ease;
+    }
+
+    &::-webkit-datetime-edit-month-field {
+        transition: 0.2s ease;
+    }
+
+    &::-webkit-datetime-edit-day-field {
+        transition: 0.2s ease;
+    }
+
+    &::-webkit-datetime-edit-year-field {
+        transition: 0.2s ease;
+    }
+}
+
+.input:not(.input--focused) {
+    & .input__control--date {
+        &::-webkit-datetime-edit-text {
+            opacity: 0;
+        }
+
+        &::-webkit-datetime-edit-month-field {
+            opacity: 0;
+        }
+
+        &::-webkit-datetime-edit-day-field {
+            opacity: 0;
+        }
+
+        &::-webkit-datetime-edit-year-field {
+            opacity: 0;
+        }
+    }
+}
+
+.input__label--textArea {
+    padding-bottom: var(--spacing--8px);
+}
+
+.input__control--textArea {
+    width: 100%;
+    resize: none;
+    height: 120px;
+    outline: 0;
+    border-width: 0;
+    padding: var(--spacing--8px);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.input__error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: var(--spacing--2px);
+    color: currentColor;
+}

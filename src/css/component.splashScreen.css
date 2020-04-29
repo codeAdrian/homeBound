@@ -1,0 +1,18 @@
+.splashScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    position: absolute !important;
+    left: 0;
+    right: 0;
+}
+
+.splashScreen__logo {
+    margin: 0 auto var(--spacing--16px);
+}
+
+.splashScreen__title {
+    color: var(--color__text);
+}

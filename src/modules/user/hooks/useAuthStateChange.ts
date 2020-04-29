@@ -1,49 +1,26 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
-import { createUserDocument, UserActionTypes } from 'modules/user';
-import {
-  SettingsActionTypes,
-  getUserDocumentSettings,
-  UserSettings,
-} from 'modules/settings';
+import { useUserServices } from 'modules/user';
+import { useSettingsServices } from 'modules/settings';
 
 export const useAuthStateChange = () => {
-  const dispatch = useDispatch();
+  const [, api] = useSettingsServices();
+  const [, { updateUserData, resetUserData }] = useUserServices();
 
-  const handleAuthData = useCallback(
-    (payload: firebase.User | {}) => ({
-      type: UserActionTypes.Success,
-      payload,
-    }),
-    [],
-  );
-
-  const handleSettingsData = useCallback(
-    (payload: UserSettings) => ({
-      type: SettingsActionTypes.Success,
-      payload,
-    }),
-    [],
-  );
+  const { getSettings, resetSettings } = api;
 
   const handleAuthChange = useCallback(
     async (userAuth) => {
-      dispatch({ type: UserActionTypes.Request });
-      dispatch({ type: SettingsActionTypes.Request });
-
       if (userAuth) {
-        const userRef = await createUserDocument(userAuth);
-        const settingsRef = await getUserDocumentSettings(userAuth.uid);
-
-        dispatch(handleAuthData(userRef));
-        dispatch(handleSettingsData(settingsRef));
-      } else {
-        dispatch(handleAuthData({}));
-        dispatch(handleSettingsData({}));
+        updateUserData(userAuth);
+        getSettings(userAuth);
+        return;
       }
+
+      resetSettings();
+      resetUserData();
     },
-    [dispatch, handleAuthData, handleSettingsData],
+    [getSettings, resetSettings, resetUserData, updateUserData],
   );
 
   return handleAuthChange;

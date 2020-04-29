@@ -1,10 +1,4 @@
-import { UserActions, UserActionTypes } from 'modules/user';
-
-export interface UserState {
-  isLoading: boolean;
-  userData?: firebase.UserInfo;
-  error?: string;
-}
+import { UserActions, UserActionTypes, UserState } from 'modules/user';
 
 const INITIAL_STATE: UserState = {
   userData: undefined,
@@ -32,9 +26,11 @@ export const userReducer = (
     case UserActionTypes.Error:
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload,
         isLoading: false,
       };
+    case UserActionTypes.Reset:
+      return INITIAL_STATE;
     default:
       return state || INITIAL_STATE;
   }

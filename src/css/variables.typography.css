@@ -1,0 +1,30 @@
+:root {
+    --font__family--primary: 'Roboto', sans-serif;
+    --font__family--secondary: 'Roboto Slab', serif;
+
+    --font__weight--light: 300;
+    --font__weight--regular: 400;
+    --font__weight--medium: 500;
+    --font__weight--bold: 700;
+
+    --font__size--xxsmall: 8px;
+    --font__line--xxsmall: 10px;
+
+    --font__size--xsmall: 12px;
+    --font__line--xsmall: 16px;
+
+    --font__size--small: 13px;
+    --font__line--small: 20px;
+
+    --font__size--base: 14px;
+    --font__line--base: 20px;
+
+    --font__size--large: 18px;
+    --font__line--large: 20px;
+
+    --font__size--xlarge: 22px;
+    --font__line--xlarge: 28px;
+
+    --font__size--xxlarge: 32px;
+    --font__line--xxlarge: 36px;
+}
