@@ -40,16 +40,6 @@ Build and deploy project to production
 yarn build && firebase deploy
 ```
 
-## Contributors
-
-Team PROTOTYP:
-
--   Adrian Bece
--   Vlatko Vlahek
--   Josip Ravas
--   Igor Plac
--   Valentina Bermanec
-
 ## License
 
 [MIT](http://www.opensource.org/licenses/mit-license.html)
