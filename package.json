@@ -7,11 +7,6 @@
     "email": "adrian@prototyp.digital",
     "url": "https://github.com/codeadrian"
   },
-  "contributors": [
-    "Vlatko Vlahek <vlatko@prototyp.digital> (https://github.com/vlaja)",
-    "Igor Plac <igor@prototyp.digital> (https://prototyp.digital)",
-    "Valenina Bermanec <valentina@prototyp.digital> (https://prototyp.digital)"
-  ],
   "dependencies": {
     "date-fns": "^2.12.0",
     "firebase": "^7.13.2",
